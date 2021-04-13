@@ -5,3 +5,8 @@ class IndustryForm(forms.ModelForm):
     class Meta():
         model 		= Team
         fields 		= ['industry']
+
+class BuyRawMaterialForm(forms.ModelForm):
+    class Meta():
+        model       = Cart
+        fields      = ['raw_material', 'quantity']

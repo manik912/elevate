@@ -18,4 +18,17 @@ def home(request):
     }
     return render(request, 'home/home.html', context)
 
+def buyMaterial(request):
+    if(request.method == 'POST'):
+        form = BuyRawMaterialForm(request.POST)
+        if form.is_valid():
+            form.instance.team_name = request.user
+            form.save()
+    else:
+        form = BuyRawMaterialForm()
+    context = {
+        'form' : form,
+    }
+    return render(request, 'home/buying.html', context)
+
 

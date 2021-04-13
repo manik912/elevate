@@ -45,7 +45,10 @@ class Team(AbstractUser):
 
 
 class Cart(models.Model):
-    team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
-    raw_material = models.ForeignKey(RawMaterial, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
+	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+	raw_material = models.ForeignKey(Item, on_delete=models.CASCADE)
+	quantity = models.IntegerField(default=0)
+
+	def __str__(self):
+		return str(self.team_name) + str(self.raw_material.name)
 
