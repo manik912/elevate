@@ -38,6 +38,3 @@ class Route(models.Model):
     def __str__(self):
         return str(self.from_spot) + " -> " + str(self.to_spot) + " = " + str(self.distace)
 
-class Manufacture(models.Model):
-    product = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField()

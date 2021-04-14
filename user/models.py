@@ -31,7 +31,7 @@ class Team(AbstractUser):
 	name4 				= models.CharField(max_length=50, null=True, blank=True)
 	contact_no4 		= PhoneNumberField(blank=True, null=True, help_text='Add country code before the contact no.')
 	industry			= models.ForeignKey(Industry, on_delete=models.SET_NULL, null=True, blank=True)
-	ecoins				= models.IntegerField(default=0)
+	ecoins				= models.IntegerField(default=1000)
 
 	USERNAME_FIELD 		= 'team_name'
 	user_permissions 	= None
@@ -46,9 +46,15 @@ class Team(AbstractUser):
 
 class Cart(models.Model):
 	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+	spot = models.ForeignKey(Spot, on_delete=models.PROTECT, null=True, blank=True)
 	raw_material = models.ForeignKey(Item, on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=0)
 
 	def __str__(self):
-		return str(self.team_name) + str(self.raw_material.name)
+		return str(self.team_name) + " -> " + str(self.raw_material.name)
 
+
+class Manufacture(models.Model):
+    team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+    product = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True)
+    quantity = models.IntegerField()

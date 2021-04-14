@@ -9,4 +9,4 @@ class IndustryForm(forms.ModelForm):
 class BuyRawMaterialForm(forms.ModelForm):
     class Meta():
         model       = Cart
-        fields      = ['raw_material', 'quantity']
+        fields      = ['spot', 'raw_material', 'quantity']
