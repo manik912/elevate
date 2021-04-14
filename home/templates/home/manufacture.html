@@ -15,24 +15,11 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <h1>HOME PAGE</h1>
+    <h1>Manufacture PAGE</h1>
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}
-        <br>
         <input type="submit" value="submit">
     </form>
-    <br>
-    {% for spot in spots %}
-        <h2>{{spot.name}}-></h2>
-        {% for i in spr %}
-            {% if spot.name == i.spot.name %}
-                <p>Name: {{i.raw_material.name}}</p>
-                <p>Quantity: {{i.quantity}}</p>
-                <p>Cost: {{i.cost}}</p>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
 </body>
-    
 </html>

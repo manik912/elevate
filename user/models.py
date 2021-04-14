@@ -44,17 +44,28 @@ class Team(AbstractUser):
 		return self.team_name
 
 
-class Cart(models.Model):
+class RawMaterialCart(models.Model):
 	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
 	spot = models.ForeignKey(Spot, on_delete=models.PROTECT, null=True, blank=True)
-	raw_material = models.ForeignKey(Item, on_delete=models.CASCADE)
+	raw_material = models.ForeignKey(Item, limit_choices_to={'raw_material':True} ,on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=0)
 
 	def __str__(self):
 		return str(self.team_name) + " -> " + str(self.raw_material.name)
 
+class ProductCart(models.Model):
+	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+	product = models.ForeignKey(Item, limit_choices_to={'product':True}, on_delete=models.CASCADE)
+	quantity = models.IntegerField(default=0)
 
-class Manufacture(models.Model):
-    team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
-    product = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField()
+	def __str__(self):
+		return str(self.team_name) + " -> " + str(self.product.name)
+
+class SendRequest(models.Model):
+	from_team = models.ForeignKey(Team, related_name="FromTeam", on_delete=models.CASCADE)
+	to_team = models.ForeignKey(Team, related_name="ToTeam", on_delete=models.CASCADE)
+	item = models.ForeignKey(Item, on_delete=models.CASCADE)
+	cost = models.IntegerField()
+	quantity = models.IntegerField()
+
+

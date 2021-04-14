@@ -1,5 +1,6 @@
 from django import forms
 from user.models import *
+from .models import *
 
 class IndustryForm(forms.ModelForm):
     class Meta():
@@ -8,5 +9,11 @@ class IndustryForm(forms.ModelForm):
 
 class BuyRawMaterialForm(forms.ModelForm):
     class Meta():
-        model       = Cart
+        model       = RawMaterialCart
         fields      = ['spot', 'raw_material', 'quantity']
+
+
+class ManufactureForm(forms.ModelForm):
+    class Meta():
+        model       = ProductCart
+        fields      = ['product', 'quantity']
