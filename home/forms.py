@@ -17,3 +17,8 @@ class ManufactureForm(forms.ModelForm):
     class Meta():
         model       = ProductCart
         fields      = ['product', 'quantity']
+
+class SendRequestForm(forms.ModelForm):
+    class Meta():
+        model       = SendRequest
+        fields      = ['to_team', 'item', 'cost', 'quantity']

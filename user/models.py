@@ -67,5 +67,6 @@ class SendRequest(models.Model):
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	cost = models.IntegerField()
 	quantity = models.IntegerField()
+	is_accepted = models.BooleanField(default=False)
 
 

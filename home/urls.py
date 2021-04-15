@@ -6,5 +6,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('buy', buyMaterial, name='buy'),
     path('manufacture', manufacture, name='manufacture'),
+    path('trade', send_req, name='trade'),
+    path('accept/<int:pk>', accept_req, name='accept'),
     
 ]

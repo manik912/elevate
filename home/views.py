@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 from user.models import *
@@ -65,8 +65,7 @@ def buyMaterial(request):
                     messages.add_message(request, messages.INFO, 'This raw material is not available at this spot')
             else:
                 messages.add_message(request, messages.INFO, 'You need to enter the quantity in multiples of 5 and it should be less than 40.')
-    else:
-        form = BuyRawMaterialForm()
+    form = BuyRawMaterialForm()
     context = {
         'form' : form,
         'spr'  : spr,
@@ -107,11 +106,97 @@ def manufacture(request):
                     form.instance.team_name = request.user
                     form.save()
                 messages.add_message(request, messages.INFO, 'We have added the product in your cart')
-    else:
-        form = ManufactureForm()
+
+    form = ManufactureForm()
     context = {
         'form' : form,
     }
     return render(request, 'home/manufacture.html', context)
 
-# def send_req(request):
+
+def send_req(request):
+    if(request.method == 'POST'):
+        form = SendRequestForm(request.POST)
+        if form.is_valid():
+            q = form.cleaned_data.get("quantity")
+            p = form.cleaned_data.get("item")
+            c = form.cleaned_data.get("cost")
+            t = form.cleaned_data.get("to_team")
+            u = request.user
+            if c*q <= u.ecoins:
+                if p.raw_material:
+                    x = RawMaterialCart.objects.filter(raw_material=p).filter(team_name=t)
+                elif p.product:
+                    x = ProductCart.objects.filter(product=p).filter(team_name=t)
+
+                if x:
+                    flag=0
+                    for i in x:
+                        if i.quantity < q:
+                            flag = 1
+                            break
+                    if flag==0:
+                        form.instance.from_team = request.user
+                        form.save()
+                        messages.add_message(request, messages.INFO, 'Request sent!')
+                    else:
+                        messages.add_message(request, messages.INFO, 'This team doesnot have this much quantity.')
+                else:
+                    messages.add_message(request, messages.INFO, 'This team doesnot have this product/raw material')
+            else:
+                messages.add_message(request, messages.INFO, 'You don\'t have enough money to buy this product')
+
+    form = SendRequestForm()
+    req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+    context = {
+        'form' : form,
+        'req'  : req,
+    }
+    return render(request, 'home/trading.html', context)
+
+
+def accept_req(request, pk):
+    x = SendRequest.objects.filter(id=pk)
+    for i in x:
+        if i.from_team.ecoins>=(i.cost)*(i.quantity):
+            if i.item.raw_material:
+                y = RawMaterialCart.objects.filter(raw_material=i.item).filter(team_name=i.to_team)
+            elif i.item.product:
+                y = ProductCart.objects.filter(product=i.item).filter(team_name=i.to_team)
+            
+            if y:
+                flag=0
+                for j in y:
+                    if j.quantity < i.quantity:
+                        flag = 1
+                        break
+                        
+                if flag==0:
+                    i.is_accepted = True
+                    i.from_team.ecoins -= (i.cost)*(i.quantity)
+                    i.to_team.ecoins += (i.cost)*(i.quantity)
+                    for j in y:
+                        j.quantity -= i.quantity
+                        j.save()
+                    if i.item.raw_material:
+                        y = RawMaterialCart.objects.filter(raw_material=i.item).filter(team_name=i.from_team)
+                    elif i.item.product:
+                        y = ProductCart.objects.filter(product=i.item).filter(team_name=i.from_team)
+                    if y:
+                        for j in y:
+                            j.quantity += i.quantity
+                            j.save()
+                    #else:
+                        #####################################
+                        # if product is not in any of the list then create a new object.
+                    i.save()
+                    i.from_team.save()
+                    i.to_team.save()
+                else:
+                    messages.add_message(request, messages.INFO, 'You don\'t have enough quantity of this product/raw material to accept this deal.')
+            else:
+                messages.add_message(request, messages.INFO, 'You don\'t have this product/raw material to accept this deal.')
+        else:
+            messages.add_message(request, messages.INFO, 'Buyer doesn\'t have enough money for this deal.')
+
+    return redirect('trade')
