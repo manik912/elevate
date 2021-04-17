@@ -70,3 +70,9 @@ class SendRequest(models.Model):
 	is_accepted = models.BooleanField(default=False)
 
 
+class SellUs(models.Model):
+	team = models.ForeignKey(Team, on_delete=models.PROTECT)
+	product = models.ForeignKey(Item, limit_choices_to={'product':True}, on_delete=models.CASCADE)
+	quantity = models.IntegerField()
+
+

@@ -22,3 +22,8 @@ class SendRequestForm(forms.ModelForm):
     class Meta():
         model       = SendRequest
         fields      = ['to_team', 'item', 'cost', 'quantity']
+
+class SellUsForm(forms.ModelForm):
+    class Meta():
+        model       = SellUs
+        fields      = ['product', 'quantity']

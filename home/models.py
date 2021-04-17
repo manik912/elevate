@@ -5,6 +5,7 @@ class Item(models.Model): #Raw materials + product
     name = models.CharField(max_length=50)
     product = models.BooleanField(default=False)
     raw_material = models.BooleanField(default=False)
+    product_cost = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
