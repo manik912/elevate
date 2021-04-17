@@ -186,9 +186,13 @@ def accept_req(request, pk):
                         for j in y:
                             j.quantity += i.quantity
                             j.save()
-                    #else:
-                        #####################################
-                        # if product is not in any of the list then create a new object.
+                    else:
+                        if i.item.raw_material:
+                            new = RawMaterialCart(raw_material=i.item, team_name=i.from_team, spot=i.from_team.industry.spot, quantity=i.quantity)
+                            new.save()
+                        elif i.item.product:
+                            new = ProductCart(product=i.item, team_name=i.from_team, quantity=i.quantity)
+                            new.save()
                     i.save()
                     i.from_team.save()
                     i.to_team.save()
@@ -200,3 +204,28 @@ def accept_req(request, pk):
             messages.add_message(request, messages.INFO, 'Buyer doesn\'t have enough money for this deal.')
 
     return redirect('trade')
+
+def sell_us(request):
+    if(request.method == 'POST'):
+        form = SellUsForm(request.POST)
+        if form.is_valid():
+            q = form.cleaned_data.get("quantity")
+            p = form.cleaned_data.get("product")
+            u = request.user
+            pc = ProductCart.objects.filter(product=p).filter(team_name=u)
+            for i in pc:
+                if i.quantity>=q:
+                    form.instance.team = request.user
+                    u.ecoins += q*(p.cost)
+                    u.save()
+                    pc.quantity -= q
+                    pc.save()
+                    form.save()
+                else:
+                    messages.add_message(request, messages.INFO, 'You don\'t have this much quantity for this deal.')
+    else:
+        form = SellUsForm()
+    context = {
+        'form' : form,
+    }
+    return render(request, 'home/buying.html', context)
