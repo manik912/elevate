@@ -1,0 +1,385 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block head %}{% endblock head %}
+{% block bodytag %}{% endblock bodytag %}
+{% block body %}
+
+
+		<!-- Header -->
+		<!-- Header -->
+		<div class="header bg-primary pb-6">
+			<div class="container-fluid">
+				<div class="header-body">
+					<div class="row align-items-center py-4">
+						<div class="col-lg-6 col-7">
+						  <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
+						  <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+							<ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+							  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+							  <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+							  <li class="breadcrumb-item active" aria-current="page">Default</li>
+							</ol>
+						  </nav>
+						</div>
+
+						 <div class="col-lg-6 col-5 text-right">
+							<!-- <a href="#" class="btn btn-sm btn-neutral">New</a>
+							<a href="#" class="btn btn-sm btn-neutral">Filters</a> -->
+						</div> 
+					</div>
+
+					<!-- Card stats -->
+					<div class="row">
+						<div class="col-xl-3 col-md-6">
+							<div class="card card-stats">
+								<!-- Card body -->
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
+											<span class="h2 font-weight-bold mb-0">350,897</span>
+										</div>
+										<div class="col-auto">
+											<div
+												class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+												<i class="ni ni-active-40"></i>
+											</div>
+										</div>
+									</div>
+									<p class="mt-3 mb-0 text-sm">
+										<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+										<span class="text-nowrap">Since last month</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-md-6">
+							<div class="card card-stats">
+								<!-- Card body -->
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
+											<span class="h2 font-weight-bold mb-0">2,356</span>
+										</div>
+										<div class="col-auto">
+											<div
+												class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+												<i class="ni ni-chart-pie-35"></i>
+											</div>
+										</div>
+									</div>
+									<p class="mt-3 mb-0 text-sm">
+										<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+										<span class="text-nowrap">Since last month</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-md-6">
+							<div class="card card-stats">
+								<!-- Card body -->
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
+											<span class="h2 font-weight-bold mb-0">924</span>
+										</div>
+										<div class="col-auto">
+											<div
+												class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+												<i class="ni ni-money-coins"></i>
+											</div>
+										</div>
+									</div>
+									<p class="mt-3 mb-0 text-sm">
+										<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+										<span class="text-nowrap">Since last month</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-md-6">
+							<div class="card card-stats">
+								<!-- Card body -->
+								<div class="card-body">
+									<div class="row">
+										<div class="col">
+											<h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+											<span class="h2 font-weight-bold mb-0">49,65%</span>
+										</div>
+										<div class="col-auto">
+											<div
+												class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+												<i class="ni ni-chart-bar-32"></i>
+											</div>
+										</div>
+									</div>
+									<p class="mt-3 mb-0 text-sm">
+										<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+										<span class="text-nowrap">Since last month</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Page content -->
+		<div class="container-fluid mt--6">
+			<div class="row">
+				<div class="col-xl-4">
+					<div class="card bg-default">
+						<div class="card-header bg-transparent">
+							<div class="row align-items-center">
+								<div class="col">
+									<h6 class="text-light text-uppercase ls-1 mb-1">Buying request form</h6>
+									<h5 class="h3 text-white mb-0">Send Request</h5>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<!-- Chart -->
+							<form action="">
+
+								    {% csrf_token %}
+    								{{ form }}
+    								<button class="btn btn-success mt-3" style="width: 100%;">
+										<input type="submit" name="Send" value="Send">
+									</button>
+    						</form>
+
+								<div class="team-name ">
+									<label for="">Select Team</label>
+									<div class="btn-group" style="width: 100%;">
+										<button type="button" class="btn btn-secondary"style="width: 100%;" >
+											<span class="float-left">Teams</span>
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<div class="dropdown-menu">
+										  <a class="dropdown-item" href="#">Team 1</a>
+										  <a class="dropdown-item" href="#">Team 2</a>
+										  <a class="dropdown-item" href="#">Team 3</a>
+										</div>
+									  </div>
+								</div>
+								<div class="product mt-3" >
+									<label for="">Select Product</label>
+									<div class="btn-group" style="width: 100%;">
+										<button type="button" class="btn btn-secondary"style="width: 100%;" >
+											<span class="float-left">Products</span>
+										</button>
+										<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<div class="dropdown-menu">
+										  <a class="dropdown-item" href="#">Product 1</a>
+										  <a class="dropdown-item" href="#">Product 2</a>
+										  <a class="dropdown-item" href="#">Product 3</a>
+										</div>
+									  </div>
+								</div>
+								<div class="price mt-3">
+									<div class="">
+										<label for="input1" class="control-label">Price </label>
+										<i class="fa fa-inr"></i>
+										<input type="number" id="input1" class="form-control" placeholder="Enter Price">
+									  </div>
+								</div>
+								<div class="quantity mt-3">
+									<label for="">Quantity </label>
+									<input type="number" class="form-control" placeholder="Enter Quantity">
+								</div>
+								<button class="btn btn-success mt-3" style="width: 100%;">
+									Send
+								</button>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-8" >
+					<div class="card" >
+						<div class="card-header bg-transparent">
+							<div class="row align-items-center">
+								<div class="col">
+									<h6 class="text-uppercase text-muted ls-1 mb-1">Requested</h6>
+									<h5 class="h3 mb-0">Pending Requests</h5>
+								</div>
+							</div>
+						</div>
+						<div class="card-body p-2" >
+							<!-- Chart -->
+							<div class="req-list">
+								<div class="list-group">
+
+									{% for re in req %}
+
+									<a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+									  <div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">{{ re.from_team }}</h5>
+									  </div>
+									  <p class="mb-1">Product : {{ re.item }}</p>
+									  <p class="mb-1">Quantity : {{ re.quantity }}</p>
+									  <p class="mb-1">Price : {{ re.cost }}</p>
+									  <button class="btn btn-danger float-right " style="margin-top:-2.5rem ;">Reject</button>
+									  <button type="submit" class="btn btn-success float-right mr-1 " onclick="location.href='{% url 'accept' re.id %}'" style="margin-top:-2.5rem ;">Accept</button>
+
+									</a>
+
+									{% endfor %}
+								  </div>
+							</div>	
+					
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card bg-default">
+						<div class="card-header bg-transparent">
+							<div class="row align-items-center ">
+								<div class="col">
+									<strong>
+										<h1 class="h1 text-white mb-0 text-bold">Notifications</h1>
+									</strong>
+								</div>
+							</div>
+							<div class="notify-body mt-3">
+								<div class="list-group">
+									<a href="#" class="list-group-item list-group-item-action flex-column align-items-start bg-default">
+									  <div class="d-flex w-100 justify-content-between">
+										<div class="row" style ="width: 100%; color: white;">
+											<div class="col-xl-10">
+												<h2 class="mb-1" style="color: red;">News Flash!!</h2>
+											</div>
+											<div class="col-xl-2">
+												<div class="notify-time float-right">
+													<small>10:00 PM</small>
+												</div>
+											</div>
+										</div>
+									  </div>
+									  <div class="row" style ="width: 100%; color: white;">
+										<div class="col-xl-10">
+											<p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ex libero omnis facere suscipit eum nostrum illo debitis quis nemo, quidem voluptatibus maiores velit, saepe facilis eveniet natus voluptatum. Sunt!</p>
+										</div>
+										<div class="col-xl-2">
+											<img src="demo-img.jpg" alt="" style="width: 100%;">
+										</div>
+										
+									  </div>
+
+									</a>
+									<a href="#" class="list-group-item list-group-item-action flex-column align-items-start bg-default">
+									  <div class="d-flex w-100 justify-content-between">
+										<div class="row" style ="width: 100%; color: white;">
+											<div class="col-xl-10">
+												<h2 class="mb-1" style="color: red;">News Flash!!</h2>
+											</div>
+											<div class="col-xl-2">
+												<div class="notify-time float-right">
+													<small>10:00 PM</small>
+												</div>
+											</div>
+										</div>
+									  </div>
+									  <div class="row" style ="width: 100%; color: white;">
+										<div class="col-xl-10">
+											<p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ex libero omnis facere suscipit eum nostrum illo debitis quis nemo, quidem voluptatibus maiores velit, saepe facilis eveniet natus voluptatum. Sunt!</p>
+										</div>
+										<div class="col-xl-2">
+											<img src="demo-img.jpg" alt="" style="width: 100%;">
+										</div>
+										
+									  </div>
+
+									</a>
+									<a href="#" class="list-group-item list-group-item-action flex-column align-items-start bg-default">
+									  <div class="d-flex w-100 justify-content-between">
+										<div class="row" style ="width: 100%; color: white;">
+											<div class="col-xl-10">
+												<h2 class="mb-1" style="color: red;">News Flash!!</h2>
+											</div>
+											<div class="col-xl-2">
+												<div class="notify-time float-right">
+													<small>10:00 PM</small>
+												</div>
+											</div>
+										</div>
+									  </div>
+									  <div class="row" style ="width: 100%; color: white;">
+										<div class="col-xl-10">
+											<p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ex libero omnis facere suscipit eum nostrum illo debitis quis nemo, quidem voluptatibus maiores velit, saepe facilis eveniet natus voluptatum. Sunt!</p>
+										</div>
+										<div class="col-xl-2">
+											<img src="demo-img.jpg" alt="" style="width: 100%;">
+										</div>
+										
+									  </div>
+
+									</a>
+
+								  </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endblock body %}
+	</div>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+	<script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendor/js-cookie/js.cookie.js"></script>
+	<script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+	<script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+	<!-- Optional JS -->
+	<script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
+	<script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
+	<!-- Argon JS -->
+	<script src="assets/js/argon.min5438.js?v=1.2.0"></script>
+	<script>
+		// Facebook Pixel Code Don't Delete
+		! function (f, b, e, v, n, t, s) {
+			if (f.fbq) return;
+			n = f.fbq = function () {
+				n.callMethod ?
+					n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+			};
+			if (!f._fbq) f._fbq = n;
+			n.push = n;
+			n.loaded = !0;
+			n.version = '2.0';
+			n.queue = [];
+			t = b.createElement(e);
+			t.async = !0;
+			t.src = v;
+			s = b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t, s)
+		}(window,
+			document, 'script', '../../connect.facebook.net/en_US/fbevents.js');
+
+		try {
+			fbq('init', '111649226022273');
+			fbq('track', "PageView");
+
+		} catch (err) {
+			console.log('Facebook Track Error:', err);
+		}
+	</script>
+	<noscript>
+		<img height="1" width="1" style="display:none"
+			src="https://www.facebook.com/tr?id=111649226022273&amp;ev=PageView&amp;noscript=1" />
+	</noscript>
+</body>
+
+
+<!-- Mirrored from demos.creative-tim.com/argon-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Apr 2021 18:26:38 GMT -->
+
+</html>

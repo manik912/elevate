@@ -8,7 +8,7 @@ from django.contrib import messages
 # Create your views here.
 
 def test(request):
-    return render(request, 'home/base.html')
+    return render(request, 'home/trading_temp.html')
 
 
 @login_required
@@ -156,7 +156,7 @@ def send_req(request):
         'form' : form,
         'req'  : req,
     }
-    return render(request, 'home/trading.html', context)
+    return render(request, 'home/trading_temp.html', context)
 
 
 def accept_req(request, pk):
