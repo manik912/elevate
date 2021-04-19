@@ -427,14 +427,15 @@
     <!-- Header -->
 
     <!-- Page content -->
+    <h1></h1>
         {% if messages %}
-            <div style="background: black; height:80px; width: 100%"></div>
-            <ul class="messages" style="background: #32a852; width: 100%; color: rgb(255, 255, 255); text-align: center; margin: 0px; padding: 10px;">
-                {% for message in messages %}
-                    <h1 style="font-weight: 600; font-size: 25px; margin: 0px;">{{ message }}</h1>
-                {% endfor %}
-            </ul>
+           <script>
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+           </script>
         {% endif %}
+
     {% block body %}{% endblock body %}
 
 
