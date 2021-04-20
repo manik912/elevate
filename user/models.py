@@ -53,6 +53,17 @@ class RawMaterialCart(models.Model):
 	def __str__(self):
 		return str(self.team_name) + " -> " + str(self.raw_material.name)
 
+class RawMaterialBuy(models.Model):
+	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
+	spot = models.ForeignKey(Spot, on_delete=models.PROTECT, null=True, blank=True)
+	raw_material_1 = models.ForeignKey(Item, related_name="RawMaterial1", limit_choices_to={'raw_material':True} ,on_delete=models.CASCADE)
+	quantity_1 = models.IntegerField(default=0)
+	raw_material_2 = models.ForeignKey(Item, related_name="RawMaterial2", limit_choices_to={'raw_material':True} ,on_delete=models.CASCADE)
+	quantity_2 = models.IntegerField(default=0)
+
+	def __str__(self):
+		return str(self.team_name) + " -> " + str(self.raw_material_1.name) + " and " + str(self.raw_material_2.name) 
+
 class ProductCart(models.Model):
 	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
 	product = models.ForeignKey(Item, limit_choices_to={'product':True}, on_delete=models.CASCADE)

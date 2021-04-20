@@ -24,6 +24,10 @@ def home(request):
     }
     return render(request, 'home/home.html', context)
 
+def cal_transportation_cost(s1, s2):
+    route = Route.objects.filter(from_spot=s1).filter(to_spot=s2).first()
+    return ((route.distace)*3)
+
 @login_required
 def buyMaterial(request):
     spr = SpotRawMaterial.objects.all()
@@ -32,41 +36,53 @@ def buyMaterial(request):
         form = BuyRawMaterialForm(request.POST)
         if form.is_valid():
             s = form.cleaned_data.get("spot")
-            r = form.cleaned_data.get("raw_material")
-            q = form.cleaned_data.get("quantity")
-            if q%5==0 and q>0 and q<40:
-                spr = SpotRawMaterial.objects.filter(spot=s)
-                flag=0
-                c = 0
-                for i in spr:
-                    if i.raw_material == r:
-                        flag=1
-                        c = i.cost
-                        no = i.quantity
-                        temp = i
-                if flag==1:
-                    u = request.user
-                    if u.ecoins >= q*c:
-                        if no>=q:
-                            x = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r)
-                            if x:
-                                for i2 in x:
-                                    i2.quantity += q
-                                    i2.save()
-                                temp.quantity -= q
-                                temp.save()
+            r1 = form.cleaned_data.get("raw_material_1")
+            q1 = form.cleaned_data.get("quantity_1")
+            r2 = form.cleaned_data.get("raw_material_2")
+            q2 = form.cleaned_data.get("quantity_2")
+            if q1%5==0 and q2%5==0 and q1>0 and q2>0 and q2<60 and q1<60:
+                spr1 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r1).first()
+                spr2 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r2).first()
+                if r1.name != r2.name:
+                    if spr1 and spr2:
+                        no1   = spr1.quantity
+                        no2   = spr2.quantity
+                        c1   = spr1.cost
+                        c2   = spr2.cost
+                        u = request.user
+                        d = cal_transportation_cost(s, u.industry.spot)
+                        if u.ecoins >= ((q1*c1)+(q2*c2) +d):
+                            if no1>=q1 and no2>=q2:
+                                x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
+                                if x1:
+                                    x1.quantity += q1
+                                    x1.save()
+                                else:
+                                    y = RawMaterialCart(team_name=u, raw_material=r1, quantity=q1, spot=s)
+                                    y.save()
+                                spr1.quantity -= q1
+                                spr1.save()
+                                x2 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r2).first()
+                                if x2:
+                                    x2.quantity += q2
+                                    x2.save()
+                                else:
+                                    y = RawMaterialCart(team_name=u, raw_material=r2, quantity=q2, spot=s)
+                                    y.save()
+                                spr2.quantity -= q2
+                                spr2.save()
+                                u.ecoins -= ((q1*c1)+(q2*c2)+d)
+                                u.save()
+                                messages.add_message(request, messages.INFO, 'We have successfully added this item to your cart')
                             else:
-                                form.instance.team_name = request.user
-                                form.save()
-                            u.ecoins -= (q*c)
-                            u.save()
-                            messages.add_message(request, messages.INFO, 'We have successfully added this item to your cart')
+                                messages.add_message(request, messages.INFO, 'This much raw material is not available at this spot')
                         else:
-                            messages.add_message(request, messages.INFO, 'This much raw material is not available at this spot')
+                            messages.add_message(request, messages.INFO, 'Not enough money')
                     else:
-                        messages.add_message(request, messages.INFO, 'Not enough money')
+                        messages.add_message(request, messages.INFO, 'This raw material is not available at this spot')
                 else:
-                    messages.add_message(request, messages.INFO, 'This raw material is not available at this spot')
+                    messages.add_message(request, messages.INFO, 'Raw Material 1 and Raw Material 2 should be different')
+        
             else:
                 messages.add_message(request, messages.INFO, 'You need to enter the quantity in multiples of 5 and it should be less than 40.')
     form = BuyRawMaterialForm()
