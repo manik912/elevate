@@ -1,5 +1,6 @@
 {% extends "home/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block head %}{% endblock head %}
 {% block bodytag %}{% endblock bodytag %}
 {% block body %}
@@ -11,7 +12,7 @@
 			<div class="container-fluid">
 				<div class="header-body">
 					<div class="row align-items-center py-4">
-						<div class="col-lg-6 col-7">
+							<!-- <div class="col-lg-6 col-7">
 						  <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
 						  <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
 							<ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -20,12 +21,9 @@
 							  <li class="breadcrumb-item active" aria-current="page">Default</li>
 							</ol>
 						  </nav>
-						</div>
+						</div> -->
 
-						 <div class="col-lg-6 col-5 text-right">
-							<!-- <a href="#" class="btn btn-sm btn-neutral">New</a>
-							<a href="#" class="btn btn-sm btn-neutral">Filters</a> -->
-						</div> 
+					 
 					</div>
 
 					<!-- Card stats -->
@@ -141,16 +139,59 @@
 						</div>
 						<div class="card-body">
 							<!-- Chart -->
-							<form action="">
+							<form action="" method="POST">
 
 								    {% csrf_token %}
-    								{{ form }}
-    								<button class="btn btn-success mt-3" style="width: 100%;">
-										<input type="submit" name="Send" value="Send">
+									<div id="div_id_to_team" class="form-group"> 
+										<label for="id_to_team" class=" requiredField">
+										Select team<span class="asteriskField">*</span> 
+										</label> 
+										<div class=""> 
+											<select style="font-weight: bold; color:black;" name="to_team" class="select form-control" required="" id="id_to_team"> 
+												<option value="" selected="">Teams</option> 
+												<option value="1">tanya</option> 
+												<option value="2">tanyathegreat</option> 
+												<option value="3">dumyteam1</option>
+											</select> 
+										</div> 
+									</div> 
+
+									<div id="div_id_item" class="form-group"> 
+										<label for="id_item" class=" requiredField">
+									        Select Product <span class="asteriskField">*</span> 
+									    </label> 
+									    <div class=""> 
+									    	<select style="font-weight: bold; color:black;" name="item" class="select form-control" required="" id="id_item"> 
+									    		<option value="" selected="">Products</option> 
+									    		<option value="1">Steel</option> 
+									    		<option value="2">Plastic</option> 
+									    		<option value="3">Laptop</option>
+
+											</select> 
+										</div> 
+									</div> 
+									<div id="div_id_cost" class="form-group"> 
+										<label for="id_cost" class=" requiredField">
+									        Price<span class="asteriskField">*</span> 
+									    </label> 
+									        <div class=""> 
+									           	<input type="number" name="cost" class="numberinput form-control" required="" id="id_cost" placeholder="Enter Price" > 
+									        </div> 
+									    </div> 
+									<div id="div_id_quantity" class="form-group"> 
+										<label for="id_quantity" class=" requiredField">
+									        Quantity<span class="asteriskField">*</span> 
+									    </label> 
+									    <div class=""> 
+									    	<input type="number" name="quantity" class="numberinput form-control" required="" id="id_quantity" placeholder="Enter Quantity"> 
+									    </div> 
+									</div>
+
+    								<button type="submit" class="btn btn-success mt-3" style="width: 100%;">
+										Send
 									</button>
     						</form>
-
-								<div class="team-name ">
+								<!-- <div class="team-name ">
 									<label for="">Select Team</label>
 									<div class="btn-group" style="width: 100%;">
 										<button type="button" class="btn btn-secondary"style="width: 100%;" >
@@ -165,8 +206,8 @@
 										  <a class="dropdown-item" href="#">Team 3</a>
 										</div>
 									  </div>
-								</div>
-								<div class="product mt-3" >
+								</div> -->
+								<!-- <div class="product mt-3" >
 									<label for="">Select Product</label>
 									<div class="btn-group" style="width: 100%;">
 										<button type="button" class="btn btn-secondary"style="width: 100%;" >
@@ -181,21 +222,21 @@
 										  <a class="dropdown-item" href="#">Product 3</a>
 										</div>
 									  </div>
-								</div>
-								<div class="price mt-3">
+								</div> -->
+								<!-- <div class="price mt-3">
 									<div class="">
 										<label for="input1" class="control-label">Price </label>
 										<i class="fa fa-inr"></i>
 										<input type="number" id="input1" class="form-control" placeholder="Enter Price">
 									  </div>
-								</div>
-								<div class="quantity mt-3">
+								</div> -->
+								<!-- <div class="quantity mt-3">
 									<label for="">Quantity </label>
 									<input type="number" class="form-control" placeholder="Enter Quantity">
-								</div>
-								<button class="btn btn-success mt-3" style="width: 100%;">
+								</div> -->
+								<!-- <button class="btn btn-success mt-3" style="width: 100%;">
 									Send
-								</button>
+								</button> -->
 
 						</div>
 					</div>
