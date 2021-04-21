@@ -45,36 +45,14 @@
           
           <!-- Nav items -->
           <ul class="navbar-nav">
+            {% for i in rmc %}
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <!--<i class="ni ni-tv-2 text-primary"></i>-->
-                <span class="nav-link-text">RM1</span><span class="lak" >56</span>
+                <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-               <!-- <i class="ni ni-planet text-orange"></i>-->
-                <span class="nav-link-text">Raw material 2</span><span class="lak" >60</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-               <!-- <i class="ni ni-pin-3 text-primary"></i>-->
-                <span class="nav-link-text">RM3</span><span class="lak" >70</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-               <!-- <i class="ni ni-single-02 text-yellow"></i>-->
-                <span class="nav-link-text">RM4</span><span class="lak" >80</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <!--<i class="ni ni-bullet-list-67 text-default"></i>-->
-                <span class="nav-link-text">RM5</span><span class="lak" >90</span>
-              </a>
-            </li>
+            {% endfor %}
           </ul>
           <!-- Divider -->
           <hr class="my-3">
@@ -82,41 +60,15 @@
           <div class="col-xl-4">
             <h2 class="mb-0">Products</h2>
           </div>
-          <!-- <h6 class="navbar-heading p-0 text-muted">
-            <span class="docs-normal">Documentation</span>
-          </h6> -->
-          <!-- Navigation -->
           <ul class="navbar-nav mb-md-3">
+            {% for i in pc%}
             <li class="nav-item">
               <a class="nav-link" href="#" target="_blank">
                 <!--<i class="ni ni-spaceship"></i>-->
-                <span class="nav-link-text">Product one</span><span class="lak" >100</span>
+                <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.pc}}pc">{{i.quantity}}</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">
-                <!--<i class="ni ni-palette"></i>-->
-                <span class="nav-link-text">P2</span><span class="lak" >150</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">
-                <!--<i class="ni ni-ui-04"></i>-->
-                <span class="nav-link-text">P3</span><span class="lak" >200</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">
-                <!--<i class="ni ni-chart-pie-35"></i>-->
-                <span class="nav-link-text">P4</span><span class="lak" >300</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link active active-pro" href="examples/upgrade.html">
-                <i class="ni ni-send text-dark"></i>
-                <span class="nav-link-text">Upgrade to PRO</span>
-              </a> -->
-            </li>
+            {% endfor %}
           </ul> 
         </div>
       </div>
@@ -621,8 +573,11 @@
                 data: mydata,
                 dataType: "json",
                 success: function (res) {
-                    for (i = 0; i < res.spr.length; i++) {
-                        $('#' + res.spr[i].id).html('Quantity' + res.spr[i].quantity);
+                    for (i = 0; i < res.rmc.length; i++) {
+                        $('#' + res.rmc[i].id +'rmc').html( res.rmc[i].quantity);
+                    }
+                    for (i = 0; i < res.pc.length; i++) {
+                        $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
                     }
                     if (res.messages) {
                         for (i in res.messages)

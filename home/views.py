@@ -91,8 +91,8 @@ def buyMaterial(request):
             else:
                 message= 'You need to enter the quantity in multiples of 5 and it should be less than 40.'
         spr = SpotRawMaterial.objects.filter(spot=s).values()
-        rmc = RawMaterialCart.objects.filter(team_name=request.user)
-        pc = ProductCart.objects.filter(team_name=request.user)
+        rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
+        pc = ProductCart.objects.filter(team_name=request.user).values()
         responseData = {
             'spr' : list(spr),
             'messages': [message],
@@ -145,13 +145,22 @@ def manufacture(request):
                     form.instance.team_name = request.user
                     form.save()
                 message= 'We have added the product in your cart'
+        
+        rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
+        pc = ProductCart.objects.filter(team_name=request.user).values()
         responseData = {
-            'messages': [message]
+            'messages': [message],
+            'rmc':list(rmc),
+            'pc':list(pc)
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
+    rmc = RawMaterialCart.objects.filter(team_name=request.user)
+    pc = ProductCart.objects.filter(team_name=request.user)
     context = {
         'form' : form,
+        'rmc':rmc,
+        'pc':pc,
     }
     return render(request, 'home/manufacture.html', context)
 
@@ -187,18 +196,25 @@ def send_req(request):
                     message = 'This team doesnot have this product/raw material'
             else:
                 message = 'You don\'t have enough money to buy this product'
-        form = SendRequestForm()
+        # form = SendRequestForm()
+        rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
+        pc = ProductCart.objects.filter(team_name=request.user).values()
         responseData = {
-            'form'     : form,
-            'messages': [message]
+            'messages': [message],
+            'rmc':list(rmc),
+            'pc':list(pc)
         }
         return JsonResponse(responseData)
 
     form = SendRequestForm()
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+    rmc = RawMaterialCart.objects.filter(team_name=request.user)
+    pc = ProductCart.objects.filter(team_name=request.user)
     context = {
         'form' : form,
         'req'  : req,
+        'rmc':rmc,
+        'pc':pc,
     }
     return render(request, 'home/trading_temp.html', context)
 
@@ -251,8 +267,12 @@ def accept_req(request, pk):
                 message = 'You don\'t have this product/raw material to accept this deal.'
         else:
             message = 'Buyer doesn\'t have enough money for this deal.'
-    req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+    req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
+    rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
+    pc = ProductCart.objects.filter(team_name=request.user).values()
     responseData = {
+        'rmc': list(rmc),
+        'pc':list(pc),
         'req' : list(req),
         'messages': [message]
     }
@@ -289,10 +309,19 @@ def reject_req(request, pk):
     if request.method =="POST":
         obj.delete()
         message = 'Request Denied Successfully!'
-        req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+        req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
+        
         responseData = {
             'req' : list(req),
             'messages': [message]
         }
         return JsonResponse(responseData)
     return render(request, 'home/trading_temp.html')
+
+
+def pending_req(request):
+    req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
+    responseData = {
+        'req' : list(req),
+    }
+    return JsonResponse(responseData)
