@@ -19,6 +19,7 @@ def home(request):
         form = IndustryForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
+            return redirect('buy')
     else:
         form = IndustryForm()
     context = {
@@ -30,9 +31,9 @@ def cal_transportation_cost(s1, s2):
     route1 = Route.objects.filter(from_spot=s1).filter(to_spot=s2).first()
     route2 = Route.objects.filter(from_spot=s2).filter(to_spot = s1).first()
     if route1 != None:
-        return ((route1.distace)*6)
+        return ((route1.distace)*4)
     elif route2 !=None:
-        return ((route2.distace)*6)
+        return ((route2.distace)*4)
     else:
         return 0
 
@@ -62,7 +63,9 @@ def buyMaterial(request):
                         c2   = spr2.cost
                         u = request.user
                         d = cal_transportation_cost(s, u.industry.spot)
-                        if u.ecoins >= ((q1*c1)+(q2*c2) +d):
+                        tc = ((q1*c1)+(q2*c2))
+                        tax = tc*(s.tax)/100
+                        if u.ecoins >= (tc +d +tax):
                             if no1>=q1 and no2>=q2:
                                 x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
                                 if x1:
@@ -82,7 +85,7 @@ def buyMaterial(request):
                                     y.save()
                                 spr2.quantity -= q2
                                 spr2.save()
-                                u.ecoins -= ((q1*c1)+(q2*c2)+d)
+                                u.ecoins -= (tc +d +tax)
                                 u.save()
                                 message=  'We have successfully added this item to your cart'
                             else:

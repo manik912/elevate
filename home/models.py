@@ -15,9 +15,9 @@ class Item(models.Model): #Raw materials + product
 
 class Spot(models.Model):
     name = models.CharField(max_length=50)
-
+    tax = models.IntegerField(default=0)
     def __str__(self):
-        return str(self.id) + ' ' + self.name 
+        return self.name 
 
 class SpotRawMaterial(models.Model):
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
