@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from user.models import *
 from user.models import Team
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
+from django.core.serializers import serialize
 # Create your views here.
 
 def test(request):
@@ -26,7 +28,7 @@ def home(request):
 
 def cal_transportation_cost(s1, s2):
     route = Route.objects.filter(from_spot=s1).filter(to_spot=s2).first()
-    return ((route.distace)*3)
+    return ((route.distace)*6)
 
 @login_required
 def buyMaterial(request):
@@ -35,11 +37,14 @@ def buyMaterial(request):
     if(request.method == 'POST'):
         form = BuyRawMaterialForm(request.POST)
         if form.is_valid():
-            s = form.cleaned_data.get("spot")
-            r1 = form.cleaned_data.get("raw_material_1")
-            q1 = form.cleaned_data.get("quantity_1")
-            r2 = form.cleaned_data.get("raw_material_2")
-            q2 = form.cleaned_data.get("quantity_2")
+            form.instance.team_name = request.user
+            form.save()
+            s = form.cleaned_data.get('spot')
+            q1 = form.cleaned_data.get('quantity_1')
+            q2 = form.cleaned_data.get('quantity_2')
+            r2 = form.cleaned_data.get('raw_material_2')
+            r1 = form.cleaned_data.get('raw_material_1')
+
             if q1%5==0 and q2%5==0 and q1>0 and q2>0 and q2<60 and q1<60:
                 spr1 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r1).first()
                 spr2 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r2).first()
@@ -73,23 +78,37 @@ def buyMaterial(request):
                                 spr2.save()
                                 u.ecoins -= ((q1*c1)+(q2*c2)+d)
                                 u.save()
-                                messages.add_message(request, messages.INFO, 'We have successfully added this item to your cart')
+                                message=  'We have successfully added this item to your cart'
                             else:
-                                messages.add_message(request, messages.INFO, 'This much raw material is not available at this spot')
+                                message=  'This much raw material is not available at this spot'
                         else:
-                            messages.add_message(request, messages.INFO, 'Not enough money')
+                            message = 'Not enough money'
                     else:
-                        messages.add_message(request, messages.INFO, 'This raw material is not available at this spot')
+                        message = 'This raw material is not available at this spot'
                 else:
-                    messages.add_message(request, messages.INFO, 'Raw Material 1 and Raw Material 2 should be different')
+                    message= 'Raw Material 1 and Raw Material 2 should be different'
         
             else:
-                messages.add_message(request, messages.INFO, 'You need to enter the quantity in multiples of 5 and it should be less than 40.')
+                message= 'You need to enter the quantity in multiples of 5 and it should be less than 40.'
+        spr = SpotRawMaterial.objects.filter(spot=s).values()
+        rmc = RawMaterialCart.objects.filter(team_name=request.user)
+        pc = ProductCart.objects.filter(team_name=request.user)
+        responseData = {
+            'spr' : list(spr),
+            'messages': [message],
+            'rmc' : list(rmc),
+            'pc'  : list(pc),
+        }
+        return JsonResponse(responseData)
     form = BuyRawMaterialForm()
+    rmc = RawMaterialCart.objects.filter(team_name=request.user)
+    pc = ProductCart.objects.filter(team_name=request.user)
     context = {
         'form' : form,
         'spr'  : spr,
-        'spots' : spots
+        'spots' : spots,
+        'rmc' : rmc,
+        'pc'  : pc,
     }
     return render(request, 'home/buying.html', context)
 
@@ -108,7 +127,7 @@ def manufacture(request):
                 for j in raw:
                     if (i.quantity)*q > (j.quantity):
                         flag=1
-                        messages.add_message(request, messages.INFO, 'You donot have enough raw material')
+                        message = 'You donot have enough raw material'
                         break
             
             if flag==0:
@@ -125,8 +144,11 @@ def manufacture(request):
                 else:
                     form.instance.team_name = request.user
                     form.save()
-                messages.add_message(request, messages.INFO, 'We have added the product in your cart')
-
+                message= 'We have added the product in your cart'
+        responseData = {
+            'messages': [message]
+        }
+        return JsonResponse(responseData)
     form = ManufactureForm()
     context = {
         'form' : form,
@@ -158,13 +180,19 @@ def send_req(request):
                     if flag==0:
                         form.instance.from_team = request.user
                         form.save()
-                        messages.add_message(request, messages.INFO, 'Request sent!')
+                        message =  'Request sent!'
                     else:
-                        messages.add_message(request, messages.INFO, 'This team doesnot have this much quantity.')
+                        message='This team doesnot have this much quantity.'
                 else:
-                    messages.add_message(request, messages.INFO, 'This team doesnot have this product/raw material')
+                    message = 'This team doesnot have this product/raw material'
             else:
-                messages.add_message(request, messages.INFO, 'You don\'t have enough money to buy this product')
+                message = 'You don\'t have enough money to buy this product'
+        form = SendRequestForm()
+        responseData = {
+            'form'     : form,
+            'messages': [message]
+        }
+        return JsonResponse(responseData)
 
     form = SendRequestForm()
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
@@ -176,6 +204,7 @@ def send_req(request):
 
 
 def accept_req(request, pk):
+    message = 'You have successfully accepted this deal'
     x = SendRequest.objects.filter(id=pk)
     for i in x:
         if i.from_team.ecoins>=(i.cost)*(i.quantity):
@@ -217,13 +246,17 @@ def accept_req(request, pk):
                     i.from_team.save()
                     i.to_team.save()
                 else:
-                    messages.add_message(request, messages.INFO, 'You don\'t have enough quantity of this product/raw material to accept this deal.')
+                    message= 'You don\'t have enough quantity of this product/raw material to accept this deal.'
             else:
-                messages.add_message(request, messages.INFO, 'You don\'t have this product/raw material to accept this deal.')
+                message = 'You don\'t have this product/raw material to accept this deal.'
         else:
-            messages.add_message(request, messages.INFO, 'Buyer doesn\'t have enough money for this deal.')
-
-    return redirect('trade')
+            message = 'Buyer doesn\'t have enough money for this deal.'
+    req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+    responseData = {
+        'req' : list(req),
+        'messages': [message]
+    }
+    return JsonResponse(responseData)
 
 def sell_us(request):
     if(request.method == 'POST'):
@@ -249,3 +282,17 @@ def sell_us(request):
         'form' : form,
     }
     return render(request, 'home/buying.html', context)
+
+
+def reject_req(request, pk):
+    obj = get_object_or_404(SendRequest, id = pk)
+    if request.method =="POST":
+        obj.delete()
+        message = 'Request Denied Successfully!'
+        req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+        responseData = {
+            'req' : list(req),
+            'messages': [message]
+        }
+        return JsonResponse(responseData)
+    return render(request, 'home/trading_temp.html')

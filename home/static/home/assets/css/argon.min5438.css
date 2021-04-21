@@ -615,12 +615,6 @@ pre code {
 .row {
   display: flex;
   margin-right: -15px;
-<<<<<<< HEAD
-=======
-
-  margin-top: 10px;
-
->>>>>>> 26158da150ff264846902c87b176ff6ba196973f
   margin-left: -15px;
   flex-wrap: wrap;
 }

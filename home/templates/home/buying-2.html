@@ -1,0 +1,73 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>HOME PAGE</h1>
+    <form method="POST" id="buying-form">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <input type="button" id="submit-btn" value="submit">
+    </form>
+    <br>
+    {% for spot in spots %}
+        <h2>{{spot.name}}-></h2>
+        {% for i in spr %}
+            {% if spot.name == i.spot.name %}
+                <p>Name: {{i.raw_material.name}}</p>
+                <p id="{{i.id}}">Quantity: {{i.quantity}}</p>
+                <p>Cost: {{i.cost}}</p>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#submit-btn').click(function(){
+        console.log('hello world')
+        let spot = $('#id_spot').val();
+        let raw_material_1 = $('#id_raw_material_1').val();
+        let raw_material_2 = $('#id_raw_material_2').val();
+        let quantity_1 = $('#id_quantity_1').val();
+        let quantity_2 = $('#id_quantity_2').val();
+        let token = $('input[name=csrfmiddlewaretoken]').val();
+        // console.log(spot, rm1, rm2, q1, q2)
+        mydata = {"spot":spot, "raw_material_1":raw_material_1, "raw_material_2":raw_material_2, "quantity_1":quantity_1, "quantity_2":quantity_2, "csrfmiddlewaretoken": token}
+        console.log(mydata)
+        $.ajax({
+            type: "POST",
+            url: "/buy/",
+            data: mydata,
+            dataType: "json",
+            success:function(res){
+                for(i=0; i<res.spr.length; i++){
+                    $('#' + res.spr[i].id).html('Quantity' + res.spr[i].quantity);
+                }
+                if (res.messages){
+                    for (i in res.messages)
+                        alert(res.messages[i]);
+                }
+            }
+        });
+    });
+    });
+    
+</script>
+    
+</html>

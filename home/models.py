@@ -17,7 +17,7 @@ class Spot(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name 
+        return str(self.id) + ' ' + self.name 
 
 class SpotRawMaterial(models.Model):
     spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
