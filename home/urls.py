@@ -10,5 +10,5 @@ urlpatterns = [
     path('accept/<int:pk>/', accept_req, name='accept'),
     path('reject/<int:pk>/', reject_req, name='reject'),
     path('test/', test, name='test'),
-    
+    path('get-req/ajax', pending_req, name='get-req'),
 ]
