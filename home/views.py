@@ -27,8 +27,14 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 def cal_transportation_cost(s1, s2):
-    route = Route.objects.filter(from_spot=s1).filter(to_spot=s2).first()
-    return ((route.distace)*6)
+    route1 = Route.objects.filter(from_spot=s1).filter(to_spot=s2).first()
+    route2 = Route.objects.filter(from_spot=s2).filter(to_spot = s1).first()
+    if route1 != None:
+        return ((route1.distace)*6)
+    elif route2 !=None:
+        return ((route2.distace)*6)
+    else:
+        return 0
 
 @login_required
 def buyMaterial(request):
