@@ -54,4 +54,8 @@ class Manufacture(models.Model):
         return str(self.product) + " -> " + str(self.raw_material) + " = " + str(self.quantity)
 
 
+class Notification(models.Model):
 
+    notice = models.CharField(max_length=500)
+    def __str__(self):
+        return self.notice
