@@ -66,7 +66,7 @@ def buyMaterial(request):
                         tc = ((q1*c1)+(q2*c2))
                         tax = tc*(s.tax)
                         ftax = float(tax)
-                        ftax/=100
+                        ftax/=400
                         if u.ecoins >= (tc +d +ftax):
                             if no1>=q1 and no2>=q2:
                                 x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
