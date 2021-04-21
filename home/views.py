@@ -145,13 +145,22 @@ def manufacture(request):
                     form.instance.team_name = request.user
                     form.save()
                 message= 'We have added the product in your cart'
+        
+        rmc = RawMaterialCart.objects.filter(team_name=request.user)
+        pc = ProductCart.objects.filter(team_name=request.user)
         responseData = {
-            'messages': [message]
+            'messages': [message],
+            'rmc':list(rmc),
+            'pc':list(pc)
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
+    rmc = RawMaterialCart.objects.filter(team_name=request.user)
+    pc = ProductCart.objects.filter(team_name=request.user)
     context = {
         'form' : form,
+        'rmc':rmc,
+        'pc':pc,
     }
     return render(request, 'home/manufacture.html', context)
 
@@ -188,17 +197,25 @@ def send_req(request):
             else:
                 message = 'You don\'t have enough money to buy this product'
         form = SendRequestForm()
+        rmc = RawMaterialCart.objects.filter(team_name=request.user)
+        pc = ProductCart.objects.filter(team_name=request.user)
         responseData = {
             'form'     : form,
-            'messages': [message]
+            'messages': [message],
+            'rmc':list(rmc),
+            'pc':list(pc)
         }
         return JsonResponse(responseData)
 
     form = SendRequestForm()
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+    rmc = RawMaterialCart.objects.filter(team_name=request.user)
+    pc = ProductCart.objects.filter(team_name=request.user)
     context = {
         'form' : form,
         'req'  : req,
+        'rmc':rmc,
+        'pc':pc,
     }
     return render(request, 'home/trading_temp.html', context)
 
