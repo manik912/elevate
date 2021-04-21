@@ -64,8 +64,10 @@ def buyMaterial(request):
                         u = request.user
                         d = cal_transportation_cost(s, u.industry.spot)
                         tc = ((q1*c1)+(q2*c2))
-                        tax = tc*(s.tax)/100
-                        if u.ecoins >= (tc +d +tax):
+                        tax = tc*(s.tax)
+                        ftax = float(tax)
+                        ftax/=100
+                        if u.ecoins >= (tc +d +ftax):
                             if no1>=q1 and no2>=q2:
                                 x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
                                 if x1:
@@ -85,7 +87,7 @@ def buyMaterial(request):
                                     y.save()
                                 spr2.quantity -= q2
                                 spr2.save()
-                                u.ecoins -= (tc +d +tax)
+                                u.ecoins -= (tc +d +ftax)
                                 u.save()
                                 message=  'We have successfully added this item to your cart'
                             else:
