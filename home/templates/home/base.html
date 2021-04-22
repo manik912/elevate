@@ -41,14 +41,14 @@
 
 </head>
 <style>
-    @media(max-width: 1024px){
+    /* @media(max-width: 1024px){
         #display {
             display: none;
         }
         #error {
             display: block;
         }
-    }
+    } */
 </style>
 
 <body {% block bodytag %}{% endblock bodytag %}>
@@ -61,6 +61,7 @@
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img class="navlogo" src="{% static 'home/assets/img/elevate-white.png' %}" style="height: 60px; width: 60px;">
         
         <!-- Navbar links -->
         <ul class="navbar-nav align-items-center  ml-md-auto ">
