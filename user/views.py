@@ -77,7 +77,7 @@ def export_answers_xls(request):
                 if sell.product.category_2:
                     sub = sub + sell.quantity
                 if sell.product.category_3:
-                    sub = suc + sell.quantity
+                    suc = suc + sell.quantity
 
 
             sellts = SendRequest.objects.filter(from_team=team).filter(is_accepted=True)
