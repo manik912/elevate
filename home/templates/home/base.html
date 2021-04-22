@@ -157,8 +157,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
+                                      {% for ns in n %}
                                         <h5 class="card-title text-uppercase text-muted mb-0">News Flash</h5>
-                                        <span class="h5 font-weight-bold mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto nulla asperiores.</span>
+                                        <span class="h5 font-weight-bold mb-0">{{ns.notice}}</span>
+                                        {% endfor %}
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
