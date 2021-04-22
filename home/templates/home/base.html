@@ -104,7 +104,7 @@
               <img alt="Image placeholder" src="{%static 'home/assets/img/theme/team-4.jpg' %}">
             </span> -->
             <div class="media-body  ml-2  d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">Hi {{user.team_name}}</span>
+              <span class="mb-0 font-weight-bold">Hi {{user.team_name}}</span>
             </div>
             </div>
           </a>
@@ -157,8 +157,8 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
+                                      <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
                                       {% for ns in n %}
-                                        <h5 class="card-title text-uppercase text-muted mb-0">News Flash</h5>
                                         <span class="h5 font-weight-bold mb-0">{{ns.notice}}</span>
                                         {% endfor %}
                                     </div>
