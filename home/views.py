@@ -413,8 +413,15 @@ def pending_req(request):
     teams = Team.objects.all().values()
     responseData = {
         'req':list(req),
-        'sreq':list(req),
+        'sreq':list(sreq),
         'pc':list(pc),
         'teams':list(teams)
     }
     return JsonResponse(responseData)
+
+
+def error_404(request, exception):
+    return render(request, 'home/404.html')
+
+def custom_error_view(request, exception=None):
+    return render(request, "home/404.html", {})
