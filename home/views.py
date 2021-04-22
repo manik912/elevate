@@ -134,16 +134,20 @@ def manufacture(request):
             temp = Manufacture.objects.filter(product=p)
             flag = 0
             for i in temp:
-                raw = RawMaterialCart.objects.filter(raw_material=i.raw_material)
-                for j in raw:
-                    if (i.quantity)*q > (j.quantity):
-                        flag=1
-                        message = 'You donot have enough raw material'
-                        break
+                raw = RawMaterialCart.objects.filter(raw_material=i.raw_material).filter(team_name=request.user)
+                if raw:
+                    for j in raw:
+                        if (i.quantity)*q > (j.quantity):
+                            flag=1
+                            message = 'You donot have enough raw material'
+                            break
+                else:
+                    flag=1
+                    message = 'You donot have enough raw material'
             
             if flag==0:
                 for i in temp:
-                    raw = RawMaterialCart.objects.filter(raw_material=i.raw_material)
+                    raw = RawMaterialCart.objects.filter(raw_material=i.raw_material).filter(team_name=request.user)
                     for j in raw:
                         j.quantity -= (i.quantity)*q
                         j.save()
@@ -175,7 +179,7 @@ def manufacture(request):
     }
     return render(request, 'home/manufacture.html', context)
 
-
+@login_required
 def send_req(request):
     if(request.method == 'POST'):
         form = SendRequestForm(request.POST)
@@ -229,7 +233,7 @@ def send_req(request):
     }
     return render(request, 'home/trading_temp.html', context)
 
-
+@login_required
 def accept_req(request, pk):
     message = 'You have successfully accepted this deal'
     x = SendRequest.objects.filter(id=pk)
@@ -289,6 +293,7 @@ def accept_req(request, pk):
     }
     return JsonResponse(responseData)
 
+@login_required
 def sell_us(request):
     if(request.method == 'POST'):
         form = SellUsForm(request.POST)
@@ -314,7 +319,7 @@ def sell_us(request):
     }
     return render(request, 'home/buying.html', context)
 
-
+@login_required
 def reject_req(request, pk):
     obj = get_object_or_404(SendRequest, id = pk)
     if request.method =="POST":
@@ -330,9 +335,11 @@ def reject_req(request, pk):
     return render(request, 'home/trading_temp.html')
 
 
+@login_required
 def pending_req(request):
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
+    
     responseData = {
-        'req' : list(req),
+        'req':list(req)
     }
     return JsonResponse(responseData)

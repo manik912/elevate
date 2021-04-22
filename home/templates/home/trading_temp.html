@@ -3,15 +3,14 @@
 {% load crispy_forms_tags %}
 {% block head %}{% endblock head %}
 {% block bodytag %}{% endblock bodytag %}
-{% block body %}
 
-<!-- Sidenav -->
+{% block sidenav %}
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="{%static 'home/assets/img/brand/blue.png'%}" class="navbar-brand-img" alt="...">
+			<h2 class="mt-2">INVENTORY</h2>
         </a>
       </div>
       <div class="navbar-inner">
@@ -22,11 +21,10 @@
           </div>
           
           <!-- Nav items -->
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" id="resource-inventory">
             {% for i in rmc %}
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <!--<i class="ni ni-tv-2 text-primary"></i>-->
                 <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
               </a>
             </li>
@@ -38,11 +36,10 @@
           <div class="col-xl-4">
             <h2 class="mb-0">Products</h2>
           </div>
-          <ul class="navbar-nav mb-md-3">
+          <ul class="navbar-nav mb-md-3" id="product-inventory">
             {% for i in pc%}
             <li class="nav-item">
-              <a class="nav-link" href="#" target="_blank">
-                <!--<i class="ni ni-spaceship"></i>-->
+              <a class="nav-link" href="#">
                 <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.id}}pc">{{i.quantity}}</span>
               </a>
             </li>
@@ -52,190 +49,11 @@
       </div>
     </div>
   </nav>
-  <!-- Main content -->
   <div class="main-content" id="panel">
-    <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
-		<div class="container-fluid">
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			
-			<!-- Navbar links -->
-			<ul class="navbar-nav align-items-center  ml-md-auto ">
-			  <li class="nav-item d-xl-none">
-				<!-- Sidenav toggler -->
-				<div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-				  <div class="sidenav-toggler-inner">
-					<i class="sidenav-toggler-line"></i>
-					<i class="sidenav-toggler-line"></i>
-					<i class="sidenav-toggler-line"></i>
-				  </div>
-				</div>
-			  </li>
-			  <li class="nav-item ">
-				<a class="nav-link" href="{% url 'buy' %}">
-				  Buy
-				</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'manufacture' %}">
-				  Manufacture
-				</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="{% url 'trade' %}" >
-				  Trade
-				</a>
-			  </li>
-			  
-			</ul>
-			<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-			  <li class="nav-item dropdown">
-				<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  <div class="media align-items-center">
-					<span class="avatar avatar-sm rounded-circle">
-					  <img alt="Image placeholder" src="{%static 'home/assets/img/theme/team-4.jpg' %}">
-					</span>
-					<div class="media-body  ml-2  d-none d-lg-block">
-					  <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
-					</div>
-				  </div>
-				</a>
-				<div class="dropdown-menu  dropdown-menu-right ">
-				  <div class="dropdown-header noti-title">
-					<h6 class="text-overflow m-0">Welcome!</h6>
-				  </div>
-				  <a href="#!" class="dropdown-item">
-					<i class="ni ni-single-02"></i>
-					<span>My profile</span>
-				  </a>
-				  <a href="#!" class="dropdown-item">
-					<i class="ni ni-settings-gear-65"></i>
-					<span>Settings</span>
-				  </a>
-				  <a href="#!" class="dropdown-item">
-					<i class="ni ni-calendar-grid-58"></i>
-					<span>Activity</span>
-				  </a>
-				  <a href="#!" class="dropdown-item">
-					<i class="ni ni-support-16"></i>
-					<span>Support</span>
-				  </a>
-				  <div class="dropdown-divider"></div>
-				  <a href="#!" class="dropdown-item">
-					<i class="ni ni-user-run"></i>
-					<span>Logout</span>
-				  </a>
-				</div>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-	  </nav>
-	<div class="header bg-primary pb-6">
-		<div class="container-fluid">
-			<div class="header-body">
-				<div class="row align-items-center py-4">
-
-
-				</div>
-
-				<!-- Card stats -->
-				<div class="row">
-					<div class="col-xl-3 col-md-6">
-						<div class="card card-stats">
-							<!-- Card body -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
-										<span class="h2 font-weight-bold mb-0">350,897</span>
-									</div>
-									<div class="col-auto">
-										<div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-											<i class="ni ni-active-40"></i>
-										</div>
-									</div>
-								</div>
-								<p class="mt-3 mb-0 text-sm">
-									<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-									<span class="text-nowrap">Since last month</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card card-stats">
-							<!-- Card body -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-										<span class="h2 font-weight-bold mb-0">2,356</span>
-									</div>
-									<div class="col-auto">
-										<div
-											class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-											<i class="ni ni-chart-pie-35"></i>
-										</div>
-									</div>
-								</div>
-								<p class="mt-3 mb-0 text-sm">
-									<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-									<span class="text-nowrap">Since last month</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card card-stats">
-							<!-- Card body -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-										<span class="h2 font-weight-bold mb-0">924</span>
-									</div>
-									<div class="col-auto">
-										<div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-											<i class="ni ni-money-coins"></i>
-										</div>
-									</div>
-								</div>
-								<p class="mt-3 mb-0 text-sm">
-									<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-									<span class="text-nowrap">Since last month</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-md-6">
-						<div class="card card-stats">
-							<!-- Card body -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col">
-										<h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-										<span class="h2 font-weight-bold mb-0">49,65%</span>
-									</div>
-									<div class="col-auto">
-										<div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-											<i class="ni ni-chart-bar-32"></i>
-										</div>
-									</div>
-								</div>
-								<p class="mt-3 mb-0 text-sm">
-									<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-									<span class="text-nowrap">Since last month</span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+{% endblock sidenav%}
+{% block body %}
 	<!-- Page content -->
-	<div class="container-fluid mt--6">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xl-4">
 				<div class="card bg-default">
@@ -271,7 +89,7 @@
 					<div class="card-body p-2">
 						<!-- Chart -->
 						<div class="req-list">
-							<div class="list-group">
+							<div class="list-group" id="pen-req">
 
 								{% for re in req %}
 
@@ -298,110 +116,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xl-12">
-				<div class="card bg-default">
-					<div class="card-header bg-transparent">
-						<div class="row align-items-center ">
-							<div class="col">
-								<strong>
-									<h1 class="h1 text-white mb-0 text-bold">Notifications</h1>
-								</strong>
-							</div>
-						</div>
-						<div class="notify-body mt-3">
-							<div class="list-group">
-								<a href="#"
-									class="list-group-item list-group-item-action flex-column align-items-start bg-default">
-									<div class="d-flex w-100 justify-content-between">
-										<div class="row" style="width: 100%; color: white;">
-											<div class="col-xl-10">
-												<h2 class="mb-1" style="color: red;">News Flash!!</h2>
-											</div>
-											<div class="col-xl-2">
-												<div class="notify-time float-right">
-													<small>10:00 PM</small>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row" style="width: 100%; color: white;">
-										<div class="col-xl-10">
-											<p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-												Nulla ex libero omnis facere suscipit eum nostrum illo debitis quis
-												nemo, quidem voluptatibus maiores velit, saepe facilis eveniet natus
-												voluptatum. Sunt!</p>
-										</div>
-										<div class="col-xl-2">
-										</div>
-
-									</div>
-
-								</a>
-								<a href="#"
-									class="list-group-item list-group-item-action flex-column align-items-start bg-default">
-									<div class="d-flex w-100 justify-content-between">
-										<div class="row" style="width: 100%; color: white;">
-											<div class="col-xl-10">
-												<h2 class="mb-1" style="color: red;">News Flash!!</h2>
-											</div>
-											<div class="col-xl-2">
-												<div class="notify-time float-right">
-													<small>10:00 PM</small>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row" style="width: 100%; color: white;">
-										<div class="col-xl-10">
-											<p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-												Nulla ex libero omnis facere suscipit eum nostrum illo debitis quis
-												nemo, quidem voluptatibus maiores velit, saepe facilis eveniet natus
-												voluptatum. Sunt!</p>
-										</div>
-										<div class="col-xl-2">
-										</div>
-
-									</div>
-
-								</a>
-								<a href="#"
-									class="list-group-item list-group-item-action flex-column align-items-start bg-default">
-									<div class="d-flex w-100 justify-content-between">
-										<div class="row" style="width: 100%; color: white;">
-											<div class="col-xl-10">
-												<h2 class="mb-1" style="color: red;">News Flash!!</h2>
-											</div>
-											<div class="col-xl-2">
-												<div class="notify-time float-right">
-													<small>10:00 PM</small>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row" style="width: 100%; color: white;">
-										<div class="col-xl-10">
-											<p class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-												Nulla ex libero omnis facere suscipit eum nostrum illo debitis quis
-												nemo, quidem voluptatibus maiores velit, saepe facilis eveniet natus
-												voluptatum. Sunt!</p>
-										</div>
-										<div class="col-xl-2">
-										</div>
-
-									</div>
-
-								</a>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	{% endblock body %}
-</div>
+
 
 {% block js%}
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -409,7 +126,6 @@
 <script>
 	$(document).ready(function () {
 		$('#submit-btnt').click(function () {
-			console.log('hello world')
 			let to_team = $('#id_to_team').val();
 			let item = $('#id_item').val();
 			let cost = $('#id_cost').val();
@@ -440,18 +156,52 @@
 		});
 	});
 
-	// setTimeout(function() {
+	
+
+	setInterval(function() {
+		$.ajax({
+			type: "GET",
+			url: "/get-req/ajax/",
+			dataType: "json",
+			success: function (res) {
+				console.log(res);
+				output="";
+				for (i = 0; i < res.req.length; i++) {
+					console.log(res.req[i]);
+					output += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  res.req[i].from_team + 
+						"</h5></div><p class='mb-1'>Product :" + res.req[i].item.name + 
+							"</p><p class='mb-1'>Quantity :" + res.req[i].quantity +
+								"</p><p class='mb-1'>Price :" + res.req[i].cost +
+									"</p><input type='button' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.req[i].id + ")' style='margin-top:-2.5rem ;'><input type='button' value='Accept' onclick='acceptfun(" + res.req[i].id + 
+									")' class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
+				}
+				$('#pen-req').html(output);
+			}
+		});
+	}, 2000);
+
+	// setInterval(function() {
+	// 	output = "";
 	// 	$.ajax({
 	// 		type: "GET",
-	// 		url: "/get-req/",
+	// 		url: "/get-req/ajax/",
 	// 		dataType: "json",
 	// 		success: function (res) {
-	// 			for (i = 0; i < res.req.length; i++) {
-	// 				var div = document.createElement("div");
+	// 			if(res.status){
+	// 				output += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  res.from_team + 
+	// 					"</h5></div><p class='mb-1'>Product :" + res.item + 
+	// 						"</p><p class='mb-1'>Quantity :" + res.quantity +
+	// 							"</p><p class='mb-1'>Price :" + res.cost +
+	// 								"</p><input type='button' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.id + ") style='margin-top:-2.5rem ;'><input type='button' value='Accept' onclick='acceptfun(" + res.id + 
+	// 								") class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
+				
+	// 				$('#pen-req').append(output);
 	// 			}
 	// 		}
 	// 	});
 	// }, 3000);
+
+	
 
 	function acceptfun(n) {
 		console.log("Hello World");
@@ -466,12 +216,20 @@
 			dataType: "json",
 			success: function (res) {
 				
+				output1 = "";
+				output2 = "";
 				for (i = 0; i < res.rmc.length; i++) {
-					$('#' + res.rmc[i].id + 'rmc').html( res.rmc[i].quantity);
+					output1 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + res.rmc[i].raw_material + 
+						"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
+							+ res.rmc[i].quantity+ "</span></a></li>"
 				}
+				$('#resource-inventory').html(output1)
 				for (i = 0; i < res.pc.length; i++) {
-					$('#' + res.pc[i].id + 'pc').html( res.pc[i].quantity);
+					output2 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + res.pc[i].raw_material + 
+						"</span><span class='lak' id='" + res.pc[i].id + "rmc'>"
+							+ res.pc[i].quantity+ "</span></a></li>"
 				}
+				$('#product-inventory').html(output2)
 				if (res.messages) {
 					for (i in res.messages)
 						alert(res.messages[i]);

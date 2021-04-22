@@ -79,6 +79,7 @@ class SendRequest(models.Model):
 	cost = models.IntegerField()
 	quantity = models.IntegerField()
 	is_accepted = models.BooleanField(default=False)
+	is_visible = models.BooleanField(default=False)
 
 
 class SellUs(models.Model):

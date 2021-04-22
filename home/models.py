@@ -59,3 +59,10 @@ class Notification(models.Model):
     notice = models.CharField(max_length=500)
     def __str__(self):
         return self.notice
+
+
+class Season(models.Model):
+    season_1 = models.BooleanField(default=False)
+    season_2 = models.BooleanField(default=False)
+    season_3 = models.BooleanField(default=False)
+    season_4 = models.BooleanField(default=False)
