@@ -6,6 +6,7 @@ class Item(models.Model): #Raw materials + product
     product = models.BooleanField(default=False)
     raw_material = models.BooleanField(default=False)
     product_cost = models.IntegerField(default=0)
+    raw_material_cost = models.IntegerField(default=0)
     category_1 = models.BooleanField(default=False)
     category_2 = models.BooleanField(default=False)
     category_3 = models.BooleanField(default=False)

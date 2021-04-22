@@ -52,7 +52,7 @@ def buyMaterial(request):
             r2 = form.cleaned_data.get('raw_material_2')
             r1 = form.cleaned_data.get('raw_material_1')
 
-            if q1%5==0 and q2%5==0 and q1>0 and q2>0 and q2<60 and q1<60:
+            if q1%5==0 and q2%5==0 and q1>0 and q2>0 and (q2+q1)<=60:
                 spr1 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r1).first()
                 spr2 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r2).first()
                 if r1.name != r2.name:
@@ -100,15 +100,17 @@ def buyMaterial(request):
                     message= 'Raw Material 1 and Raw Material 2 should be different'
         
             else:
-                message= 'You need to enter the quantity in multiples of 5 and it should be less than 40.'
+                message= 'You need to enter the quantity in multiples of 5 and their sum should be less than 60.'
         spr = SpotRawMaterial.objects.filter(spot=s).values()
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
+        items = Item.objects.all().values()
         responseData = {
             'spr' : list(spr),
             'messages': [message],
             'rmc' : list(rmc),
             'pc'  : list(pc),
+            'items': list(items),
         }
         return JsonResponse(responseData)
     form = BuyRawMaterialForm()
@@ -163,10 +165,14 @@ def manufacture(request):
         
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
+        items = Item.objects.all()
+        team = Team.objects.filter(team_name=request.user).values()
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
-            'pc':list(pc)
+            'pc':list(pc),
+            'items': items,
+            'team':team,
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
@@ -314,10 +320,18 @@ def sell_us(request):
                     messages.add_message(request, messages.INFO, 'You don\'t have this much quantity for this deal.')
     else:
         form = SellUsForm()
+    rmc = RawMaterialCart.objects.filter(team_name=request.user)
+    pc = ProductCart.objects.filter(team_name=request.user)
+    rmcost = Item.objects.filter(raw_material=True)
+    pcost = Item.objects.filter(product=True)
     context = {
         'form' : form,
+        'rmc':rmc,
+        'pc':pc,
+        'rmcost':rmcost,
+        'pcost':pcost,
     }
-    return render(request, 'home/buying.html', context)
+    return render(request, 'home/sellus.html', context)
 
 @login_required
 def reject_req(request, pk):
@@ -338,8 +352,11 @@ def reject_req(request, pk):
 @login_required
 def pending_req(request):
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
-    
+    pc = Item.objects.filter(product=True).values()
+    teams = Team.objects.all().values()
     responseData = {
-        'req':list(req)
+        'req':list(req),
+        'pc':list(pc),
+        'teams':list(teams)
     }
     return JsonResponse(responseData)

@@ -168,8 +168,11 @@
 				output="";
 				for (i = 0; i < res.req.length; i++) {
 					console.log(res.req[i]);
-					output += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  res.req[i].from_team + 
-						"</h5></div><p class='mb-1'>Product :" + res.req[i].item.name + 
+					let obj = res.pc.filter(item => item.id === res.req[i].item_id);
+					let obj2 = res.teams.filter(item => item.id === res.req[i].from_team_id);
+  					
+					output += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  obj2[0].team_name + 
+						"</h5></div><p class='mb-1'>Product :" + obj[0].name + 
 							"</p><p class='mb-1'>Quantity :" + res.req[i].quantity +
 								"</p><p class='mb-1'>Price :" + res.req[i].cost +
 									"</p><input type='button' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.req[i].id + ")' style='margin-top:-2.5rem ;'><input type='button' value='Accept' onclick='acceptfun(" + res.req[i].id + 

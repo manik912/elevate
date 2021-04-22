@@ -11,4 +11,5 @@ urlpatterns = [
     path('reject/<int:pk>/', reject_req, name='reject'),
     path('test/', test, name='test'),
     path('get-req/ajax/', pending_req, name='get-req'),
+    path('sellus/', sell_us, name='sellus'),
 ]

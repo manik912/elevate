@@ -77,6 +77,11 @@
             Trade
           </a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'sellus' %}">
+              Sell Us
+            </a>
+            </li>
           
         </ul>
         <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
@@ -177,7 +182,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">E-Coins</h5>
-                                        <span class="h2 font-weight-bold mb-0">{{user.ecoins}}</span>
+                                        <span class="h2 font-weight-bold mb-0" id="ecoins">{{user.ecoins}}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
