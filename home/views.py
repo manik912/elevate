@@ -215,9 +215,10 @@ def send_req(request):
             t = form.cleaned_data.get("to_team")
             u = request.user
             tc = cal_transportation_cost(u.industry.spot, t.industry.spot)
+            tax = c*q*(t.industry.spot.tax)/400
             if t != u:
                 if check15 (p, c):
-                    if c*q + tc <= u.ecoins:
+                    if (c*q + tc +tax) <= u.ecoins:
                         if p.raw_material:
                             x = RawMaterialCart.objects.filter(raw_material=p).filter(team_name=t)
                         elif p.product:
@@ -240,7 +241,7 @@ def send_req(request):
                     else:
                         message = 'You don\'t have enough money to buy this product'
                 else:
-                    messages = '15 percent nhi hai'
+                    message = '15 percent nhi hai'
             else:
                 message = 'HmmmHMMM! Ver Smart, but nhi hoga esa!'
         # form = SendRequestForm()
@@ -274,8 +275,9 @@ def accept_req(request, pk):
     x = SendRequest.objects.filter(id=pk)
     y = SendRequest.objects.filter(id=pk).first()
     tc = cal_transportation_cost(y.from_team.industry.spot, y.to_team.industry.spot)
+    tax = (y.cost)*(y.quantity)*(y.to_team.industry.spot.tax)/400
     for i in x:
-        if i.from_team.ecoins>=((i.cost)*(i.quantity)+tc):
+        if i.from_team.ecoins>=((i.cost)*(i.quantity)+tc +tax):
             if i.item.raw_material:
                 y = RawMaterialCart.objects.filter(raw_material=i.item).filter(team_name=i.to_team)
             elif i.item.product:
@@ -290,7 +292,7 @@ def accept_req(request, pk):
                         
                 if flag==0:
                     i.is_accepted = True
-                    i.from_team.ecoins -= ((i.cost)*(i.quantity)+tc)
+                    i.from_team.ecoins -= ((i.cost)*(i.quantity)+tc +tax)
                     i.to_team.ecoins += ((i.cost)*(i.quantity)+tc)
                     for j in y:
                         j.quantity -= i.quantity

@@ -479,6 +479,8 @@
         let quantity_1 = $('#id_quantity_1').val();
         let quantity_2 = $('#id_quantity_2').val();
         let token = $('input[name=csrfmiddlewaretoken]').val();
+        $("#submit-btn").val("Processing...");
+        $("#submit-btn").attr('disabled', true);
         // console.log(spot, rm1, rm2, q1, q2)
         mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "quantity_1": quantity_1, "quantity_2": quantity_2, "csrfmiddlewaretoken": token }
         // console.log(mydata)
@@ -517,9 +519,13 @@
               for (i in res.messages)
                 alert(res.messages[i]);
             }
+            
+            $("#submit-btn").attr('disabled', false);
+            $("#submit-btn").val('Submit');
           }
         });
       });
+      
     });
 
   </script>
