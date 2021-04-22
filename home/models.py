@@ -17,6 +17,8 @@ class Item(models.Model): #Raw materials + product
 class Spot(models.Model):
     name = models.CharField(max_length=50)
     tax = models.IntegerField(default=0)
+    lat = models.CharField(max_length=50, default='0')
+    lng = models.CharField(max_length=50, default='0')
     def __str__(self):
         return self.name 
 
@@ -26,8 +28,6 @@ class SpotRawMaterial(models.Model):
     quantity = models.IntegerField(default=0)
     cost = models.IntegerField(default=0)
     is_active    = models.BooleanField(default=True)
-    lat = models.CharField(max_length=50, default='0')
-    lng = models.CharField(max_length=50, default='0')
 
     def __str__(self):
         return str(self.spot.name) + " - " + str(self.raw_material.name)     
