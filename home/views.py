@@ -115,6 +115,7 @@ def buyMaterial(request):
             'rmc' : list(rmc),
             'pc'  : list(pc),
             'items': list(items),
+            'ecoin':request.user.ecoins,
         }
         return JsonResponse(responseData)
     form = BuyRawMaterialForm()
@@ -172,11 +173,13 @@ def manufacture(request):
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
         items = Item.objects.all().values()
+
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
             'pc':list(pc),
             'items': list(items),
+            'ecoin':request.user.ecoins,
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
@@ -246,7 +249,8 @@ def send_req(request):
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
-            'pc':list(pc)
+            'pc':list(pc),
+            'ecoin':request.user.ecoins,
         }
         return JsonResponse(responseData)
 
@@ -268,7 +272,8 @@ def send_req(request):
 def accept_req(request, pk):
     message = 'You have successfully accepted this deal'
     x = SendRequest.objects.filter(id=pk)
-    tc = cal_transportation_cost(x.from_team.industry.spot, x.to_team.industry.spot)
+    y = SendRequest.objects.filter(id=pk).first()
+    tc = cal_transportation_cost(y.from_team.industry.spot, y.to_team.industry.spot)
     for i in x:
         if i.from_team.ecoins>=((i.cost)*(i.quantity)+tc):
             if i.item.raw_material:
@@ -319,12 +324,15 @@ def accept_req(request, pk):
     sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False).values()
     rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
     pc = ProductCart.objects.filter(team_name=request.user).values()
+    items = Item.objects.all().values()
     responseData = {
         'rmc': list(rmc),
         'pc':list(pc),
         'req' : list(req),
         'sreq' : list(sreq),
-        'messages': [message]
+        'messages': [message],
+        'ecoin':request.user.ecoins,
+        'items':list(items),
     }
     return JsonResponse(responseData)
 
@@ -356,6 +364,7 @@ def sell_us(request):
                 'messages': [message],
                 'rmc':list(rmc),
                 'pc':list(pc),
+                'ecoin':request.user.ecoins,
             }
             return JsonResponse(responseData)
     else:

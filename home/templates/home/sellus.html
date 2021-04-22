@@ -150,6 +150,7 @@
 				data: mydata,
 				dataType: "json",
 				success: function (res) {
+					$('#ecoins').html(res.ecoin)
 					for (i = 0; i < res.rmc.length; i++) {
 						$('#' + res.rmc[i].id + 'rmc').html(res.rmc[i].quantity);
 					}
