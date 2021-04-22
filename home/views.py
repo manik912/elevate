@@ -120,12 +120,14 @@ def buyMaterial(request):
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
+    spot_mater = SpotRawMaterial.objects.all()
     context = {
         'form' : form,
         'spr'  : spr,
         'spots' : spots,
         'rmc' : rmc,
         'pc'  : pc,
+        'spot_mater' : spot_mater,
     }
     return render(request, 'home/buying.html', context)
 
