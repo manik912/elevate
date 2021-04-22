@@ -449,8 +449,8 @@
 			let product = $('#id_product').val();
 			let quantity = $('#id_quantity').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
-			$("#submit-btns").val("Processing...");
-			$("#submit-btns").attr('disabled', true);
+			$("#submit-btnm").val("Processing...");
+			$("#submit-btnm").attr('disabled', true);
 			mydata = { "product": product, "quantity": quantity, "csrfmiddlewaretoken": token }
 			$.ajax({
 				type: "POST",
@@ -490,8 +490,8 @@
 							alert(res.messages[i]);
 					}
 					
-					$("#submit-btns").val("Manufacture Now");
-					$("#submit-btns").attr('disabled', False);
+					$("#submit-btnm").val("Manufacture Now");
+					$("#submit-btnm").attr('disabled', false);
 					$("form")[0].reset()
 				}
 			});
