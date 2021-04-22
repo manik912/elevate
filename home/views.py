@@ -13,6 +13,10 @@ def test(request):
     return render(request, 'home/trading_temp.html')
 
 
+def notification(request):
+    n = Notification.objects.all()
+    return render(request, 'home/base.html', {'n':n})
+
 @login_required
 def home(request):
     if(request.method == 'POST'):
@@ -165,15 +169,12 @@ def manufacture(request):
         
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
-        items = Item.objects.all()
-        team = Team.objects.all().values()
-        u = request.user
+        items = Item.objects.all().values()
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
             'pc':list(pc),
-            'items': items,
-            # 'ecoin': {'ecoin':u.ecoins},
+            'items': list(items),
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
