@@ -26,6 +26,8 @@ class SpotRawMaterial(models.Model):
     quantity = models.IntegerField(default=0)
     cost = models.IntegerField(default=0)
     is_active    = models.BooleanField(default=True)
+    lat = models.CharField(max_length=50, default='0')
+    lng = models.CharField(max_length=50, default='0')
 
     def __str__(self):
         return str(self.spot.name) + " - " + str(self.raw_material.name)     
