@@ -173,7 +173,7 @@ def manufacture(request):
             'rmc':list(rmc),
             'pc':list(pc),
             'items': items,
-            'ecoin': u,
+            # 'ecoin': {'ecoin':u.ecoins},
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
