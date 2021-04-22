@@ -446,12 +446,10 @@
 <script>
 	$(document).ready(function () {
 		$('#submit-btnm').click(function () {
-			console.log('hello world')
 			let product = $('#id_product').val();
 			let quantity = $('#id_quantity').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
 			mydata = { "product": product, "quantity": quantity, "csrfmiddlewaretoken": token }
-			console.log(mydata)
 			$.ajax({
 				type: "POST",
 				url: "/manufacture/",
@@ -464,8 +462,10 @@
 					// for (i = 0; i < res.pc.length; i++) {
 					// 	$('#' + res.pc[i].id + 'pc').html(res.pc[i].quantity);
 					// }
-					let obj3 = res.items.filter(item => item.id === res.team[0].ecoins_id);
-					$('#ecoins').html(obj3[0].ecoins);
+					
+					// $('#ecoins').html(res.ecoin.e);
+					console.log(res);
+
 					output1 = "";
 					output2 = "";
 					for (i = 0; i < res.rmc.length; i++) {

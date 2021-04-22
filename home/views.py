@@ -166,13 +166,14 @@ def manufacture(request):
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
         items = Item.objects.all()
-        team = Team.objects.filter(team_name=request.user).values()
+        team = Team.objects.all().values()
+        u = request.user
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
             'pc':list(pc),
             'items': items,
-            'team':team,
+            'ecoin': u,
         }
         return JsonResponse(responseData)
     form = ManufactureForm()
@@ -301,25 +302,39 @@ def accept_req(request, pk):
 
 @login_required
 def sell_us(request):
+    message= ""
     if(request.method == 'POST'):
         form = SellUsForm(request.POST)
         if form.is_valid():
             q = form.cleaned_data.get("quantity")
             p = form.cleaned_data.get("product")
             u = request.user
-            pc = ProductCart.objects.filter(product=p).filter(team_name=u)
-            for i in pc:
-                if i.quantity>=q:
-                    form.instance.team = request.user
-                    u.ecoins += q*(p.cost)
-                    u.save()
-                    pc.quantity -= q
-                    pc.save()
-                    form.save()
-                else:
-                    messages.add_message(request, messages.INFO, 'You don\'t have this much quantity for this deal.')
+            pc = ProductCart.objects.filter(product=p).filter(team_name=u).first()
+            
+            if pc and pc.quantity>=q:
+                form.instance.team = request.user
+                u.ecoins += q*(p.product_cost)
+                u.save()
+                pc.quantity -= q
+                pc.save()
+                form.save()
+                message=  'Done!!!!!'
+            else:
+                message=  'You don\'t have this much quantity for this deal.'
+
+            rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
+            pc = ProductCart.objects.filter(team_name=request.user).values()
+            responseData = {
+                'messages': [message],
+                'rmc':list(rmc),
+                'pc':list(pc),
+            }
+            return JsonResponse(responseData)
     else:
         form = SellUsForm()
+
+    
+
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
     rmcost = Item.objects.filter(raw_material=True)

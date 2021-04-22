@@ -118,12 +118,14 @@
                 <h2>Sell Us</h2>
             </div>
             <div class="card-body">
-                
+                <form method="POST">
+					{% csrf_token %}
                 {{form|crispy}}
                 <div class="text-center">
-                    <input type="submit" value="Sell"
+                    <input type="button" id="submit-btns" value="Sell"
                         class="btn btn-primary my-4">           
                 </div>
+			</form>
             </div>
         </div>
       </div>
@@ -137,8 +139,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 	$(document).ready(function () {
-		$('#submit-btnm').click(function () {
-			console.log('hello world')
+		$('#submit-btns').click(function () {
 			let product = $('#id_product').val();
 			let quantity = $('#id_quantity').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
@@ -146,7 +147,7 @@
 			console.log(mydata)
 			$.ajax({
 				type: "POST",
-				url: "/manufacture/",
+				url: "/sellus/",
 				data: mydata,
 				dataType: "json",
 				success: function (res) {
