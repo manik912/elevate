@@ -9,6 +9,7 @@ urlpatterns = [
     path('trade/', send_req, name='trade'),
     path('accept/<int:pk>/', accept_req, name='accept'),
     path('reject/<int:pk>/', reject_req, name='reject'),
+    path('delete/<int:pk>/', delete_req, name='delete'),
     path('test/', test, name='test'),
     path('get-req/ajax/', pending_req, name='get-req'),
     path('sellus/', sell_us, name='sellus'),
