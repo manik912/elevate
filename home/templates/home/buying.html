@@ -32,8 +32,9 @@
   <div class="scrollbar-inner">
     <!-- Brand -->
     <div class="sidenav-header  align-items-center">
+      <img src="{% static 'home/assets/img/elevate-black.png' %}" height="50px">
       <a class="navbar-brand" href="javascript:void(0)">
-        <h2 class="mt-2 w-900">INVENTORY</h2>
+        <h2 class="mt-2 w-900" style="padding: 5px;">INVENTORY</h2>
       </a>
     </div>
     <div class="navbar-inner">
@@ -270,15 +271,8 @@
     },
     locations: {
 
-    
-      "0": {
-        lat: 18.987807,
-        lng: 72.836447,
-        name: "Mumbai",
-        color: "#FF0067",
-        size: "15",
-        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1.Iron - xxxx<br>2. Chemicals - xxxx<br>3. Food Edibles - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax: 4.75%"
-      },
+
+
       "1": {
         lat: "26.9157",
         lng: "70.9083",
@@ -435,6 +429,39 @@
     </div>
   </div>
 
+<div class="col-xl-4">
+      <div class="card">
+        <div class="table-responsive">
+          <!-- Projects table -->
+
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">PRODUCTS</th>
+                
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for Spot in spot_mater %}
+                {% if Spot.spot.name == 'Srinagar' %}
+                <tr>
+                  <th scope="row">{{Spot.raw_material.name}}</th>
+                  <td>
+                     {{Spot.quantity}}
+                  </td>
+                  <td>
+                     {{Spot.cost}}
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
   {% endblock body %}
 
