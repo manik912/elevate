@@ -82,8 +82,8 @@
 						<div class="card-header bg-transparent">
 							<div class="row align-items-center">
 								<div class="col">
-									<h6 class="text-uppercase text-muted ls-1 mb-1">Received Requests</h6>
-									<h5 class="h3 mb-0">Pending Requests</h5>
+									<h6 class="text-uppercase text-muted ls-1 mb-1">Pending Requests</h6>
+									<h5 class="h3 mb-0">Received Requests</h5>
 								</div>
 							</div>
 						</div>
@@ -142,7 +142,7 @@
 										<p class="mb-1">Quantity : {{ sre.quantity }}</p>
 										<p class="mb-1">Price : {{ sre.cost }}</p>
 										<input type="button" value="Delete" class="btn btn-danger float-right "
-											onclick="deletefun({{sre.id}})" style="margin-top:-2.5rem ;">
+											onclick="deletefun({{sre.id}})"  style="margin-top:-2.5rem ;">
 										
 									</a>
 
@@ -170,6 +170,8 @@
 			let cost = $('#id_cost').val();
 			let quantity = $('#id_quantity').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
+			$("#submit-btnt").val("Processing...");
+			$("#submit-btnt").attr('disabled', true);
 			mydata = { "to_team": to_team, "item": item, "cost": cost, "quantity": quantity, "csrfmiddlewaretoken": token }
 			console.log(mydata)
 			$.ajax({
@@ -178,7 +180,7 @@
 				data: mydata,
 				dataType: "json",
 				success: function (res) {
-					
+					$('#ecoins').html(res.ecoin)
 					for (i = 0; i < res.rmc.length; i++) {
                         $('#' + res.rmc[i].id +'rmc').html( res.rmc[i].quantity);
                     }
@@ -190,6 +192,9 @@
 						for (i in res.messages)
 							alert(res.messages[i]);
 					}
+					
+					$("#submit-btns").val("Submit");
+					$("#submit-btns").attr('disabled', False);
 				}
 			});
 		});
@@ -269,17 +274,23 @@
 			data: mydata,
 			dataType: "json",
 			success: function (res) {
-				
+				$('#ecoins').html(res.ecoin)
 				output1 = "";
 				output2 = "";
+				console.log(res);
+
 				for (i = 0; i < res.rmc.length; i++) {
-					output1 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + res.rmc[i].raw_material + 
+					let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
+					console.log(obj);
+					output1 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name + 
 						"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
 							+ res.rmc[i].quantity+ "</span></a></li>"
 				}
 				$('#resource-inventory').html(output1)
 				for (i = 0; i < res.pc.length; i++) {
-					output2 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + res.pc[i].raw_material + 
+					let obj = res.items.filter(item => item.id === res.pc[i].product_id);
+					console.log(obj);
+					output2 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name + 
 						"</span><span class='lak' id='" + res.pc[i].id + "rmc'>"
 							+ res.pc[i].quantity+ "</span></a></li>"
 				}

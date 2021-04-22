@@ -449,6 +449,8 @@
 			let product = $('#id_product').val();
 			let quantity = $('#id_quantity').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
+			$("#submit-btns").val("Processing...");
+			$("#submit-btns").attr('disabled', true);
 			mydata = { "product": product, "quantity": quantity, "csrfmiddlewaretoken": token }
 			$.ajax({
 				type: "POST",
@@ -465,7 +467,7 @@
 					
 					// $('#ecoins').html(res.ecoin.e);
 					// console.log(res);
-
+					$('#ecoins').html(res.ecoin)	
 					output1 = "";
 					output2 = "";
 					for (i = 0; i < res.rmc.length; i++) {
@@ -487,6 +489,9 @@
 						for (i in res.messages)
 							alert(res.messages[i]);
 					}
+					
+					$("#submit-btns").val("Manufacture Now");
+					$("#submit-btns").attr('disabled', False);
 					$("form")[0].reset()
 				}
 			});

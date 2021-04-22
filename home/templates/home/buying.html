@@ -24,9 +24,6 @@
     padding: 1rem 1.5rem;
   }
 </style>
-
-<script src="{%static 'home/assets/img/map/mapdata.js' %}"></script>
-<script src="{%static 'home/assets/img/map/countrymap.js' %}"></script>
 {% endblock head %}
 {% block bodytag %}{% endblock bodytag %}
 {% block sidenav %}
@@ -83,13 +80,334 @@
 {% block body %}
 
 
+<script type="text/javascript">
+  var simplemaps_countrymap_mapdata={
+    main_settings: {
+     //General settings
+      width: "responsive", //'700' or 'responsive'
+      background_color: "#FFFFFF",
+      background_transparent: "yes",
+      border_color: "#ffffff",
+      
+      //State defaults
+      state_description: "State description",
+      state_color: "#88A4BC",
+      state_hover_color: "#738595",
+      state_url: "",
+      border_size: 1.5,
+      all_states_inactive: "yes",
+      all_states_zoomable: "yes",
+      location_description: "",
+      location_color: "",
+      location_opacity: "0.8",
+      location_hover_opacity: 1,
+      location_url: "",
+      location_size: "",
+      location_type: "square",
+      location_image_source: "frog.png",
+      location_border_color: "#FFFFFF",
+      location_border: 2,
+      location_hover_border: 2.5,
+      all_locations_inactive: "no",
+      all_locations_hidden: "no",
+      
+      //Label defaults
+      label_color: "#d5ddec",
+      label_hover_color: "#d5ddec",
+      label_size: 22,
+      label_font: "Arial",
+      hide_labels: "no",
+      hide_eastern_labels: "no",
+     
+      //Zoom settings
+      zoom: "yes",
+      back_image: "no",
+      initial_back: "no",
+      initial_zoom: "-1",
+      initial_zoom_solo: "no",
+      region_opacity: 1,
+      region_hover_opacity: 0.6,
+      zoom_out_incrementally: "yes",
+      zoom_percentage: 0.99,
+      zoom_time: 0.5,
+      
+      //Popup settings
+      popup_color: "white",
+      popup_opacity: 0.9,
+      popup_shadow: 1,
+      popup_corners: 5,
+      popup_font: "12px/1.5 Verdana, Arial, Helvetica, sans-serif",
+      popup_nocss: "no",
+      
+      //Advanced settings
+      div: "map",
+      auto_load: "yes",
+      url_new_tab: "no",
+      images_directory: "default",
+      fade_time: 0.1,
+      link_text: "View Website",
+      popups: "detect",
+      state_image_url: "",
+      state_image_position: "",
+      location_image_url: ""
+    },
+    state_specific: {
+      "1": {
+        description: " "
+      },
+      "2": {
+        description: " "
+      },
+      "3": {
+        description: " "
+      },
+      "4": {
+        description: " "
+      },
+      "5": {
+        description: " "
+      },
+      "6": {
+        description: " "
+      },
+      "7": {
+        description: " "
+      },
+      "8": {
+        description: " "
+      },
+      "9": {
+        description: " "
+      },
+      "10": {
+        description: " "
+      },
+      "11": {
+        description: " "
+      },
+      "12": {
+        description: " "
+      },
+      "13": {
+        description: " "
+      },
+      "14": {
+        description: " "
+      },
+      "16": {
+        description: " "
+      },
+      "17": {
+        description: " "
+      },
+      "18": {
+        description: " "
+      },
+      "19": {
+        description: " "
+      },
+      "20": {
+        description: " "
+      },
+      "21": {
+        description: " "
+      },
+      "22": {
+        description: " "
+      },
+      "23": {
+        description: " "
+      },
+      "24": {
+        description: " "
+      },
+      "25": {
+        description: " "
+      },
+      "26": {
+        description: " "
+      },
+      "27": {
+        description: " "
+      },
+      "28": {
+        description: " "
+      },
+      "29": {
+        description: " "
+      },
+      "30": {
+        description: " "
+      },
+      "31": {
+        description: " "
+      },
+      "32": {
+        description: " "
+      },
+      "33": {
+        description: " "
+      },
+      "34": {
+        description: " "
+      },
+      "35": {
+        description: " "
+      },
+      "36": {
+        description: " "
+      },
+      "37": {
+        description: " "
+      },
+      "38": {
+        description: " "
+      },
+      standard: {
+        inactive: "yes",
+        description: " "
+      }
+    },
+    locations: {
+
+    
+      "0": {
+        lat: 18.987807,
+        lng: 72.836447,
+        name: "Mumbai",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1.Iron - xxxx<br>2. Chemicals - xxxx<br>3. Food Edibles - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax: 4.75%"
+      },
+      "1": {
+        lat: "26.9157",
+        lng: "70.9083",
+        name: "Jaisalmer",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1.Water - xxxx<br>2. Iron - xxxx<br>3. Silicon - xxxx<br>4. Stainless Steel - xxxx<br><br>State Tax: 6.25%"
+      },
+      "2": {
+        lat: "34.0837",
+        lng: "74.7973",
+        name: "Srinagar",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Iron - xxxx<br>3. Oil - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax: 4.25%"
+      },
+      "3": {
+        lat: "29.1492",
+        lng: "75.7217",
+        name: "Hisar",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Chemicals - xxxx<br>2. Food Edibles - xxxx<br>3. Rubber - xxxx<br>4. Fabric - xxxx<br><br>State Tax: 6.5%"
+      },
+      "4": {
+        lat: "26.7606",
+        lng: "83.3732",
+        name: "Gorakhpur",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Water - xxxx<br>2. Iron - xxxx<br>3. Food Edibles - xxxx<br>4. Fabric - xxxx<br><br>State Tax - 7.75%"
+      },
+      "5": {
+        lat: "25.4484",
+        lng: "78.5685",
+        name: "Jhansi",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Carbon Compound - xxxx<br>3. Oil - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax - 7.75%"
+      },
+      "6": {
+        lat: "22.5726",
+        lng: "88.3639",
+        name: "Kolkata",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Chemicals - xxxx<br>2. Oil - xxxx<br>3. Stainless Steel - xxxx<br>4. Fabric - xxxx<br><br>State Tax - 7.5%"
+      },
+      "7": {
+        lat: "27.3314",
+        lng: "88.6138",
+        name: "Gangtok",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Silicon - xxxx<br>3. Carbon Compound - xxxx<br>4. Rubber - xxxx<br><br>State Tax - 5.25%"
+      },
+      "8": {
+        lat: "17.3850",
+        lng: "78.4867",
+        name: "Hyderabad",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Food Edibles - xxxx<br>2. Silicon - xxxx<br>3. Carbon Compound - xxxx<br>4. Oil - xxxx<br><br>State Tax - 5.75%"
+      },
+      "9": {
+        lat: "13.0827",
+        lng: "80.2707",
+        name: "Chennai",
+        color: "#FF0067",
+        size: "15",
+        description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Water - xxxx<br>3. Rubber - xxxx<br>4. Stainless Steel - xxxx<br><br>State Tax - 6.75%"
+      },
+      "10": {
+        lat: "30.9084",
+        lng: "77.0999",
+        name: "Solan",
+        color: "#000000",
+        size: "20",
+        description: "<i>Industrial Cluster</i>"
+      },
+      "11": {
+        lat: "22.3039",
+        lng: "70.8022",
+        name: "Rajkot",
+        color: "#000000",
+        size: "20",
+        description: "<i>Industrial Cluster</i>"
+      },
+      "12": {
+        lat: "11.0168",
+        lng: "76.9558",
+        name: "Coimbatore",
+        color: "#000000",
+        size: "20",
+        description: "<i>Industrial Cluster</i>"
+      },
+      "13": {
+        lat: "26.1445",
+        lng: "91.7362",
+        name: "Guwahati",
+        color: "#000000",
+        size: "20",
+        description: "<i>Industrial Cluster</i>"
+      },
+      "14": {
+        lat: "21.2514",
+        lng: "81.6296",
+        name: "Raipur",
+        color: "#000000",
+        size: "20",
+        description: "<i>Industrial Cluster</i>"
+      }
+    },
+    labels: {},
+    regions: {},
+    legend: {
+      entries: []
+    }
+  };
+</script>
+<script src="{%static 'home/assets/img/map/countrymap.js' %}"></script>
+
 
 <div class="container-fluid ">
   <div class="row">
     <div class="col-xl-8">
       <div class="card bg-default">
 
-        <div id="map" style="text-align: center;">
+        <div id="map" style="">
           <!-- <img style="min-height: 100vh;" src="{%static 'home/assets/img/map/country.svg' %}"> -->
 
         </div>
@@ -134,6 +452,8 @@
         let quantity_1 = $('#id_quantity_1').val();
         let quantity_2 = $('#id_quantity_2').val();
         let token = $('input[name=csrfmiddlewaretoken]').val();
+        $("#submit-btn").val("Processing...");
+        $("#submit-btn").attr('disabled', true);
         // console.log(spot, rm1, rm2, q1, q2)
         mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "quantity_1": quantity_1, "quantity_2": quantity_2, "csrfmiddlewaretoken": token }
         // console.log(mydata)
@@ -149,6 +469,7 @@
             // for (i = 0; i < res.pc.length; i++) {
             //     $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
             // }
+            $('#ecoins').html(res.ecoin)
             console.log(res);
             output1 = "";
             output2 = "";
@@ -171,9 +492,13 @@
               for (i in res.messages)
                 alert(res.messages[i]);
             }
+            
+            $("#submit-btn").attr('disabled', false);
+            $("#submit-btn").val('Submit');
           }
         });
       });
+      
     });
 
   </script>
