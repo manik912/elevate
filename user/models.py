@@ -46,7 +46,7 @@ class Team(AbstractUser):
 
 class RawMaterialCart(models.Model):
 	team_name = models.ForeignKey(Team, on_delete=models.CASCADE)
-	spot = models.ForeignKey(Spot, on_delete=models.PROTECT, null=True, blank=True)
+	spot = models.ForeignKey(Spot, verbose_name="Location", on_delete=models.PROTECT, null=True, blank=True)
 	raw_material = models.ForeignKey(Item, limit_choices_to={'raw_material':True} ,on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=0)
 
