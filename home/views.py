@@ -187,6 +187,18 @@ def manufacture(request):
     }
     return render(request, 'home/manufacture.html', context)
 
+def check15(p, c):
+    pro = Item.objects.filter(name = p.name).first()
+    ac = 0
+    if pro.raw_material:
+        ac = pro.raw_material_cost
+    else:
+        ac = pro.product_cost
+    
+    if (ac + (ac*(15/100)))<= c and c>= (ac - (ac*(15/100))):
+        return True
+    return False
+
 @login_required
 def send_req(request):
     if(request.method == 'POST'):
@@ -197,28 +209,35 @@ def send_req(request):
             c = form.cleaned_data.get("cost")
             t = form.cleaned_data.get("to_team")
             u = request.user
-            if c*q <= u.ecoins:
-                if p.raw_material:
-                    x = RawMaterialCart.objects.filter(raw_material=p).filter(team_name=t)
-                elif p.product:
-                    x = ProductCart.objects.filter(product=p).filter(team_name=t)
+            tc = cal_transportation_cost(u.industry.spot, t.industry.spot)
+            if t != u:
+                if check15 (p, c):
+                    if c*q + tc <= u.ecoins:
+                        if p.raw_material:
+                            x = RawMaterialCart.objects.filter(raw_material=p).filter(team_name=t)
+                        elif p.product:
+                            x = ProductCart.objects.filter(product=p).filter(team_name=t)
 
-                if x:
-                    flag=0
-                    for i in x:
-                        if i.quantity < q:
-                            flag = 1
-                            break
-                    if flag==0:
-                        form.instance.from_team = request.user
-                        form.save()
-                        message =  'Request sent!'
+                        if x:
+                            flag=0
+                            for i in x:
+                                if i.quantity < q:
+                                    flag = 1
+                                    break
+                            if flag==0:
+                                form.instance.from_team = request.user
+                                form.save()
+                                message =  'Request sent!'
+                            else:
+                                message='This team doesnot have this much quantity.'
+                        else:
+                            message = 'This team doesnot have this product/raw material'
                     else:
-                        message='This team doesnot have this much quantity.'
+                        message = 'You don\'t have enough money to buy this product'
                 else:
-                    message = 'This team doesnot have this product/raw material'
+                    messages = '15 percent nhi hai'
             else:
-                message = 'You don\'t have enough money to buy this product'
+                message = 'HmmmHMMM! Ver Smart, but nhi hoga esa!'
         # form = SendRequestForm()
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
@@ -231,11 +250,13 @@ def send_req(request):
 
     form = SendRequestForm()
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False)
+    sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False)
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
     context = {
         'form' : form,
         'req'  : req,
+        'sreq' : sreq,
         'rmc':rmc,
         'pc':pc,
     }
@@ -245,8 +266,9 @@ def send_req(request):
 def accept_req(request, pk):
     message = 'You have successfully accepted this deal'
     x = SendRequest.objects.filter(id=pk)
+    tc = cal_transportation_cost(x.from_team.industry.spot, x.to_team.industry.spot)
     for i in x:
-        if i.from_team.ecoins>=(i.cost)*(i.quantity):
+        if i.from_team.ecoins>=((i.cost)*(i.quantity)+tc):
             if i.item.raw_material:
                 y = RawMaterialCart.objects.filter(raw_material=i.item).filter(team_name=i.to_team)
             elif i.item.product:
@@ -261,8 +283,8 @@ def accept_req(request, pk):
                         
                 if flag==0:
                     i.is_accepted = True
-                    i.from_team.ecoins -= (i.cost)*(i.quantity)
-                    i.to_team.ecoins += (i.cost)*(i.quantity)
+                    i.from_team.ecoins -= ((i.cost)*(i.quantity)+tc)
+                    i.to_team.ecoins += ((i.cost)*(i.quantity)+tc)
                     for j in y:
                         j.quantity -= i.quantity
                         j.save()
@@ -284,6 +306,7 @@ def accept_req(request, pk):
                     i.save()
                     i.from_team.save()
                     i.to_team.save()
+                    message = 'You have successfully accepted this deal'
                 else:
                     message= 'You don\'t have enough quantity of this product/raw material to accept this deal.'
             else:
@@ -291,12 +314,14 @@ def accept_req(request, pk):
         else:
             message = 'Buyer doesn\'t have enough money for this deal.'
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
+    sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False).values()
     rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
     pc = ProductCart.objects.filter(team_name=request.user).values()
     responseData = {
         'rmc': list(rmc),
         'pc':list(pc),
         'req' : list(req),
+        'sreq' : list(sreq),
         'messages': [message]
     }
     return JsonResponse(responseData)
@@ -364,14 +389,31 @@ def reject_req(request, pk):
         return JsonResponse(responseData)
     return render(request, 'home/trading_temp.html')
 
+@login_required
+def delete_req(request, pk):
+    obj = get_object_or_404(SendRequest, id = pk)
+    if request.method =="POST":
+        obj.delete()
+        message = 'Request Deleted Successfully!'
+        sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False).values()
+        
+        responseData = {
+            'sreq' : list(sreq),
+            'messages': [message]
+        }
+        return JsonResponse(responseData)
+    return render(request, 'home/trading_temp.html')
+
 
 @login_required
 def pending_req(request):
     req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
+    sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False).values()
     pc = Item.objects.filter(product=True).values()
     teams = Team.objects.all().values()
     responseData = {
         'req':list(req),
+        'sreq':list(req),
         'pc':list(pc),
         'teams':list(teams)
     }

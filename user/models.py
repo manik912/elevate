@@ -76,10 +76,13 @@ class SendRequest(models.Model):
 	from_team = models.ForeignKey(Team, related_name="FromTeam", on_delete=models.CASCADE)
 	to_team = models.ForeignKey(Team, related_name="ToTeam", on_delete=models.CASCADE)
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
-	cost = models.IntegerField()
+	cost = models.IntegerField(verbose_name="Cost Per Unit")
 	quantity = models.IntegerField()
 	is_accepted = models.BooleanField(default=False)
 	is_visible = models.BooleanField(default=False)
+
+	def __str__(self):
+		return str(self.from_team.team_name) + " -> " + str(self.to_team.team_name)
 
 
 class SellUs(models.Model):
