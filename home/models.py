@@ -6,6 +6,7 @@ class Item(models.Model): #Raw materials + product
     product = models.BooleanField(default=False)
     raw_material = models.BooleanField(default=False)
     product_cost = models.IntegerField(default=0)
+    raw_material_cost = models.IntegerField(default=0)
     category_1 = models.BooleanField(default=False)
     category_2 = models.BooleanField(default=False)
     category_3 = models.BooleanField(default=False)
@@ -59,3 +60,10 @@ class Notification(models.Model):
     notice = models.CharField(max_length=500)
     def __str__(self):
         return self.notice
+
+
+class Season(models.Model):
+    season_1 = models.BooleanField(default=False)
+    season_2 = models.BooleanField(default=False)
+    season_3 = models.BooleanField(default=False)
+    season_4 = models.BooleanField(default=False)
