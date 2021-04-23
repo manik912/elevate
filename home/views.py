@@ -170,9 +170,6 @@ def buyMaterial(request):
     pc = ProductCart.objects.filter(team_name=request.user)
     spot_mater = SpotRawMaterial.objects.all()
     season = Season.objects.all().first()
-    print("###########################################")
-    print(spot_mater.raw)
-    print("###########################################")
 
     context = {
         'form' : form,
@@ -255,7 +252,6 @@ def check15(p, c):
     else:
         ac += pro.product_cost
     
-    print(c)
     if (ac + (ac*(15/100)))>= c and c>= (ac - (ac*(15/100))):
         return True
     return False
