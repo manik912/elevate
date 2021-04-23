@@ -74,12 +74,10 @@ def export_answers_xls(request):
             for sell in sellus:
                 if sell.product.category_1:
                     sua = sua + sell.quantity
-            for sell in sellus:
                 if sell.product.category_2:
                     sub = sub + sell.quantity
-            for sell in sellus:
                 if sell.product.category_3:
-                    sub = suc + sell.quantity
+                    suc = suc + sell.quantity
 
 
             sellts = SendRequest.objects.filter(from_team=team).filter(is_accepted=True)
@@ -89,14 +87,12 @@ def export_answers_xls(request):
             stc = 0
 
             for sellt in sellts:
-                if sellt.product.category_1:
-                    sua = sua + sellt.quantity
-            for sellt in sellus:
-                if sell.product.category_2:
-                    sub = sub + sellt.quantity
-            for sellt in sellus:
-                if sell.product.category_3:
-                    sub = suc + sellt.quantity
+                if sellt.item.category_1:
+                    sta = sta + sellt.quantity
+                if sellt.item.category_2:
+                    stb = stb + sellt.quantity
+                if sellt.item.category_3:
+                    stb = stc + sellt.quantity
 
 
             sa = sta + sua
