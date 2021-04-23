@@ -1,7 +1,18 @@
 {% extends "home/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block head %}{% endblock head %}
+{% block head %}
+	
+	<style type="text/css">
+		.cardinner{
+			background: #acacac !important;
+		}
+		.nav-link :hover {
+			color: black;
+		}
+	</style>
+
+{% endblock head %}
 {% block bodytag %}{% endblock bodytag %}
 
 
@@ -23,9 +34,9 @@
 				<!-- Nav items -->
 				<ul class="navbar-nav" id="resource-inventory">
 					<li class="nav-item">
-						<div class="nav-link" style="padding: 0.675rem 3.5rem;">
+						<div class="nav-link" style="padding: 0.675rem 1.5rem;">
 							<!--<i class="ni ni-tv-2 text-primary"></i>-->
-							<span class="nav-link-text">{{request.user.industry.spot.name}}</span>
+							<span class="nav-link-text" style="font-size: 20px; font-weight: bold; ">{{request.user.industry.spot.name}}</span>
 						</div>
 					</li>
 				</ul>
@@ -80,7 +91,7 @@
 
 						<div class="container">
 							<div class="row" style="justify-content: center;">
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -116,7 +127,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -152,7 +163,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -199,7 +210,7 @@
 
 						<div class="container">
 							<div class="row" style="justify-content: center;">
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -238,7 +249,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -271,7 +282,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -312,7 +323,7 @@
 
 						<div class="container">
 							<div class="row" style="justify-content: center;">
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -348,7 +359,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -381,7 +392,7 @@
 										</li>
 									</ul>
 								</div>
-								<div class="col-lg-3 card card-stat card-body mx-2"
+								<div class="col-lg-3 card card-stat card-body mx-2 cardinner"
 									style="overflow: visible !important;">
 									<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
 										<li class="nav-item dropdown">
@@ -430,7 +441,7 @@
 					<div class="card-header bg-transparent">
 						<div class="row align-items-center">
 							<div class="col">
-								<h6 class="text-uppercase text-muted ls-1 mb-1"></h6>
+								<h6 class="text-uppercase text-light ls-1 mb-1"></h6>
 								<h5 class="h3 mb-0">Manufacture Product</h5>
 							</div>
 						</div>
