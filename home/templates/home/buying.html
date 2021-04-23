@@ -425,7 +425,7 @@
 			</div>
 		</div>
 		<div class="col-xl-4">
-			<div class="card" style="min-height:1050px;">
+			<div class="card" style="min-height:105vh;">
 				<div class="card-header bg-transparent">
 					<div class="row align-items-center">
 						<div class="col">
@@ -498,8 +498,8 @@
 								
 							</div>
 							
-							<button class="add_field_button btn btn-primary my-2">Add More Fields</button>
-							<input type="button" class="btn btn-primary my-2" id="submit-btn" value="Buy"> -->
+							<button class="add_field_button btn btn-primary my-2">Add More Fields</button> -->
+							<input type="button" class="btn btn-primary my-2" id="submit-btn" value="Buy">
 						</form>
 					</div>
 				</div>
@@ -517,21 +517,20 @@
 <script>
 	$(document).ready(function () {
 		$('#submit-btn').click(function () {
-			console.log('hello world')
 			let spot = $('#id_spot').val();
 			let raw_material_1 = $('#id_raw_material_1').val();
 			let raw_material_2 = $('#id_raw_material_2').val();
-			let raw_material_3 = $('#id_raw_material_3').val();
-			let raw_material_4 = $('#id_raw_material_4').val();
+			// let raw_material_3 = $('#id_raw_material_3').val();
+			// let raw_material_4 = $('#id_raw_material_4').val();
 			let quantity_1 = $('#id_quantity_1').val();
 			let quantity_2 = $('#id_quantity_2').val();
-			let quantity_3 = $('#id_quantity_3').val();
-			let quantity_4 = $('#id_quantity_4').val();
+			// let quantity_3 = $('#id_quantity_3').val();
+			// let quantity_4 = $('#id_quantity_4').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
 			$("#submit-btn").val("Processing...");
 			$("#submit-btn").attr('disabled', true);
 			// console.log(spot, rm1, rm2, q1, q2)
-			mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "raw_material_3": raw_material_3, "raw_material_4": raw_material_4, "quantity_1": quantity_1, "quantity_2": quantity_2, "quantity_3": quantity_3, "quantity_4": quantity_4, "csrfmiddlewaretoken": token }
+			mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "quantity_1": quantity_1, "quantity_2": quantity_2, "csrfmiddlewaretoken": token }
 			// console.log(mydata)
 			$.ajax({
 				type: "POST",
@@ -546,7 +545,6 @@
 					//     $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
 					// }
 					$('#ecoins').html(res.ecoin)
-					console.log(res);
 					output1 = "";
 					output2 = "";
 					for (i = 0; i < res.rmc.length; i++) {
@@ -577,18 +575,18 @@
 		});
 	});
 
-	setInterval(function () {
-		$.ajax({
-			type: "GET",
-			url: "/get-quan/ajax/",
-			dataType: "json",
-			success: function (res) {
-				for (i = 0; i < res.req.length; i++) {
-					$('#' + res.req[i].id).html(res.req[i].quantity);
-				}
-			}
-		});
-	}, 20000);
+	// setInterval(function () {
+	// 	$.ajax({
+	// 		type: "GET",
+	// 		url: "/get-quan/ajax/",
+	// 		dataType: "json",
+	// 		success: function (res) {
+	// 			for (i = 0; i < res.req.length; i++) {
+	// 				$('#' + res.req[i].id).html(res.req[i].quantity);
+	// 			}
+	// 		}
+	// 	});
+	// }, 20000);
 
 	$("#id_spot").change(function () {
 		var spot = $(this).val();
@@ -610,8 +608,8 @@
 				}
 				$("#id_raw_material_1").html(output)
 				$("#id_raw_material_2").html(output)
-				$("#id_raw_material_3").html(output)
-				$("#id_raw_material_4").html(output)
+				// $("#id_raw_material_3").html(output)
+				// $("#id_raw_material_4").html(output)
 			}
 		});
 	});
@@ -620,7 +618,7 @@
 
 
 
-<script>
+<!-- <script>
 	$(document).ready(function() {
     var max_fields      = 4; 
     var wrapper         = $(".input_fields_wrap");
@@ -642,6 +640,6 @@
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
-</script>
+</script> -->
 
 {% endblock js %}
