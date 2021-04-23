@@ -23,6 +23,10 @@
 	.card-body {
 		padding: 1rem 1.5rem;
 	}
+	svg {
+		background: #353535
+	}
+	
 </style>
 {% endblock head %}
 {% block bodytag %}{% endblock bodytag %}
@@ -498,7 +502,8 @@
 								
 							</div>
 							
-							<button class="add_field_button btn btn-primary my-2">Add More Fields</button> -->
+							<button class="add_field_button btn btn-primary my-2">Add More Fields</button>
+							
 							<input type="button" class="btn btn-primary my-2" id="submit-btn" value="Buy">
 						</form>
 					</div>
@@ -520,6 +525,7 @@
 			let spot = $('#id_spot').val();
 			let raw_material_1 = $('#id_raw_material_1').val();
 			let raw_material_2 = $('#id_raw_material_2').val();
+			// $( "#myselect option:selected" ).val();
 			// let raw_material_3 = $('#id_raw_material_3').val();
 			// let raw_material_4 = $('#id_raw_material_4').val();
 			let quantity_1 = $('#id_quantity_1').val();
@@ -529,30 +535,25 @@
 			let token = $('input[name=csrfmiddlewaretoken]').val();
 			$("#submit-btn").val("Processing...");
 			$("#submit-btn").attr('disabled', true);
-			// console.log(spot, rm1, rm2, q1, q2)
 			mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "quantity_1": quantity_1, "quantity_2": quantity_2, "csrfmiddlewaretoken": token }
-			// console.log(mydata)
+			console.log(mydata)
 			$.ajax({
 				type: "POST",
 				url: "/buy/",
 				data: mydata,
 				dataType: "json",
 				success: function (res) {
-					// for (i = 0; i < res.rmc.length; i++) {
-					//     $('#' + res.rmc[i].id +'rmc').html( res.rmc[i].quantity);
-					// }
-					// for (i = 0; i < res.pc.length; i++) {
-					//     $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
-					// }
 					$('#ecoins').html(res.ecoin)
 					output1 = "";
 					output2 = "";
+					console.log("heyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
 					for (i = 0; i < res.rmc.length; i++) {
 						let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
 						output1 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
 							"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
 							+ res.rmc[i].quantity + "</span></a></li>"
 					}
+					console.log("heyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
 					$('#resource-inventory').html(output1)
 					for (i = 0; i < res.pc.length; i++) {
 						let obj = res.items.filter(item => item.id === res.pc[i].product_id);
@@ -561,11 +562,14 @@
 							"</span><span class='lak' id='" + res.pc[i].id + "pc'>"
 							+ res.pc[i].quantity + "</span></a></li>"
 					}
+					console.log("hupppppppppppppppppppppppppppppp")
+
 					$('#product-inventory').html(output2)
 					if (res.messages) {
 						for (i in res.messages)
 							alert(res.messages[i]);
 					}
+					console.log("haryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
 
 					$("#submit-btn").attr('disabled', false);
 					$("#submit-btn").val('Submit');
@@ -604,7 +608,7 @@
 				output="<option value='' selected=''>---------</option>";
 				for(i=0; i<req.rmc.length; i++){
 					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
-					output+= "<option value='" + req.rmc[i].id + "'>" + obj[0].name +"</option>"
+					output+= "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name +"</option>"
 				}
 				$("#id_raw_material_1").html(output)
 				$("#id_raw_material_2").html(output)
