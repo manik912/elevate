@@ -12,7 +12,7 @@ from django.core.serializers import serialize
 def cat(request):
 
     team = request.user
-    sellus = SellUs.objects.filter(team=request.user)
+    sellus = SellUs.objects.filter(team=request.user).filter(item__product=True)
     sua = 0
     sub = 0
     suc = 0
@@ -149,22 +149,22 @@ def buyMaterial(request):
         
             else:
                 message= 'You need to enter the quantity in multiples of 5 and their sum should be less than 60.'
-        spr = SpotRawMaterial.objects.filter(spot=s).values()
-        rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
-        pc = ProductCart.objects.filter(team_name=request.user).values()
-        items = Item.objects.all().values()
-        # season = Season.objects.all().values()
+            spr = SpotRawMaterial.objects.filter(spot=s).values()
+            rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
+            pc = ProductCart.objects.filter(team_name=request.user).values()
+            items = Item.objects.all().values()
+            # season = Season.objects.all().values()
 
-        responseData = {
-            'spr' : list(spr),
-            'messages': [message],
-            'rmc' : list(rmc),
-            'pc'  : list(pc),
-            'items': list(items),
-            'ecoin':request.user.ecoins,
-            # 'season':season,
-        }
-        return JsonResponse(responseData)
+            responseData = {
+                'spr' : list(spr),
+                'messages': [message],
+                'rmc' : list(rmc),
+                'pc'  : list(pc),
+                'items': list(items),
+                'ecoin':request.user.ecoins,
+                # 'season':season,
+            }
+            return JsonResponse(responseData)
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
