@@ -12,18 +12,19 @@ from django.core.serializers import serialize
 def cat(request):
 
     team = request.user
-    sellus = SellUs.objects.filter(team=team)
+    sellus = SellUs.objects.filter(team=request.user)
     sua = 0
     sub = 0
     suc = 0
-
-    for sell in sellus:
-        if sell.product.category_1:
-            sua = sua + sell.quantity
-        if sell.product.category_2:
-            sub = sub + sell.quantity
-        if sell.product.category_3:
-            suc = suc + sell.quantity
+    
+    if sellus:
+        for sell in sellus:
+            if sell.item.category_1:
+                sua = sua + sell.quantity
+            if sell.item.category_2:
+                sub = sub + sell.quantity
+            if sell.item.category_3:
+                suc = suc + sell.quantity
 
 
     sellts = SendRequest.objects.filter(from_team=team).filter(is_accepted=True)
@@ -32,13 +33,14 @@ def cat(request):
     stb = 0
     stc = 0
 
-    for sellt in sellts:
-        if sellt.item.category_1:
-            sta = sta + sellt.quantity
-        if sellt.item.category_2:
-            stb = stb + sellt.quantity
-        if sellt.item.category_3:
-            stb = stc + sellt.quantity
+    if sellts:
+        for sellt in sellts:
+            if sellt.item.category_1:
+                sta = sta + sellt.quantity
+            if sellt.item.category_2:
+                stb = stb + sellt.quantity
+            if sellt.item.category_3:
+                stb = stc + sellt.quantity
             
     sa = sta + sua
     sb = stb + sub
@@ -151,7 +153,7 @@ def buyMaterial(request):
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
         items = Item.objects.all().values()
-        season = Season.objects.all().first()
+        # season = Season.objects.all().values()
 
         responseData = {
             'spr' : list(spr),
@@ -160,7 +162,7 @@ def buyMaterial(request):
             'pc'  : list(pc),
             'items': list(items),
             'ecoin':request.user.ecoins,
-            'season':season,
+            # 'season':season,
         }
         return JsonResponse(responseData)
     form = BuyRawMaterialForm()
@@ -298,14 +300,14 @@ def send_req(request):
         # form = SendRequestForm()
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
-        season = Season.objects.all().first()
+        # season = Season.objects.all().first()
 
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
             'pc':list(pc),
             'ecoin':request.user.ecoins,
-            'season':season,
+            # 'season':season,
         }
         return JsonResponse(responseData)
 
@@ -314,14 +316,14 @@ def send_req(request):
     sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False)
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
-    season = Season.objects.all().first()
+    # season = Season.objects.all().first()
 
     context = {
         'form' : form,
         'req'  : req,
         'sreq' : sreq,
         'rmc':rmc,
-        'season':season,
+        # 'season':season,
         'pc':pc,
     }
     return render(request, 'home/trading_temp.html', context)
@@ -403,20 +405,32 @@ def sell_us(request):
         form = SellUsForm(request.POST)
         if form.is_valid():
             q = form.cleaned_data.get("quantity")
-            p = form.cleaned_data.get("product")
+            p = form.cleaned_data.get("item")
             u = request.user
-            pc = ProductCart.objects.filter(product=p).filter(team_name=u).first()
-            
-            if pc and pc.quantity>=q:
-                form.instance.team = request.user
-                u.ecoins += q*(p.product_cost)
-                u.save()
-                pc.quantity -= q
-                pc.save()
-                form.save()
-                message=  'Done!!!!!'
-            else:
-                message=  'You don\'t have this much quantity for this deal.'
+            if p.product:
+                pc = ProductCart.objects.filter(product=p).filter(team_name=u).first()
+                if pc and pc.quantity>=q:
+                    form.instance.team = request.user
+                    u.ecoins += q*(p.product_cost)
+                    u.save()
+                    pc.quantity -= q
+                    pc.save()
+                    form.save()
+                    message=  'Done!!!!!'
+                else:
+                    message=  'You don\'t have this much quantity for this deal.'
+            elif p.raw_material:
+                pc = RawMaterialCart.objects.filter(raw_material=p).filter(team_name=u).first()
+                if pc and pc.quantity>=q:
+                    form.instance.team = request.user
+                    u.ecoins += q*(p.raw_material_cost - (p.raw_material_cost*0.25))
+                    u.save()
+                    pc.quantity -= q
+                    pc.save()
+                    form.save()
+                    message=  'Done!!!!!'
+                else:
+                    message=  'You don\'t have this much quantity for this deal.'
 
             rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
             pc = ProductCart.objects.filter(team_name=request.user).values()
@@ -430,8 +444,6 @@ def sell_us(request):
             return JsonResponse(responseData)
     else:
         form = SellUsForm()
-
-    
 
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
@@ -495,42 +507,16 @@ def pending_req(request):
     return JsonResponse(responseData)
 
 
+def get_quantity(request):
+    req = SpotRawMaterial.objects.filter().values()
+    return JsonResponse({'req' : list(req)})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def get_rmc(request):
+    if request.method == 'POST':
+        s = request.POST.get('spot', None) 
+        rmc = SpotRawMaterial.objects.filter(spot=s).values()
+        items = Item.objects.filter(raw_material=True).values()
+        return JsonResponse({'rmc':list(rmc), 'items': list(items)})
 
 
 def error_404(request, exception):

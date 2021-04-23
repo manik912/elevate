@@ -419,7 +419,7 @@
 		<div class="col-xl-8">
 			<div class="card bg-default">
 
-				<div id="map" style="">
+				<div id="map">
 					<!-- <img style="min-height: 100vh;" src="{%static 'home/assets/img/map/country.svg' %}"> -->
 
 				</div>
@@ -438,7 +438,63 @@
 					<div class="chart">
 						<form method="POST" id="buying-form">
 							{% csrf_token %}
-							{{form|crispy}}
+
+							<div id="div_id_spot" class="form-group"> <label for="id_spot" class="">
+									Location *
+								</label>
+								<div class=""> <select name="spot" class="select form-control" id="id_spot">
+										<option value="" selected="">---------</option>
+										<option value="5">Guwahati</option>
+										<option value="4">Raipur</option>
+										<option value="3">Rajkot</option>
+										<option value="2">Coimbatore</option>
+										<option value="1">Solan</option>
+										<option value="7">Srinagar</option>
+										<option value="6">Hisar</option>
+										<option value="13">Jaisalmer</option>
+										<option value="15">Hyderabad</option>
+										<option value="14">Gorakhpur</option>
+										<option value="12">Kolkata</option>
+										<option value="11">Mumbai</option>
+										<option value="10">Chennai</option>
+										<option value="9">Jhansi</option>
+										<option value="8">Gangtok</option>
+
+									</select> </div>
+							</div>
+							<div id="div_id_raw_material_1" class="form-group"> <label for="id_raw_material_1"
+									class=" requiredField">
+									Raw material 1<span class="asteriskField">*</span> </label>
+								<div class=""> <select name="raw_material_1" class="select form-control" required=""
+										id="id_raw_material_1">
+										<option value="" selected="">---------</option>
+										
+
+									</select> </div>
+							</div>
+							<div id="div_id_quantity_1" class="form-group"> <label for="id_quantity_1"
+									class=" requiredField">
+									Quantity 1<span class="asteriskField">*</span> </label>
+								<div class=""> <input type="number" name="quantity_1" value="0"
+										class="numberinput form-control" required="" id="id_quantity_1"> </div>
+							</div>
+							<div id="div_id_raw_material_2" class="form-group"> <label for="id_raw_material_2"
+									class=" requiredField">
+									Raw material 2<span class="asteriskField">*</span> </label>
+								<div class=""> <select name="raw_material_2" class="select form-control" required=""
+										id="id_raw_material_2">
+										<option value="" selected="">---------</option>
+										
+
+									</select> </div>
+							</div>
+							<div id="div_id_quantity_2" class="form-group"> <label for="id_quantity_2"
+									class=" requiredField">
+									Quantity 2<span class="asteriskField">*</span> </label>
+								<div class=""> <input type="number" name="quantity_2" value="0"
+										class="numberinput form-control" required="" id="id_quantity_2"> </div>
+							</div>
+
 							<input type="button" class="btn btn-primary my-4" id="submit-btn" value="submit">
 						</form>
 					</div>
@@ -472,7 +528,7 @@
 							{% if Spot.spot.name == 'Srinagar' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -508,7 +564,7 @@
 							{% if Spot.spot.name == 'Hisar' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -544,7 +600,7 @@
 							{% if Spot.spot.name == 'Gorakhpur' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -580,7 +636,7 @@
 							{% if Spot.spot.name == 'Gangtok' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -616,7 +672,7 @@
 							{% if Spot.spot.name == 'Jaisalmer' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -652,7 +708,7 @@
 							{% if Spot.spot.name == 'Jhansi' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -688,7 +744,7 @@
 							{% if Spot.spot.name == 'Kolkata' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -724,7 +780,7 @@
 							{% if Spot.spot.name == 'Mumbai' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -760,7 +816,7 @@
 							{% if Spot.spot.name == 'Hyderabad' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -796,7 +852,7 @@
 							{% if Spot.spot.name == 'Chennai' %}
 							<tr>
 								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td>
+								<td id="{{Spot.id}}">
 									{{Spot.quantity}}
 								</td>
 								<td>
@@ -817,71 +873,108 @@
 
 
 
-	{% endblock body %}
+{% endblock body %}
 
-	{% block js %}
+{% block js %}
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-	<script>
-		$(document).ready(function () {
-			$('#submit-btn').click(function () {
-				console.log('hello world')
-				let spot = $('#id_spot').val();
-				let raw_material_1 = $('#id_raw_material_1').val();
-				let raw_material_2 = $('#id_raw_material_2').val();
-				let quantity_1 = $('#id_quantity_1').val();
-				let quantity_2 = $('#id_quantity_2').val();
-				let token = $('input[name=csrfmiddlewaretoken]').val();
-				$("#submit-btn").val("Processing...");
-				$("#submit-btn").attr('disabled', true);
-				// console.log(spot, rm1, rm2, q1, q2)
-				mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "quantity_1": quantity_1, "quantity_2": quantity_2, "csrfmiddlewaretoken": token }
-				// console.log(mydata)
-				$.ajax({
-					type: "POST",
-					url: "/buy/",
-					data: mydata,
-					dataType: "json",
-					success: function (res) {
-						// for (i = 0; i < res.rmc.length; i++) {
-						//     $('#' + res.rmc[i].id +'rmc').html( res.rmc[i].quantity);
-						// }
-						// for (i = 0; i < res.pc.length; i++) {
-						//     $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
-						// }
-						$('#ecoins').html(res.ecoin)
-						console.log(res);
-						output1 = "";
-						output2 = "";
-						for (i = 0; i < res.rmc.length; i++) {
-							let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
-							output1 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
-								"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
-								+ res.rmc[i].quantity + "</span></a></li>"
-						}
-						$('#resource-inventory').html(output1)
-						for (i = 0; i < res.pc.length; i++) {
-							let obj = res.items.filter(item => item.id === res.pc[i].product_id);
-
-							output2 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
-								"</span><span class='lak' id='" + res.pc[i].id + "pc'>"
-								+ res.pc[i].quantity + "</span></a></li>"
-						}
-						$('#product-inventory').html(output2)
-						if (res.messages) {
-							for (i in res.messages)
-								alert(res.messages[i]);
-						}
-
-						$("#submit-btn").attr('disabled', false);
-						$("#submit-btn").val('Submit');
+<script>
+	$(document).ready(function () {
+		$('#submit-btn').click(function () {
+			console.log('hello world')
+			let spot = $('#id_spot').val();
+			let raw_material_1 = $('#id_raw_material_1').val();
+			let raw_material_2 = $('#id_raw_material_2').val();
+			let quantity_1 = $('#id_quantity_1').val();
+			let quantity_2 = $('#id_quantity_2').val();
+			let token = $('input[name=csrfmiddlewaretoken]').val();
+			$("#submit-btn").val("Processing...");
+			$("#submit-btn").attr('disabled', true);
+			// console.log(spot, rm1, rm2, q1, q2)
+			mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "quantity_1": quantity_1, "quantity_2": quantity_2, "csrfmiddlewaretoken": token }
+			// console.log(mydata)
+			$.ajax({
+				type: "POST",
+				url: "/buy/",
+				data: mydata,
+				dataType: "json",
+				success: function (res) {
+					// for (i = 0; i < res.rmc.length; i++) {
+					//     $('#' + res.rmc[i].id +'rmc').html( res.rmc[i].quantity);
+					// }
+					// for (i = 0; i < res.pc.length; i++) {
+					//     $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
+					// }
+					$('#ecoins').html(res.ecoin)
+					console.log(res);
+					output1 = "";
+					output2 = "";
+					for (i = 0; i < res.rmc.length; i++) {
+						let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
+						output1 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
+							"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
+							+ res.rmc[i].quantity + "</span></a></li>"
 					}
-				});
+					$('#resource-inventory').html(output1)
+					for (i = 0; i < res.pc.length; i++) {
+						let obj = res.items.filter(item => item.id === res.pc[i].product_id);
+
+						output2 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
+							"</span><span class='lak' id='" + res.pc[i].id + "pc'>"
+							+ res.pc[i].quantity + "</span></a></li>"
+					}
+					$('#product-inventory').html(output2)
+					if (res.messages) {
+						for (i in res.messages)
+							alert(res.messages[i]);
+					}
+
+					$("#submit-btn").attr('disabled', false);
+					$("#submit-btn").val('Submit');
+					$("form")[0].reset()
+				}
 			});
-
 		});
+	});
 
-	</script>
+	setInterval(function () {
+		$.ajax({
+			type: "GET",
+			url: "/get-quan/ajax/",
+			dataType: "json",
+			success: function (res) {
+				for (i = 0; i < res.req.length; i++) {
+					$('#' + res.req[i].id).html(res.req[i].quantity);
+				}
+			}
+		});
+	}, 10000);
 
-	{% endblock js %}
+	$("#id_spot").change(function () {
+		var spot = $(this).val();
+		let token = $('input[name=csrfmiddlewaretoken]').val();
+		$.ajax({
+			type: 'POST',
+			url: '/buy/ajax/',
+			data: {
+				'spot': spot,
+				"csrfmiddlewaretoken": token,
+			},
+			
+			success: function (req) {
+				console.log(req)
+				output="<option value='' selected=''>---------</option>";
+				for(i=0; i<req.rmc.length; i++){
+					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
+					output+= "<option value='" + req.rmc[i].id + "'>" + obj[0].name +"</option>"
+				}
+				$("#id_raw_material_1").html(output)
+				$("#id_raw_material_2").html(output)
+			}
+		});
+	});
+
+</script>
+
+{% endblock js %}

@@ -87,7 +87,7 @@ class SendRequest(models.Model):
 
 class SellUs(models.Model):
 	team = models.ForeignKey(Team, on_delete=models.PROTECT)
-	product = models.ForeignKey(Item, limit_choices_to={'product':True}, on_delete=models.CASCADE)
+	item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, blank=True)
 	quantity = models.IntegerField()
 
 
