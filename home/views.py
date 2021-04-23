@@ -170,6 +170,9 @@ def buyMaterial(request):
     pc = ProductCart.objects.filter(team_name=request.user)
     spot_mater = SpotRawMaterial.objects.all()
     season = Season.objects.all().first()
+    print("###########################################")
+    print(spot_mater.raw)
+    print("###########################################")
 
     context = {
         'form' : form,
