@@ -93,7 +93,6 @@
 
 {% block body %}
 
-
 <script type="text/javascript">
 	var simplemaps_countrymap_mapdata = {
 		main_settings: {
@@ -289,7 +288,7 @@
 				name: "Mumbai",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1.Iron - xxxx<br>2. Chemicals - xxxx<br>3. Food Edibles - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax: 4.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Mumbai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"1": {
 				lat: "26.9157",
@@ -297,7 +296,7 @@
 				name: "Jaisalmer",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1.Water - xxxx<br>2. Iron - xxxx<br>3. Silicon - xxxx<br>4. Stainless Steel - xxxx<br><br>State Tax: 6.25%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Mumbai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"2": {
 				lat: "34.0837",
@@ -305,7 +304,7 @@
 				name: "Srinagar",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Iron - xxxx<br>3. Oil - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax: 4.25%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Srinagar' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"3": {
 				lat: "29.1492",
@@ -313,7 +312,7 @@
 				name: "Hisar",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Chemicals - xxxx<br>2. Food Edibles - xxxx<br>3. Rubber - xxxx<br>4. Fabric - xxxx<br><br>State Tax: 6.5%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Hisar' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"4": {
 				lat: "26.7606",
@@ -321,7 +320,7 @@
 				name: "Gorakhpur",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Water - xxxx<br>2. Iron - xxxx<br>3. Food Edibles - xxxx<br>4. Fabric - xxxx<br><br>State Tax - 7.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Gorakhpur' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"5": {
 				lat: "25.4484",
@@ -329,7 +328,7 @@
 				name: "Jhansi",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Carbon Compound - xxxx<br>3. Oil - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax - 7.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Jhansi' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"6": {
 				lat: "22.5726",
@@ -337,7 +336,7 @@
 				name: "Kolkata",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Chemicals - xxxx<br>2. Oil - xxxx<br>3. Stainless Steel - xxxx<br>4. Fabric - xxxx<br><br>State Tax - 7.5%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Kolkata' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"7": {
 				lat: "27.3314",
@@ -345,7 +344,7 @@
 				name: "Gangtok",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Silicon - xxxx<br>3. Carbon Compound - xxxx<br>4. Rubber - xxxx<br><br>State Tax - 5.25%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Gangtok' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"8": {
 				lat: "17.3850",
@@ -353,7 +352,7 @@
 				name: "Hyderabad",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Food Edibles - xxxx<br>2. Silicon - xxxx<br>3. Carbon Compound - xxxx<br>4. Oil - xxxx<br><br>State Tax - 5.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Hyderabad' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"9": {
 				lat: "13.0827",
@@ -361,7 +360,7 @@
 				name: "Chennai",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Water - xxxx<br>3. Rubber - xxxx<br>4. Stainless Steel - xxxx<br><br>State Tax - 6.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Chennai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"10": {
 				lat: "30.9084",
@@ -503,373 +502,6 @@
 		</div>
 	</div>
 </div>
-<div class="container-fluid">
-	<h1 style="text-align: center;color: white;margin-bottom: 20px;">Manik</h1>
-	<div class="row">
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Srinagar</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Srinagar' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Hisar</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Hisar' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Gorakhpur</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Gorakhpur' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Gangtok</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Gangtok' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Jaisalmer</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Jaisalmer' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Jhansi</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Jhansi' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Kolkata</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Kolkata' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Mumbai</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Mumbai' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Hyderabad</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Hyderabad' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="table-responsive">
-					<!-- Projects table -->
-					<center>
-						<h1>Chennai</h1>
-
-					</center>
-					<table class="table align-items-center table-flush">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">PRODUCTS</th>
-
-								<th scope="col">Qty</th>
-								<th scope="col">Price</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for Spot in spot_mater %}
-							{% if Spot.spot.name == 'Chennai' %}
-							<tr>
-								<th scope="row">{{Spot.raw_material.name}}</th>
-								<td id="{{Spot.id}}">
-									{{Spot.quantity}}
-								</td>
-								<td>
-									{{Spot.cost}}
-								</td>
-							</tr>
-							{% endif %}
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
 
 
 
