@@ -502,7 +502,7 @@
             output2 = "";
             for (i = 0; i < res.rmc.length; i++) {
               let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
-              output1 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name +
+              output1 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
                 "</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
                 + res.rmc[i].quantity + "</span></a></li>"
             }
@@ -510,8 +510,8 @@
             for (i = 0; i < res.pc.length; i++) {
               let obj = res.items.filter(item => item.id === res.pc[i].product_id);
 
-              output2 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name +
-                "</span><span class='lak' id='" + res.pc[i].id + "rmc'>"
+              output2 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
+                "</span><span class='lak' id='" + res.pc[i].id + "pc'>"
                 + res.pc[i].quantity + "</span></a></li>"
             }
             $('#product-inventory').html(output2)
