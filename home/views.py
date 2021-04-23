@@ -65,8 +65,11 @@ def home(request):
             return redirect('buy')
     else:
         form = IndustryForm()
+    season = Season.objects.all().first()
+
     context = {
         'form' : form,
+        'season':season,
     }
     return render(request, 'home/home.html', context)
 
@@ -148,6 +151,8 @@ def buyMaterial(request):
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
         items = Item.objects.all().values()
+        season = Season.objects.all().first()
+
         responseData = {
             'spr' : list(spr),
             'messages': [message],
@@ -155,12 +160,15 @@ def buyMaterial(request):
             'pc'  : list(pc),
             'items': list(items),
             'ecoin':request.user.ecoins,
+            'season':season,
         }
         return JsonResponse(responseData)
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
     spot_mater = SpotRawMaterial.objects.all()
+    season = Season.objects.all().first()
+
     context = {
         'form' : form,
         'spr'  : spr,
@@ -168,6 +176,7 @@ def buyMaterial(request):
         'rmc' : rmc,
         'pc'  : pc,
         'spot_mater' : spot_mater,
+        'season':season,
     }
     return render(request, 'home/buying.html', context)
 
@@ -224,10 +233,12 @@ def manufacture(request):
     form = ManufactureForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
+    season = Season.objects.all().first()
     context = {
         'form' : form,
         'rmc':rmc,
         'pc':pc,
+        'season':season,
     }
     return render(request, 'home/manufacture.html', context)
 
@@ -287,11 +298,14 @@ def send_req(request):
         # form = SendRequestForm()
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
+        season = Season.objects.all().first()
+
         responseData = {
             'messages': [message],
             'rmc':list(rmc),
             'pc':list(pc),
             'ecoin':request.user.ecoins,
+            'season':season,
         }
         return JsonResponse(responseData)
 
@@ -300,11 +314,14 @@ def send_req(request):
     sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False)
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
+    season = Season.objects.all().first()
+
     context = {
         'form' : form,
         'req'  : req,
         'sreq' : sreq,
         'rmc':rmc,
+        'season':season,
         'pc':pc,
     }
     return render(request, 'home/trading_temp.html', context)
@@ -367,6 +384,7 @@ def accept_req(request, pk):
     rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
     pc = ProductCart.objects.filter(team_name=request.user).values()
     items = Item.objects.all().values()
+
     responseData = {
         'rmc': list(rmc),
         'pc':list(pc),
@@ -402,6 +420,7 @@ def sell_us(request):
 
             rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
             pc = ProductCart.objects.filter(team_name=request.user).values()
+
             responseData = {
                 'messages': [message],
                 'rmc':list(rmc),
@@ -418,12 +437,14 @@ def sell_us(request):
     pc = ProductCart.objects.filter(team_name=request.user)
     rmcost = Item.objects.filter(raw_material=True)
     pcost = Item.objects.filter(product=True)
+    season = Season.objects.all().first()
     context = {
         'form' : form,
         'rmc':rmc,
         'pc':pc,
         'rmcost':rmcost,
         'pcost':pcost,
+        'season':season,
     }
     return render(request, 'home/sellus.html', context)
 
@@ -434,10 +455,11 @@ def reject_req(request, pk):
         obj.delete()
         message = 'Request Denied Successfully!'
         req = SendRequest.objects.filter(to_team=request.user).filter(is_accepted=False).values()
-        
+
         responseData = {
             'req' : list(req),
             'messages': [message]
+
         }
         return JsonResponse(responseData)
     return render(request, 'home/trading_temp.html')
@@ -449,7 +471,6 @@ def delete_req(request, pk):
         obj.delete()
         message = 'Request Deleted Successfully!'
         sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False).values()
-        
         responseData = {
             'sreq' : list(sreq),
             'messages': [message]
@@ -464,6 +485,7 @@ def pending_req(request):
     sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False).values()
     pc = Item.objects.filter(product=True).values()
     teams = Team.objects.all().values()
+
     responseData = {
         'req':list(req),
         'sreq':list(sreq),
