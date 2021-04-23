@@ -9,8 +9,9 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 # Create your views here.
 
-def cat(team):
+def cat(request):
 
+    team = request.user
     sellus = SellUs.objects.filter(team=team)
     sua = 0
     sub = 0
@@ -38,24 +39,11 @@ def cat(team):
             cate.stb = cate.stb + sellt.quantity
         if sellt.item.category_3:
             cate.stb = cate.stc + sellt.quantity
-
-
-    class cate(object):
-        sa = 0
-        sb = 0
-        sc = 0
-
             
-    cate.sa = sta + sua
-    cate.sb = stb + sub
-    cate.sc = stc + suc
-
-
-    context = {
-        'sa' : cate.sa,
-        'sb' : cate.sb,
-        'sc' : cate.sc,
-    }
+    sa = sta + sua
+    sb = stb + sub
+    sc = stc + suc
+    
 
     return cate
 

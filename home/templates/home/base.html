@@ -163,9 +163,7 @@
                                 <div class="row">
                                     <div class="col">
                                       <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
-                                      {% for ns in n %}
-                                        <span class="h5 font-weight-bold mb-0">{{ns.notice}}</span>
-                                      {% endfor %}
+                                        <a href="{% url 'category' %}">Category</a>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
