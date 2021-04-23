@@ -185,21 +185,37 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Today's Date</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0">Season</h5>
                                         {% if season.season_1 %}
-                                        <span class="h4 font-weight-bold mb-0">1</span>
+                                        <h4>Summer Season</h4>
+                                        <span class="h4 font-weight-bold mb-0">April-June</span>
+                                        <!-- <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                              <i class="fas fa-sun"></i>
+                                            </div>
+                                        </div> -->
                                         {% elif season.season_2 %}
-                                        <span class="h4 font-weight-bold mb-0">2</span>
+                                        <span class="h4 font-weight-bold mb-0"></span>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                                <i class="ni ni-calendar-grid-58"></i>
+                                            </div>
+                                        </div>
                                         {% elif season.season_3 %}
                                         <span class="h4 font-weight-bold mb-0">3</span>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                                <i class="ni ni-calendar-grid-58"></i>
+                                            </div>
+                                        </div>
                                         {% elif season.season_4 %}
                                         <span class="h4 font-weight-bold mb-0">4</span>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                                            <i class="ni ni-calendar-grid-58"></i>
+                                        <div class="col-auto">
+                                          <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                              <i class="ni ni-calendar-grid-58"></i>
+                                          </div>
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
