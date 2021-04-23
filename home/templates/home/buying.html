@@ -93,7 +93,6 @@
 
 {% block body %}
 
-
 <script type="text/javascript">
 	var simplemaps_countrymap_mapdata = {
 		main_settings: {
@@ -283,13 +282,21 @@
 			}
 		},
 		locations: {
+			"0": {
+				lat: 18.987807,
+				lng: 72.836447,
+				name: "Mumbai",
+				color: "#FF0067",
+				size: "15",
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Mumbai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+			},
 			"1": {
 				lat: "26.9157",
 				lng: "70.9083",
 				name: "Jaisalmer",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1.Water - xxxx<br>2. Iron - xxxx<br>3. Silicon - xxxx<br>4. Stainless Steel - xxxx<br><br>State Tax: 6.25%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Mumbai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"2": {
 				lat: "34.0837",
@@ -297,7 +304,7 @@
 				name: "Srinagar",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Iron - xxxx<br>3. Oil - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax: 4.25%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Srinagar' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"3": {
 				lat: "29.1492",
@@ -305,7 +312,7 @@
 				name: "Hisar",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Chemicals - xxxx<br>2. Food Edibles - xxxx<br>3. Rubber - xxxx<br>4. Fabric - xxxx<br><br>State Tax: 6.5%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Hisar' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"4": {
 				lat: "26.7606",
@@ -313,7 +320,7 @@
 				name: "Gorakhpur",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Water - xxxx<br>2. Iron - xxxx<br>3. Food Edibles - xxxx<br>4. Fabric - xxxx<br><br>State Tax - 7.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Gorakhpur' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"5": {
 				lat: "25.4484",
@@ -321,7 +328,7 @@
 				name: "Jhansi",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Carbon Compound - xxxx<br>3. Oil - xxxx<br>4. Plastic Polymers - xxxx<br><br>State Tax - 7.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Jhansi' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"6": {
 				lat: "22.5726",
@@ -329,7 +336,7 @@
 				name: "Kolkata",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Chemicals - xxxx<br>2. Oil - xxxx<br>3. Stainless Steel - xxxx<br>4. Fabric - xxxx<br><br>State Tax - 7.5%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Kolkata' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"7": {
 				lat: "27.3314",
@@ -337,7 +344,7 @@
 				name: "Gangtok",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Silicon - xxxx<br>3. Carbon Compound - xxxx<br>4. Rubber - xxxx<br><br>State Tax - 5.25%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Gangtok' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"8": {
 				lat: "17.3850",
@@ -345,7 +352,7 @@
 				name: "Hyderabad",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Food Edibles - xxxx<br>2. Silicon - xxxx<br>3. Carbon Compound - xxxx<br>4. Oil - xxxx<br><br>State Tax - 5.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Hyderabad' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"9": {
 				lat: "13.0827",
@@ -353,7 +360,7 @@
 				name: "Chennai",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>1. Nicotine - xxxx<br>2. Water - xxxx<br>3. Rubber - xxxx<br>4. Stainless Steel - xxxx<br><br>State Tax - 6.75%"
+				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Chennai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
 			},
 			"10": {
 				lat: "30.9084",
@@ -428,7 +435,6 @@
 				</div>
 				<div class="card-body">
 					<div class="chart">
-						<h1>{{spot_mater}}</h1>
 						<form method="POST" id="buying-form">
 							{% csrf_token %}
 
@@ -501,7 +507,6 @@
 		</div>
 	</div>
 </div>
-
 
 {% endblock body %}
 
