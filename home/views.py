@@ -9,6 +9,9 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 # Create your views here.
 
+def instruction(request):
+    return render(request, 'home/welcome.html')
+
 def cat(request):
 
     team = request.user
@@ -534,7 +537,7 @@ def get_rmc(request):
         s = request.POST.get('spot', None) 
         rmc = SpotRawMaterial.objects.filter(spot=s).values()
         items = Item.objects.filter(raw_material=True).values()
-        return JsonResponse({'rmc':list(rmc), 'items': list(items)})
+        return JsonResponse({'rmc':list(rmc), 'items': list(items), 'ecoin':request.user.ecoins,})
 
 
 def error_404(request, exception):
