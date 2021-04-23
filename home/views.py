@@ -429,6 +429,7 @@ def sell_us(request):
                 pc = ProductCart.objects.filter(product=p).filter(team_name=u).first()
                 if pc and pc.quantity>=q:
                     form.instance.team = request.user
+                    form.instance.item = p
                     u.ecoins += q*(p.product_cost)
                     u.save()
                     pc.quantity -= q
