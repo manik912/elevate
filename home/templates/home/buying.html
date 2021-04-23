@@ -32,12 +32,26 @@
 	<div class="scrollbar-inner">
 		<!-- Brand -->
 		<div class="sidenav-header  align-items-center">
-			<img src="{% static 'home/assets/img/elevate-black.png' %}" height="90px">
+			<img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
 			
 		</div>
 		<div class="navbar-inner">
 			<!-- Collapse -->
 			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
+				<div class="col-xl-4" style="margin-top: 40px;">
+					<h2 class="mb-0">Industry</h2>
+				</div>
+
+				<!-- Nav items -->
+				<ul class="navbar-nav" id="resource-inventory">
+					<li class="nav-item">
+						<div class="nav-link" style="padding: 0.675rem 3.5rem;">
+							<!--<i class="ni ni-tv-2 text-primary"></i>-->
+							<span class="nav-link-text">{{request.user.industry.spot.name}}</span>
+						</div>
+					</li>
+				</ul>
+				<hr class="my-3">
 				<div class="col-xl-4">
 					<h2 class="mb-0">Raw Materials</h2>
 				</div>
@@ -434,6 +448,7 @@
 	</div>
 </div>
 <div class="container-fluid">
+	<h1 style="text-align: center;color: white;margin-bottom: 20px;">Manik</h1>
 	<div class="row">
 		<div class="col-xl-4">
 			<div class="card">

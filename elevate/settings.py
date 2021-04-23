@@ -72,6 +72,13 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_LOADERS = (
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
+)
+
 WSGI_APPLICATION = 'elevate.wsgi.application'
 
 
@@ -86,6 +93,7 @@ DATABASES = {
         'PASSWORD': "63ca4c2ba864c8bf09d3d26949e8ddbd730aac6d4b32f84ca2f013542d681808",
         'HOST': "ec2-54-235-108-217.compute-1.amazonaws.com",
         'PORT': '5432',
+        'CONN_MAX_AGE': 600,
     }
 }
 
