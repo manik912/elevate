@@ -247,11 +247,12 @@ def check15(p, c):
     pro = Item.objects.filter(name = p.name).first()
     ac = 0
     if pro.raw_material:
-        ac = pro.raw_material_cost
+        ac += pro.raw_material_cost
     else:
-        ac = pro.product_cost
+        ac += pro.product_cost
     
-    if (ac + (ac*(15/100)))<= c and c>= (ac - (ac*(15/100))):
+    print(c)
+    if (ac + (ac*(15/100)))>= c and c>= (ac - (ac*(15/100))):
         return True
     return False
 
@@ -344,7 +345,7 @@ def accept_req(request, pk):
                 if flag==0:
                     i.is_accepted = True
                     i.from_team.ecoins -= ((i.cost)*(i.quantity)+tc +tax)
-                    i.to_team.ecoins += ((i.cost)*(i.quantity)+tc)
+                    i.to_team.ecoins += ((i.cost)*(i.quantity))
                     for j in y:
                         j.quantity -= i.quantity
                         j.save()
