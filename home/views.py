@@ -34,18 +34,18 @@ def cat(request):
 
     for sellt in sellts:
         if sellt.item.category_1:
-            cate.sta = cate.sta + sellt.quantity
+            sta = sta + sellt.quantity
         if sellt.item.category_2:
-            cate.stb = cate.stb + sellt.quantity
+            stb = stb + sellt.quantity
         if sellt.item.category_3:
-            cate.stb = cate.stc + sellt.quantity
+            stb = stc + sellt.quantity
             
     sa = sta + sua
     sb = stb + sub
     sc = stc + suc
     
 
-    return cate
+    return JsonResponse({'sa':sa, 'sb':sb, 'sc':sc})
 
 
 def test(request):

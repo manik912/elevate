@@ -163,7 +163,7 @@
                                 <div class="row">
                                     <div class="col">
                                       <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
-                                        <a href="{% url 'category' %}">Category</a>
+                                        <input type="button" value="Category" id="category">
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -314,8 +314,30 @@
       </div>
   </div> -->
 </div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#category').click(function () {
+      
+      $.ajax({
+        type: "GET",
+        url: "/category/",
+        dataType: "json",
+        success: function (res) {
+          console.log(res);
+          
+          if (res) {
+            output = " Category A: "+ res.sa + "%0D%0A Category B: " + res.sb + "%0D%0A Category C: " + res.sc;
+            alert(output);
+          }
 
+        }
+      });
+    });
 
+  });
+
+</script>
     {% block js%}{% endblock js %}
   <!-- Argon Scripts -->
   <!-- Core -->
