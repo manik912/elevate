@@ -62,10 +62,10 @@
     <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
-      <div class="container-fluid">
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" style="padding: 0 !important;">
+      <div class="container-fluid" style="margin: 0.3rem 1rem !important;">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <img class="navlogo" src="{% static 'home/assets/img/elevate-white.png' %}" style="height: 60px; width: 60px;">
+            <img class="navlogo" src="{% static 'home/assets/img/elevate-white.png' %}" style="height: 100px; width: 100px;">
         
         <!-- Navbar links -->
         <ul class="navbar-nav align-items-center  ml-md-auto ">
@@ -163,9 +163,7 @@
                                 <div class="row">
                                     <div class="col">
                                       <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
-                                      {% for ns in n %}
-                                        <span class="h5 font-weight-bold mb-0">{{ns.notice}}</span>
-                                        {% endfor %}
+                                        <input type="button" value="Category" id="category">
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -183,7 +181,15 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Today's Date</h5>
-                                        <span class="h4 font-weight-bold mb-0">23-11-2021</span>
+                                        {% if season.season_1 %}
+                                        <span class="h4 font-weight-bold mb-0">1</span>
+                                        {% elif season.season_2 %}
+                                        <span class="h4 font-weight-bold mb-0">2</span>
+                                        {% elif season.season_3 %}
+                                        <span class="h4 font-weight-bold mb-0">3</span>
+                                        {% elif season.season_4 %}
+                                        <span class="h4 font-weight-bold mb-0">4</span>
+                                        {% endif %}
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -316,8 +322,30 @@
       </div>
   </div> -->
 </div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#category').click(function () {
+      
+      $.ajax({
+        type: "GET",
+        url: "/category/",
+        dataType: "json",
+        success: function (res) {
+          console.log(res);
+          
+          if (res) {
+            output = " Category A: "+ res.sa + "%0D%0A Category B: " + res.sb + "%0D%0A Category C: " + res.sc;
+            alert(output);
+          }
 
+        }
+      });
+    });
 
+  });
+
+</script>
     {% block js%}{% endblock js %}
   <!-- Argon Scripts -->
   <!-- Core -->
