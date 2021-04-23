@@ -40,19 +40,20 @@
       background-color: #000000;
     }
     .card{
-      background-color: #353535;
+      background-color: #353535 !important;
     }
     body{
       color: white;
     }
-    h1{
-      color: white;
+    h1, h2, h3, h4, h5, h6 {
+      color: white !important;
     }
+
     .topbox{
       background-color: #acacac;
     }
     .bg-primary{
-      background-color: #353535;
+      background-color: #353535 !important;
     }
   </style>
 
@@ -82,9 +83,8 @@
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" style="padding: 0 !important;">
-      <div class="container-fluid" style="margin: 0.3rem 1rem !important;">
+      <div class="container-fluid" style="margin: 1rem 1rem !important;">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <img class="navlogo" src="{% static 'home/assets/img/elevate-white.png' %}" style="height: 100px; width: 100px;">
         
         <!-- Navbar links -->
         <ul class="navbar-nav align-items-center  ml-md-auto ">
@@ -186,7 +186,7 @@
                             <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
-                                      <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
+                                      <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Breaking News</h5>
                                         
                                     </div>
                                     <div class="col-auto">
@@ -204,9 +204,9 @@
                             <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Season</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Season</h5>
                                         {% if season.season_1 %}
-                                        <h4>Summer Season</h4>
+                                        <h4 style="color: #32325d !important; ">Summer Season</h4>
                                         <span class="h4 font-weight-bold mb-0">April-June</span>
                                         <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -246,7 +246,7 @@
                             <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">E-Coins</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">E-Coins</h5>
                                         <span class="h2 font-weight-bold mb-0" id="ecoins">{{user.ecoins}}</span>
                                     </div>
                                     <div class="col-auto">

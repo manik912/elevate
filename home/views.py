@@ -334,14 +334,14 @@ def send_req(request):
     sreq = SendRequest.objects.filter(from_team=request.user).filter(is_accepted=False)
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
-    # season = Season.objects.all().first()
+    season = Season.objects.all().first()
 
     context = {
         'form' : form,
         'req'  : req,
         'sreq' : sreq,
         'rmc':rmc,
-        # 'season':season,
+        'season':season,
         'pc':pc,
     }
     return render(request, 'home/trading_temp.html', context)
