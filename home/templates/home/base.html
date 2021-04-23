@@ -35,7 +35,26 @@
   <link rel="stylesheet" href="{%static 'home/assets/css/argon.min5438.css'%}" type="text/css">
 
 
-  <style>body{ background-color: #708090;}</style>
+  <style>
+    body{ 
+      background-color: #000000;
+    }
+    .card{
+      background-color: #353535;
+    }
+    body{
+      color: white;
+    }
+    h1{
+      color: white;
+    }
+    .topbox{
+      background-color: #acacac;
+    }
+    .bg-primary{
+      background-color: #353535;
+    }
+  </style>
 
   {% block head %}{% endblock head %}
 
@@ -164,7 +183,7 @@
                     <div class="col-xl-6 col-md-12">
                         <div class="card card-stats" style="height: 100px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
                                       <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
@@ -182,7 +201,7 @@
                     <div class="col-xl-3 col-md-6">
                         <div class="card card-stats" style="height: 100px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Season</h5>
@@ -224,7 +243,7 @@
                     <div class="col-xl-3 col-md-6">
                         <div class="card card-stats" style="height: 100px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">E-Coins</h5>
