@@ -9,6 +9,45 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 # Create your views here.
 
+def cat(request):
+
+    team = request.user
+    sellus = SellUs.objects.filter(team=team)
+    sua = 0
+    sub = 0
+    suc = 0
+
+    for sell in sellus:
+        if sell.product.category_1:
+            sua = sua + sell.quantity
+        if sell.product.category_2:
+            sub = sub + sell.quantity
+        if sell.product.category_3:
+            suc = suc + sell.quantity
+
+
+    sellts = SendRequest.objects.filter(from_team=team).filter(is_accepted=True)
+
+    sta = 0
+    stb = 0
+    stc = 0
+
+    for sellt in sellts:
+        if sellt.item.category_1:
+            cate.sta = cate.sta + sellt.quantity
+        if sellt.item.category_2:
+            cate.stb = cate.stb + sellt.quantity
+        if sellt.item.category_3:
+            cate.stb = cate.stc + sellt.quantity
+            
+    sa = sta + sua
+    sb = stb + sub
+    sc = stc + suc
+    
+
+    return cate
+
+
 def test(request):
     return render(request, 'home/trading_temp.html')
 
@@ -432,6 +471,44 @@ def pending_req(request):
         'teams':list(teams)
     }
     return JsonResponse(responseData)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def error_404(request, exception):

@@ -14,5 +14,6 @@ urlpatterns = [
     path('test/', test, name='test'),
     path('get-req/ajax/', pending_req, name='get-req'),
     path('sellus/', sell_us, name='sellus'),
+    path('category/', cat, name='category'),
 ]
 
