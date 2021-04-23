@@ -57,7 +57,7 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row" style="justify-content: center;">
-    <!-- <div class="col-xl-4">
+    <div class="col-xl-4">
       <div class="card">
         <div class="table-responsive">
 
@@ -75,6 +75,7 @@
                 <th scope="row">{{r.name}}</th>
                 <td>
                    {{r.raw_material_cost}}
+				   
                 </td>
               </tr>
               {% endfor %}
@@ -82,7 +83,7 @@
           </table>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="col-xl-4">
       <div class="card">
         <div class="table-responsive">
@@ -138,12 +139,12 @@
 <script>
 	$(document).ready(function () {
 		$('#submit-btns').click(function () {
-			let product = $('#id_product').val();
+			let item = $('#id_item').val();
 			let quantity = $('#id_quantity').val();
 			let token = $('input[name=csrfmiddlewaretoken]').val();
 			$("#submit-btns").val("Processing...");
 			$("#submit-btns").attr('disabled', true);
-			mydata = { "product": product, "quantity": quantity, "csrfmiddlewaretoken": token }
+			mydata = { "item": item, "quantity": quantity, "csrfmiddlewaretoken": token }
 			console.log(mydata)
 			$.ajax({
 				type: "POST",
