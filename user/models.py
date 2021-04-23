@@ -60,10 +60,6 @@ class RawMaterialBuy(models.Model):
 	quantity_1 = models.IntegerField(default=0)
 	raw_material_2 = models.ForeignKey(Item, related_name="RawMaterial2", limit_choices_to={'raw_material':True} ,on_delete=models.CASCADE)
 	quantity_2 = models.IntegerField(default=0)
-	raw_material_3 = models.ForeignKey(Item, related_name="RawMaterial3", limit_choices_to={'raw_material':True}, on_delete = models.CASCADE, null=True, blank=True)
-	quantity_3 = models.IntegerField(default=0, null=True, blank=True)
-	raw_material_4 = models.ForeignKey(Item, related_name="RawMaterial4", limit_choices_to={'raw_material':True}, on_delete = models.CASCADE, null=True, blank=True)
-	quantity_4 = models.IntegerField(default=0, null=True, blank=True)
 
 	def __str__(self):
 		return str(self.team_name) + " -> " + str(self.raw_material_1.name) + " and " + str(self.raw_material_2.name) 

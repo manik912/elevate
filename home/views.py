@@ -87,11 +87,20 @@ def cal_transportation_cost(s1, s2):
 
 @login_required
 def buyMaterial(request):
+    print("main aa gya")
+
     spr = SpotRawMaterial.objects.all()
     spots = Spot.objects.all()
     if(request.method == 'POST'):
+        print(request.POST)
+
         form = BuyRawMaterialForm(request.POST)
+        print(form.is_valid())
+        print(form.errors)
+        print(form.non_field_errors)
         if form.is_valid():
+            print("i am still here")
+
             form.instance.team_name = request.user
             form.save()
             s = form.cleaned_data.get('spot')
@@ -99,6 +108,7 @@ def buyMaterial(request):
             q2 = form.cleaned_data.get('quantity_2')
             r2 = form.cleaned_data.get('raw_material_2')
             r1 = form.cleaned_data.get('raw_material_1')
+            print("i am still here")
 
             if q1%5==0 and q2%5==0 and q1>0 and q2>0 and (q2+q1)<=60:
                 spr1 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r1).first()
@@ -115,6 +125,8 @@ def buyMaterial(request):
                         tax = tc*(s.tax)
                         ftax = float(tax)
                         ftax/=400
+                        print("i am still here")
+
                         if u.ecoins >= (tc +d +ftax):
                             if no1>=q1 and no2>=q2:
                                 x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
@@ -142,6 +154,8 @@ def buyMaterial(request):
                                 message=  'This much raw material is not available at this spot'
                         else:
                             message = 'Not enough money'
+                        print("i am still here")
+
                     else:
                         message = 'This raw material is not available at this spot'
                 else:
@@ -154,6 +168,7 @@ def buyMaterial(request):
             pc = ProductCart.objects.filter(team_name=request.user).values()
             items = Item.objects.all().values()
             # season = Season.objects.all().values()
+            print("i am still here")
 
             responseData = {
                 'spr' : list(spr),
@@ -192,6 +207,7 @@ def manufacture(request):
             q = form.cleaned_data.get("quantity")
             temp = Manufacture.objects.filter(product=p)
             flag = 0
+            print("i am still here")
             for i in temp:
                 raw = RawMaterialCart.objects.filter(raw_material=i.raw_material).filter(team_name=request.user)
                 if raw:
@@ -203,6 +219,7 @@ def manufacture(request):
                 else:
                     flag=1
                     message = 'You donot have enough raw material'
+            print("i am still here")
             
             if flag==0:
                 for i in temp:
@@ -219,10 +236,12 @@ def manufacture(request):
                     form.instance.team_name = request.user
                     form.save()
                 message= 'We have added the product in your cart'
-        
+            print("i am still here")
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
         items = Item.objects.all().values()
+
+        print("mai chla")
 
         responseData = {
             'messages': [message],
