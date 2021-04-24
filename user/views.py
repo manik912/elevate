@@ -67,16 +67,19 @@ def export_answers_xls(request):
 
             sellus = SellUs.objects.filter(team=team)
 
+            print(sellus)
+
             sua = 0
             sub = 0
             suc = 0
-
+            print("###################")
             for sell in sellus:
-                if sell.product.category_1:
+                print(sell.item)
+                if sell.item.category_1:
                     sua = sua + sell.quantity
-                if sell.product.category_2:
+                if sell.item.category_2:
                     sub = sub + sell.quantity
-                if sell.product.category_3:
+                if sell.item.category_3:
                     suc = suc + sell.quantity
 
 

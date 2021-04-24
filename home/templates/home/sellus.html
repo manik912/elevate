@@ -17,21 +17,21 @@
 			<!-- Collapse -->
 			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
 				<div class="col-xl-4" style="margin-top: 40px;">
-					<h2 class="mb-0">Industry</h2>
+					<h2 class="mb-0" style="color: black !important;">Industry</h2>
 				</div>
 
 				<!-- Nav items -->
 				<ul class="navbar-nav" id="resource-inventory">
 					<li class="nav-item">
-						<div class="nav-link" style="padding: 0.675rem 3.5rem;">
+						<div class="nav-link" style="padding: 0.675rem 1.5rem;">
 							<!--<i class="ni ni-tv-2 text-primary"></i>-->
-							<span class="nav-link-text">{{request.user.industry.spot.name}}</span>
+							<span class="nav-link-text" style="font-size: 20px; font-weight: bold; ">{{request.user.industry.spot.name}}</span>
 						</div>
 					</li>
 				</ul>
 				<hr class="my-3">
 				<div class="col-xl-4">
-					<h2 class="mb-0">Raw Materials</h2>
+					<h2 class="mb-0" style="color: black !important;">Raw Materials</h2>
 				</div>
 
 				<!-- Nav items -->
@@ -50,7 +50,7 @@
 				<hr class="my-3">
 				<!-- Heading-->
 				<div class="col-xl-4">
-					<h2 class="mb-0">Products</h2>
+					<h2 class="mb-0" style="color: black !important;">Products</h2>
 				</div>
 				<ul class="navbar-nav mb-md-3">
 					{% for i in pc%}
@@ -75,12 +75,15 @@
       <div class="card">
         <div class="table-responsive">
 
-          <table class="table align-items-center table-flush">
-            <thead class="thead-light">
+          <table class="table align-items-center table-flush" style="color: white;">
+            <thead class="thead-light" style="color: black !important">
+            <div class="card-header" style="background: #353535">
+                <h2 style="font-weight: bold;">Raw Material Price</h2>
+            </div>
               <tr>
-                <th scope="col">RAW MATERIALS</th>
+                <th scope="col" style="color: black !important; font-weight: bold;">RAW MATERIALS</th>
                 
-                <th scope="col">PRICE</th>
+                <th scope="col" style="color: black !important; font-weight: bold;">PRICE</th>
               </tr>
             </thead>
             <tbody>
@@ -103,12 +106,15 @@
         <div class="table-responsive">
           <!-- Projects table -->
 
-          <table class="table align-items-center table-flush">
+          <table class="table align-items-center table-flush" style="color: white;">
             <thead class="thead-light">
+            <div class="card-header" style="background: #353535">
+                <h2 style="font-weight: bold;">Product Price</h2>
+            </div>
               <tr>
-                <th scope="col">PRODUCTS</th>
+                <th scope="col" style="color: black !important; font-weight: bold;">PRODUCTS</th>
                 
-                <th scope="col">PRICE</th>
+                <th scope="col" style="color: black !important; font-weight: bold;">PRICE</th>
               </tr>
             </thead>
             <tbody>
@@ -127,8 +133,8 @@
     </div>
     <div class="col-xl-4">
         <div class="card">
-            <div class="card-header">
-                <h2>Sell Us</h2>
+            <div class="card-header" style="background: #353535">
+                <h2 style="font-weight: bold;">Sell Us</h2>
             </div>
             <div class="card-body">
                 <form method="POST">

@@ -26,7 +26,16 @@
 </head>
 
 <body>
-
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
   <div class="header py-4 py-lg-3 pt-lg-9">
     <div class="container">
       <div class="header-body text-center mb-7">
@@ -35,13 +44,14 @@
     </div>
   </div>
   </div>
+
   <!-- Page content -->
   <div class="container mt--8 pb-5">
     <div class="row justify-content-center">
       <div class="col-lg-5 col-md-7">
         <div class="card bg-secondary border-0 mb-0">
           <div class="card-header bg-transparent pb-0">
-            <div class="text-muted text-center">
+            <div class="text-light text-center">
               <h3> Choose your industry</h3>
             </div>
           </div>
@@ -52,11 +62,11 @@
                 {{form | crispy}}
               
               <div class="text-center">
-                <button type="submit" class="btn btn-primary my-4">Start Game</button>
+                <input type="submit" value="Start Game" class="btn btn-primary my-4">
               </div>
             </form>
             {% else %}
-            <div class="text-muted text-center">
+            <div class="text-light text-center">
                 <h3>You have successfully choosen your Industry. You can start the game now.</h3>
             <div class="text-center">
                 <a href="{% url 'buy' %}" class="btn btn-primary my-4">Start Game</a>
@@ -72,6 +82,8 @@
   
   <!-- Core -->
   <script src="{% static 'home/assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+
+
   <script src="{% static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'home/assets/vendor/js-cookie/js.cookie.js' %}"></script>
   <script src="{% static 'home/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>

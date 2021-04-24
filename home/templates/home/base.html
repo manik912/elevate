@@ -35,7 +35,27 @@
   <link rel="stylesheet" href="{%static 'home/assets/css/argon.min5438.css'%}" type="text/css">
 
 
-  <style>body{ background-color: #708090;}</style>
+  <style>
+    body{ 
+      background-color: #000000;
+    }
+    .card{
+      background-color: #353535 !important;
+    }
+    body{
+      color: white;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: white !important;
+    }
+
+    .topbox{
+      background-color: #acacac;
+    }
+    .bg-primary{
+      background-color: #353535 !important;
+    }
+  </style>
 
   {% block head %}{% endblock head %}
 
@@ -63,48 +83,51 @@
   <div class="main-content" id="panel">
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" style="padding: 0 !important;">
-      <div class="container-fluid" style="margin: 0.3rem 1rem !important;">
+      <div class="container-fluid" style="margin: 1rem 1rem !important;">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <img class="navlogo" src="{% static 'home/assets/img/elevate-white.png' %}" style="height: 100px; width: 100px;">
         
         <!-- Navbar links -->
         <ul class="navbar-nav align-items-center  ml-md-auto ">
           <li class="nav-item d-xl-none">
-          <!-- Sidenav toggler -->
-          <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-            <div class="sidenav-toggler-inner">
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
+            <!-- Sidenav toggler -->
+            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+              data-target="#sidenav-main">
+              <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+              </div>
             </div>
-          </div>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="#">
-              Category
+            <a class="nav-link" href="{% url 'instruction' %}">
+              Instructions
             </a>
           </li>
           <li class="nav-item ">
-          <a class="nav-link" href="{% url 'buy' %}">
-            Buy
-          </a>
+            <a class="nav-link" href="{% url 'buy' %}">
+              Buy
+            </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'manufacture' %}">
-            Manufacture
-          </a>
+            <a class="nav-link" href="{% url 'manufacture' %}">
+              Manufacture
+            </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'trade' %}" >
-            Trade
-          </a>
+            <a class="nav-link" href="{% url 'trade' %}">
+              Trade
+            </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="{% url 'sellus' %}">
               Sell Us
             </a>
-            </li>
-          
+          </li>
+          <li class="nav-item ">
+            <button class=" btn btn-primary" id="category">Check Progress</button>
+          </li>
+
         </ul>
         <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
           <li class="nav-item dropdown">
@@ -164,10 +187,10 @@
                     <div class="col-xl-6 col-md-12">
                         <div class="card card-stats" style="height: 100px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
-                                      <h5 class="card-title text-uppercase text-muted mb-0">Breaking News</h5>
+                                      <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Breaking News</h5>
                                         
                                     </div>
                                     <div class="col-auto">
@@ -182,39 +205,42 @@
                     <div class="col-xl-3 col-md-6">
                         <div class="card card-stats" style="height: 100px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Season</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Season</h5>
                                         {% if season.season_1 %}
-                                        <h4>Summer Season</h4>
-                                        <span class="h4 font-weight-bold mb-0">April-June</span>
+                                        <h4 style="color: #32325d !important; ">May-July</h4>
+                                        <span class="h4 font-weight-bold mb-0">(Summer Season)</span>
                                         <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                               <i class="fas fa-sun"></i>
                                             </div>
                                         </div> -->
                                         {% elif season.season_2 %}
-                                        <span class="h4 font-weight-bold mb-0"></span>
-                                        <div class="col-auto">
+                                        <h4 style="color: #32325d !important; ">Aug-Oct</h4>
+                                        <span class="h4 font-weight-bold mb-0">(Autumn Season)</span>
+                                        <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                                                <i class="ni ni-calendar-grid-58"></i>
+                                              <i class="fas fa-sun"></i>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         {% elif season.season_3 %}
-                                        <span class="h4 font-weight-bold mb-0">3</span>
-                                        <div class="col-auto">
+                                        <h4 style="color: #32325d !important; ">Nov-Jan</h4>
+                                        <span class="h4 font-weight-bold mb-0">(Winter Season)</span>
+                                        <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                                                <i class="ni ni-calendar-grid-58"></i>
+                                              <i class="fas fa-sun"></i>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         {% elif season.season_4 %}
-                                        <span class="h4 font-weight-bold mb-0">4</span>
-                                        <div class="col-auto">
-                                          <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                                              <i class="ni ni-calendar-grid-58"></i>
-                                          </div>
-                                        </div>
+                                        <h4 style="color: #32325d !important; ">Feb-April</h4>
+                                        <span class="h4 font-weight-bold mb-0">(Spring Season)</span>
+                                        <!-- <div class="col-auto">
+                                            <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                                              <i class="fas fa-sun"></i>
+                                            </div>
+                                        </div> -->
                                         {% endif %}
                                     </div>
                                 </div>
@@ -224,10 +250,10 @@
                     <div class="col-xl-3 col-md-6">
                         <div class="card card-stats" style="height: 100px;">
                             <!-- Card body -->
-                            <div class="card-body">
+                            <div class="card-body topbox">
                                 <div class="row">
                                     <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">E-Coins</h5>
+                                        <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">E-Coins</h5>
                                         <span class="h2 font-weight-bold mb-0" id="ecoins">{{user.ecoins}}</span>
                                     </div>
                                     <div class="col-auto">
@@ -356,7 +382,7 @@
           console.log(res);
           
           if (res) {
-            output = " Category A: "+ res.sa + "\n" + "Category B: " + res.sb + "\n" +"Category C: " + res.sc;
+            output = "Category A: "+ res.sa + "\n" + "Category B: " + res.sb + "\n" +"Category C: " + res.sc;
             alert(output);
           }
 
