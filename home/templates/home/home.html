@@ -1,95 +1,93 @@
-{% load crispy_forms_tags %}
-{% load static %}
+{% load crispy_forms_tags %} {% load static %}
 <!DOCTYPE html>
 <html>
 
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>ELEVATE 2.0</title>
-  <!-- Canonical SEO -->
-  <link rel="canonical" href="https://www.creative-tim.com/product/argon-dashboard" />
-  <!-- Favicon -->
-  <link rel="icon" href="{% static 'home/assets/img/brand/favicon.png' %}" type="image/png">
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
-  <link rel="stylesheet" href="{% static 'home/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'home/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="{% static 'home/assets/css/argon.min5438.css?v=1.2.0' %}" type="text/css">
-  
+    <title>ELEVATE 2.0</title>
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://www.creative-tim.com/product/argon-dashboard" />
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'home/assets/img/favicon.ico' %}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="{% static 'home/assets/vendor/nucleo/css/nucleo.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'home/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css' %}" type="text/css">
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{% static 'home/assets/css/argon.min5438.css?v=1.2.0' %}" type="text/css">
+
 </head>
 
 <body>
-  {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-        {{ message }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-  <div class="header py-4 py-lg-3 pt-lg-9">
-    <div class="container">
-      <div class="header-body text-center mb-7">
-         <div class="row justify-content-center">    
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <!-- Page content -->
-  <div class="container mt--8 pb-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-5 col-md-7">
-        <div class="card bg-secondary border-0 mb-0">
-          <div class="card-header bg-transparent pb-0">
-            <div class="text-light text-center">
-              <h3> Choose your industry</h3>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %} {{ message }}
+            </li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="header py-4 py-lg-3 pt-lg-9">
+        <div class="container">
+            <div class="header-body text-center mb-7">
+                <div class="row justify-content-center">
+                </div>
             </div>
-          </div>
-          <div class="card-body px-lg-5 py-lg-5">
-            {% if user.industry == None %}
-            <form role="form" method="POST">
-                {% csrf_token %}
-                {{form | crispy}}
-              
-              <div class="text-center">
-                <input type="submit" value="Start Game" class="btn btn-primary my-4">
-              </div>
-            </form>
-            {% else %}
-            <div class="text-light text-center">
-                <h3>You have successfully choosen your Industry. You can start the game now.</h3>
-            <div class="text-center">
-                <a href="{% url 'buy' %}" class="btn btn-primary my-4">Start Game</a>
-            </div>
-            </div>
-            {% endif%}
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  
-  <!-- Core -->
-  <script src="{% static 'home/assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="card bg-secondary border-0 mb-0">
+                    <div class="card-header bg-transparent pb-0">
+                        <div class="text-light text-center">
+                            <h3> Choose your industry</h3>
+                        </div>
+                    </div>
+                    <div class="card-body px-lg-5 py-lg-5">
+                        {% if user.industry == None %}
+                        <form role="form" method="POST">
+                            {% csrf_token %} {{form | crispy}}
+
+                            <div class="text-center">
+                                <input type="submit" value="Start Game" class="btn btn-primary my-4">
+                            </div>
+                        </form>
+                        {% else %}
+                        <div class="text-light text-center">
+                            <h3>You have successfully choosen your Industry. You can start the game now.</h3>
+                            <div class="text-center">
+                                <a href="{% url 'buy' %}" class="btn btn-primary my-4">Start Game</a>
+                            </div>
+                        </div>
+                        {% endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-  <script src="{% static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'home/assets/vendor/js-cookie/js.cookie.js' %}"></script>
-  <script src="{% static 'home/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
-  <script src="{% static 'home/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
-  <!-- Argon JS -->
-  <script src="{% static 'home/assets/js/argon.min5438.js?v=1.2.0' %}"></script>
+    <!-- Core -->
+    <script src="{% static 'home/assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+
+
+    <script src="{% static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'home/assets/vendor/js-cookie/js.cookie.js' %}"></script>
+    <script src="{% static 'home/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'home/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+    <!-- Argon JS -->
+    <script src="{% static 'home/assets/js/argon.min5438.js?v=1.2.0' %}"></script>
 </body>
 
 
