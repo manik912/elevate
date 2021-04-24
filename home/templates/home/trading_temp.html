@@ -32,7 +32,7 @@
                     {% for i in rmc %}
                     <li class="nav-item">
                         <a class="nav-link">
-                            <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
+                            <span class="nav-link-text" style="color: black !important;">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
                         </a>
                     </li>
                     {% endfor %}
@@ -43,11 +43,11 @@
                 <div class="col-xl-4">
                     <h2 class="mb-0" style="color: black !important;">Products</h2>
                 </div>
-                <ul class="navbar-nav mb-md-3" id="product-inventory">
+                <ul class="navbar-nav mb-md-3" id="product-inventory" style="color: black !important;">
                     {% for i in pc%}
                     <li class="nav-item">
                         <a class="nav-link">
-                            <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.id}}pc">{{i.quantity}}</span>
+                            <span class="nav-link-text" style="color: black !important;">{{i.product}}</span><span class="lak" id="{{i.id}}pc" style="color: black !important;">{{i.quantity}}</span>
                         </a>
                     </li>
                     {% endfor %}
@@ -100,11 +100,11 @@
 
                                     <a class="list-group-item list-group-item-action flex-column align-items-start ">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">{{ re.from_team }}</h5>
+                                            <h5 class="mb-1" style="color: black !important;">{{ re.from_team }}</h5>
                                         </div>
-                                        <p class="mb-1">Product : {{ re.item }}</p>
-                                        <p class="mb-1">Quantity : {{ re.quantity }}</p>
-                                        <p class="mb-1">Price : {{ re.cost }}</p>
+                                        <p class="mb-1" style="color: black !important;">Product : {{ re.item }}</p>
+                                        <p class="mb-1" style="color: black !important;">Quantity : {{ re.quantity }}</p>
+                                        <p class="mb-1" style="color: black !important;">Price : {{ re.cost }}</p>
                                         <input type="button" id="{{re.id}}rej" value="Reject" class="btn btn-danger float-right " onclick="rejectfun({{re.id}})" style="margin-top:-2.5rem ;">
                                         <input type="button" id="{{re.id}}acc" value="Accept" onclick="acceptfun({{re.id}})" class="btn btn-success float-right mr-1" style="margin-top:-2.5rem ;">
 
@@ -136,11 +136,11 @@
 
                                     <a class="list-group-item list-group-item-action flex-column align-items-start ">
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">To Team: {{ sre.to_team }}</h5>
+                                            <h5 class="mb-1" style="color: black !important;">To Team: {{ sre.to_team }}</h5>
                                         </div>
-                                        <p class="mb-1">Product : {{ sre.item }}</p>
-                                        <p class="mb-1">Quantity : {{ sre.quantity }}</p>
-                                        <p class="mb-1">Price : {{ sre.cost }}</p>
+                                        <p class="mb-1" style="color: black !important;">Product : {{ sre.item }}</p>
+                                        <p class="mb-1" style="color: black !important;">Quantity : {{ sre.quantity }}</p>
+                                        <p class="mb-1" style="color: black !important;">Price : {{ sre.cost }}</p>
                                         <input type="button" id="{{sre.id}}del" value="Delete" class="btn btn-danger float-right " onclick="deletefun({{sre.id}}sen)" style="margin-top:-2.5rem ;">
 
                                     </a>
@@ -219,10 +219,10 @@
                         let obj = res.pc.filter(item => item.id === res.req[i].item_id);
                         let obj2 = res.teams.filter(item => item.id === res.req[i].from_team_id);
 
-                        output1 += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" + obj2[0].team_name +
-                            "</h5></div><p class='mb-1'>Product : " + obj[0].name +
-                            "</p><p class='mb-1'>Quantity : " + res.req[i].quantity +
-                            "</p><p class='mb-1'>Price : " + res.req[i].cost +
+                        output1 += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1' style='color: black !important;'>" + obj2[0].team_name +
+                            "</h5></div><p class='mb-1' style='color: black !important;'>Product : " + obj[0].name +
+                            "</p><p class='mb-1' style='color: black !important;'>Quantity : " + res.req[i].quantity +
+                            "</p><p class='mb-1' style='color: black !important;'>Price : " + res.req[i].cost +
                             "</p><input type='button' id='" + res.req[i].id + "rej' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.req[i].id + ")' style='margin-top:-2.5rem ;'><input type='button' id='" + res.req[i].id + "acc' value='Accept' onclick='acceptfun(" + res.req[i].id +
                             ")' class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
                     }
@@ -232,10 +232,10 @@
                         let obj = res.pc.filter(item => item.id === res.sreq[i].item_id);
                         let obj2 = res.teams.filter(item => item.id === res.sreq[i].to_team_id);
 
-                        output2 += "<a class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>To Team: " + obj2[0].team_name +
-                            "</h5></div><p class='mb-1'>Product :" + obj[0].name +
-                            "</p><p class='mb-1'>Quantity :" + res.sreq[i].quantity +
-                            "</p><p class='mb-1'>Price :" + res.sreq[i].cost +
+                        output2 += "<a class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1' style='color: black !important;'>To Team: " + obj2[0].team_name +
+                            "</h5></div><p class='mb-1' style='color: black !important;'>Product :" + obj[0].name +
+                            "</p><p class='mb-1' style='color: black !important;'>Quantity :" + res.sreq[i].quantity +
+                            "</p><p class='mb-1' style='color: black !important;'>Price :" + res.sreq[i].cost +
                             "</p><input type='button' id='" + res.sreq[i].id + "del' value='Delete' class='btn btn-danger float-right' onclick='deletefun(" + res.sreq[i].id + ")' style='margin-top:-2.5rem ;'></a>"
                     }
                     $('#sent-req').html(output2);
