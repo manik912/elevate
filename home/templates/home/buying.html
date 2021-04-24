@@ -93,7 +93,131 @@
 
 {% block body %}
 
-<script type="text/javascript">
+<script id="test1234" type="text/javascript">
+	var spot_mater = [];
+	var raw_materials = [];
+
+	// console.log(raw_materials)
+	var mumbai_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 11) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			mumbai_description += obj[0].name;
+			mumbai_description += " - ";
+			mumbai_description += spot_mater[mater].quantity;
+			mumbai_description += "<br>";
+		}
+	}
+	
+	var jaisalmer_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 13) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			jaisalmer_description += obj[0].name;
+			jaisalmer_description += " - ";
+			jaisalmer_description += spot_mater[mater].quantity;
+			jaisalmer_description += "<br>";
+		}
+	}
+
+	var hisar_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 6) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			hisar_description += obj[0].name;
+			hisar_description += " - ";
+			hisar_description += spot_mater[mater].quantity;
+			hisar_description += "<br>";
+		}
+	}
+	
+	var hyderabad_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 15) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			hyderabad_description += obj[0].name;
+			hyderabad_description += " - ";
+			hyderabad_description += spot_mater[mater].quantity;
+			hyderabad_description += "<br>";
+		}
+	}
+
+	var gorakhpur_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 14) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			gorakhpur_description += obj[0].name;
+			gorakhpur_description += " - ";
+			gorakhpur_description += spot_mater[mater].quantity;
+			gorakhpur_description += "<br>";
+		}
+	}
+
+	var kolkata_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 12) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			kolkata_description += obj[0].name;
+			kolkata_description += " - ";
+			kolkata_description += spot_mater[mater].quantity;
+			kolkata_description += "<br>";
+		}
+	}
+	
+	var chennai_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 10) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			chennai_description += obj[0].name;
+			chennai_description += " - ";
+			chennai_description += spot_mater[mater].quantity;
+			chennai_description += "<br>";
+		}
+	}
+	
+	var jhansi_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 9) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			jhansi_description += obj[0].name;
+			jhansi_description += " - ";
+			jhansi_description += spot_mater[mater].quantity;
+			jhansi_description += "<br>";
+		}
+	}
+	
+	var gangtok_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 8) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			gangtok_description += obj[0].name;
+			gangtok_description += " - ";
+			gangtok_description += spot_mater[mater].quantity;
+			gangtok_description += "<br>";
+		}
+	}
+
+	var srinagar_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	for (mater in spot_mater) {
+		if (spot_mater[mater].spot_id == 7) {
+			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+			// console.log(obj)
+			gangtok_description += obj[0].name;
+			gangtok_description += " - ";
+			gangtok_description += spot_mater[mater].quantity;
+			gangtok_description += "<br>";
+		}
+	}
+
 	var simplemaps_countrymap_mapdata = {
 		main_settings: {
 			//General settings
@@ -288,7 +412,7 @@
 				name: "Mumbai",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Mumbai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: mumbai_description
 			},
 			"1": {
 				lat: "26.9157",
@@ -296,7 +420,7 @@
 				name: "Jaisalmer",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Mumbai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: mumbai_description
 			},
 			"2": {
 				lat: "34.0837",
@@ -304,7 +428,7 @@
 				name: "Srinagar",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Srinagar' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: srinagar_description
 			},
 			"3": {
 				lat: "29.1492",
@@ -312,7 +436,7 @@
 				name: "Hisar",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Hisar' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: hisar_description 			
 			},
 			"4": {
 				lat: "26.7606",
@@ -320,7 +444,7 @@
 				name: "Gorakhpur",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Gorakhpur' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: gorakhpur_description
 			},
 			"5": {
 				lat: "25.4484",
@@ -328,7 +452,7 @@
 				name: "Jhansi",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Jhansi' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: jhansi_description
 			},
 			"6": {
 				lat: "22.5726",
@@ -336,7 +460,7 @@
 				name: "Kolkata",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Kolkata' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: kolkata_description
 			},
 			"7": {
 				lat: "27.3314",
@@ -344,7 +468,7 @@
 				name: "Gangtok",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Gangtok' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: gangtok_description
 			},
 			"8": {
 				lat: "17.3850",
@@ -352,7 +476,7 @@
 				name: "Hyderabad",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Hyderabad' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: hyderabad_description
 			},
 			"9": {
 				lat: "13.0827",
@@ -360,7 +484,7 @@
 				name: "Chennai",
 				color: "#FF0067",
 				size: "15",
-				description: "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>{% for mater in spot_mater %}{% if mater.spot.name == 'Chennai' %}{{mater.raw_material}} - {{mater.quantity}}<br>{% endif %}{% endfor %}"
+				description: chennai_description
 			},
 			"10": {
 				lat: "30.9084",
@@ -410,7 +534,7 @@
 		}
 	};
 </script>
-<script src="{%static 'home/assets/img/map/countrymap.js' %}"></script>
+<script src="{%static 'home/assets/img/map/countrymap.js' %}" id="shayad"></script>
 
 
 <div class="container-fluid ">
@@ -419,8 +543,6 @@
 			<div class="card bg-default">
 
 				<div id="map">
-					<!-- <img style="min-height: 100vh;" src="{%static 'home/assets/img/map/country.svg' %}"> -->
-
 				</div>
 			</div>
 		</div>
@@ -529,7 +651,7 @@
 			$("#submit-btn").val("Processing...");
 			$("#submit-btn").attr('disabled', true);
 			mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "raw_material_3": raw_material_3, "raw_material_4": raw_material_4, "quantity_1": quantity_1, "quantity_2": quantity_2, "quantity_3": quantity_3, "quantity_4": quantity_4, "csrfmiddlewaretoken": token }
-			console.log(mydata)
+			// console.log(mydata)
 			$.ajax({
 				type: "POST",
 				url: "/buy/",
@@ -537,7 +659,7 @@
 				dataType: "json",
 				success: function (res) {
 					$('#ecoins').html(res.ecoin)
-					console.log(res);
+					// console.log(res);
 					output1 = "";
 					output2 = "";
 					for (i = 0; i < res.rmc.length; i++) {
@@ -569,18 +691,60 @@
 		});
 	});
 
-	setInterval(function () {
+	setInterval(() => {
 		$.ajax({
 			type: "GET",
 			url: "/get-quan/ajax/",
 			dataType: "json",
 			success: function (res) {
-				for (i = 0; i < res.req.length; i++) {
-					$('#' + res.req[i].id).html(res.req[i].quantity);
-				}
+				// console.log($("#test1234").html())
+
+				var oldScript = $("#test1234").html();
+				var l = oldScript.indexOf("]");
+				oldScript = oldScript.substring(l+1)
+				l = oldScript.indexOf("]");
+				oldScript = oldScript.substring(l+1)
+				$("#test1234").remove();
+				var newScript;
+				newScript = document.createElement('script');
+				$(newScript).attr("id", "test1234")
+				var temp = "var spot_mater = "
+				temp += JSON.stringify(res.spot_mater)
+				var temp2 = `;
+							var raw_materials = `
+				temp2 += JSON.stringify(res.raw_materials)
+				oldScript = temp + temp2 + oldScript
+				$(newScript).html(oldScript)
+				$('head').append(newScript)
+
+				oldScript = $("#shayad").attr("src");
+				// console.log(oldScript)
+				$("#shayad").remove();
+				newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = oldScript;
+				$(newScript).attr("id", "shayad")
+				$('head').append(newScript)
+
+				$("#hey1234").load(location.href + " #map")
 			}
 		});
-	}, 20000);
+
+	}, 30000);
+		
+	// setInterval(function () {
+	// 	$.ajax({
+	// 		type: "GET",
+	// 		url: "/get-quan/ajax/",
+	// 		dataType: "json",
+	// 		success: function (res) {
+	// 			console.log(res)
+	// 			// for (i = 0; i < res.req.length; i++) {
+	// 			// 	$('#' + res.req[i].id).html(res.req[i].quantity);
+	// 			// }
+	// 		}
+	// 	});
+	// }, 30000);
 
 	$("#id_spot").change(function () {
 		var spot = $(this).val();
@@ -594,7 +758,7 @@
 			},
 			
 			success: function (req) {
-				console.log(req)
+				// console.log(req)
 				output="";
 				for(i=0; i<req.rmc.length; i++){
 					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
@@ -638,7 +802,7 @@
 			},
 			
 			success: function (req) {
-				console.log(req)
+				// console.log(req)
 				output="";
 				for(i=0; i<req.rmc.length; i++){
 					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);

@@ -85,6 +85,12 @@ def cal_transportation_cost(s1, s2):
     else:
         return 0
 
+def convert_to_json():
+    context = {
+        'spot_mater' : list(SpotRawMaterial.objects.all().values())
+    }
+    return JsonResponse(context)
+
 @login_required
 def buyMaterial(request):
     print("main aa gya")
@@ -183,7 +189,8 @@ def buyMaterial(request):
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
-    spot_mater = SpotRawMaterial.objects.all()
+    spot_mater = convert_to_json()
+    print(spot_mater)
     season = Season.objects.all().first()
 
     context = {
@@ -526,8 +533,11 @@ def pending_req(request):
 
 
 def get_quantity(request):
-    req = SpotRawMaterial.objects.filter().values()
-    return JsonResponse({'req' : list(req)})
+    context = {
+        'spot_mater' : list(SpotRawMaterial.objects.all().values()),
+        'raw_materials' : list(Item.objects.all().values())
+    }
+    return JsonResponse(context)
 
 def get_rmc(request):
     if request.method == 'POST':
