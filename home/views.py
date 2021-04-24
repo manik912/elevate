@@ -246,7 +246,6 @@ def buyMaterial(request):
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
-    print(spot_mater)
     season = Season.objects.all().first()
 
     context = {
@@ -269,7 +268,6 @@ def manufacture(request):
             q = form.cleaned_data.get("quantity")
             temp = Manufacture.objects.filter(product=p)
             flag = 0
-            print("i am still here")
             for i in temp:
                 raw = RawMaterialCart.objects.filter(raw_material=i.raw_material).filter(team_name=request.user)
                 if raw:
@@ -281,7 +279,6 @@ def manufacture(request):
                 else:
                     flag=1
                     message = 'You donot have enough raw material'
-            print("i am still here")
             
             if flag==0:
                 for i in temp:
@@ -298,12 +295,9 @@ def manufacture(request):
                     form.instance.team_name = request.user
                     form.save()
                 message= 'We have added the product in your cart'
-            print("i am still here")
         rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
         pc = ProductCart.objects.filter(team_name=request.user).values()
         items = Item.objects.all().values()
-
-        print("mai chla")
 
         responseData = {
             'messages': [message],
