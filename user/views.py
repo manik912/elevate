@@ -115,7 +115,7 @@ def register(request):
 #         return redirect('register')
     
     
-    def export_answers_xls(request):
+def export_answers_xls(request):
     if request.user.is_superuser:
         response = HttpResponse(content_type='application/ms-excel')
         response['Content-Disposition'] = 'attachment; filename="responses.xls"'
