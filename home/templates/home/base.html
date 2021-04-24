@@ -8,6 +8,15 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YG93WK56YE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YG93WK56YE');
+</script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDLR9T57ZG"></script>
@@ -201,7 +210,10 @@
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Breaking News</h5>
-
+                                                <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta earum qui rem, consequuntur eos eveniet quas totam non atque repellat itaque. Exercitationem vel pariatur placeat!</p> -->
+                                                {% for i in n %}
+                                                <span class="h4 font-weight-bold mb-0">{{i}}</span>
+                                                {% endfor %}
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">

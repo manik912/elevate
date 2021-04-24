@@ -255,6 +255,7 @@ def buyMaterial(request):
         'rmc' : rmc,
         'pc'  : pc,
         'season':season,
+        'n': Notification.objects.all(),
     }
     return render(request, 'home/buying.html', context)
 
@@ -316,6 +317,7 @@ def manufacture(request):
         'rmc':rmc,
         'pc':pc,
         'season':season,
+        'n': Notification.objects.all(),
     }
     return render(request, 'home/manufacture.html', context)
 
@@ -399,6 +401,7 @@ def send_req(request):
         'rmc':rmc,
         'season':season,
         'pc':pc,
+        'n': Notification.objects.all(),
     }
     return render(request, 'home/trading_temp.html', context)
 
@@ -532,6 +535,7 @@ def sell_us(request):
         'rmcost':rmcost,
         'pcost':pcost,
         'season':season,
+        'n': Notification.objects.all(),
     }
     return render(request, 'home/sellus.html', context)
 
