@@ -26,7 +26,16 @@
 </head>
 
 <body>
-
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
   <div class="header py-4 py-lg-3 pt-lg-9">
     <div class="container">
       <div class="header-body text-center mb-7">
@@ -35,6 +44,7 @@
     </div>
   </div>
   </div>
+
   <!-- Page content -->
   <div class="container mt--8 pb-5">
     <div class="row justify-content-center">
@@ -52,7 +62,7 @@
                 {{form | crispy}}
               
               <div class="text-center">
-                <input type="button" id="submit-btni" value="Start Game" class="btn btn-primary my-4">
+                <input type="submit" value="Start Game" class="btn btn-primary my-4">
               </div>
             </form>
             {% else %}
@@ -72,40 +82,6 @@
   
   <!-- Core -->
   <script src="{% static 'home/assets/vendor/jquery/dist/jquery.min.js' %}"></script>
-
-  <script>
-    $(document).ready(function () {
-      $('#submit-btni').click(function () {
-        let industry = $('#id_industry').val();
-        let token = $('input[name=csrfmiddlewaretoken]').val();
-        $("#submit-btni").val("Processing...");
-        $("#submit-btni").attr('disabled', true);
-        mydata = { "industry": industry, "csrfmiddlewaretoken": token }
-        $.ajax({
-          type: "POST",
-          url: "{% url 'home' %}",
-          data: mydata,
-          dataType: "json",
-          success: function (res) {
-            
-            $('#product-inventory').html(output2)
-            if (res.messages) {
-              for (i in res.messages)
-                alert(res.messages[i]);
-            }
-            $("#submit-btni").attr('disabled', false);
-            $("#submit-btni").val('Submit');
-            $("form")[0].reset()
-          }
-        });
-      });
-    });
-  
-
-
-
-
-
 
 
   <script src="{% static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
