@@ -17,5 +17,6 @@ urlpatterns = [
     path('buy/ajax/', get_rmc, name='get-rmc'),
     path('sellus/', sell_us, name='sellus'),
     path('category/', cat, name='category'),
+    path('instruction/', instruction, name='instruction'),
 ]
 

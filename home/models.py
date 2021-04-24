@@ -35,6 +35,7 @@ class SpotRawMaterial(models.Model):
 class Industry(models.Model):
     name = models.CharField(max_length=50)
     spot = models.ForeignKey(Spot, on_delete=models.SET_NULL, null=True, blank=True)
+    number = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

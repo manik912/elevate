@@ -222,6 +222,7 @@
 			url: "/get-req/ajax/",
 			dataType: "json",
 			success: function (res) {
+				$('#ecoins').html(res.ecoin)
 				console.log(res);
 				output1="";
 				output2="";

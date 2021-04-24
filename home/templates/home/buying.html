@@ -47,7 +47,7 @@
 				</div>
 
 				<!-- Nav items -->
-				<ul class="navbar-nav" id="resource-inventory">
+				<ul class="navbar-nav" >
 					<li class="nav-item">
 						<div class="nav-link" style="padding: 0.675rem 1.5rem;">
 							<!--<i class="ni ni-tv-2 text-primary"></i>-->
@@ -491,7 +491,7 @@
 										class="numberinput form-control" required="" id="id_quantity_2"> </div>
 							</div>
 
-							<div class="input_fields_wrap">
+							<!-- <div class="input_fields_wrap">
 								
 							</div>
 							
@@ -541,7 +541,6 @@
 				dataType: "json",
 				success: function (res) {
 					$('#ecoins').html(res.ecoin)
-					console.log(res);
 					output1 = "";
 					output2 = "";
 					for (i = 0; i < res.rmc.length; i++) {
@@ -606,8 +605,8 @@
 				}
 				$("#id_raw_material_1").html(output)
 				$("#id_raw_material_2").html(output)
-				$("#id_raw_material_3").html(output)
-				$("#id_raw_material_4").html(output)
+				// $("#id_raw_material_3").html(output)
+				// $("#id_raw_material_4").html(output)
 			}
 		});
 	});
@@ -630,6 +629,7 @@
 			o= "<div id='div_id_raw_material_" +x+"' class='form-group'> <label for='id_raw_material_" + x + "' class=' requiredField'> Raw material " + x + "</label><div> <select name='raw_material_" + x + "' class='select form-control' required='' id='id_raw_material_" + x + "'><option value='' selected=''>---------</option></select> </div></div><div id='div_id_quantity_" + x + "' class='form-group'> <label for='id_quantity_" + x +
 									"' class='requiredField'>Quantity " + x + "</label><div> <input type='number' name='quantity_" + x + "' value='0' class='numberinput form-control' id='id_quantity_" + x +"'> </div></div>"
             $(wrapper).append(o);
+			$("form")[0].reset();
         }
 		var spot = $("#id_spot").val();
 		let token = $('input[name=csrfmiddlewaretoken]').val();

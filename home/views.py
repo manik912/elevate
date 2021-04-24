@@ -9,6 +9,9 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 # Create your views here.
 
+def instruction(request):
+    return render(request, 'home/welcome.html')
+
 def cat(request):
 
     team = request.user
@@ -63,8 +66,16 @@ def home(request):
     if(request.method == 'POST'):
         form = IndustryForm(request.POST, instance = request.user)
         if form.is_valid():
-            form.save()
-            return redirect('buy')
+            s = form.cleaned_data.get("industry")
+            x = Industry.objects.filter(spot=s.spot).first()
+            x.number +=1
+            x.save()
+            if x.number < 10:
+                form.save()
+                return redirect('buy')
+            else:
+                message = 'This spot is already taken by a lot of teams. So, choose a different one.'
+                return JsonResponse({'messages':[message]})
     else:
         form = IndustryForm()
     season = Season.objects.all().first()
@@ -170,16 +181,16 @@ def buyMaterial(request):
             # season = Season.objects.all().values()
             print("i am still here")
 
-            responseData = {
-                'spr' : list(spr),
-                'messages': [message],
-                'rmc' : list(rmc),
-                'pc'  : list(pc),
-                'items': list(items),
-                'ecoin':request.user.ecoins,
-                # 'season':season,
-            }
-            return JsonResponse(responseData)
+        responseData = {
+            'spr' : list(spr),
+            'messages': [message],
+            'rmc' : list(rmc),
+            'pc'  : list(pc),
+            'items': list(items),
+            'ecoin':request.user.ecoins,
+            # 'season':season,
+        }
+        return JsonResponse(responseData)
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
@@ -535,7 +546,7 @@ def get_rmc(request):
         s = request.POST.get('spot', None) 
         rmc = SpotRawMaterial.objects.filter(spot=s).values()
         items = Item.objects.filter(raw_material=True).values()
-        return JsonResponse({'rmc':list(rmc), 'items': list(items)})
+        return JsonResponse({'rmc':list(rmc), 'items': list(items), 'ecoin':request.user.ecoins,})
 
 
 def error_404(request, exception):

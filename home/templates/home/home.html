@@ -52,7 +52,7 @@
                 {{form | crispy}}
               
               <div class="text-center">
-                <button type="submit" class="btn btn-primary my-4">Start Game</button>
+                <input type="button" id="submit-btni" value="Start Game" class="btn btn-primary my-4">
               </div>
             </form>
             {% else %}
@@ -72,6 +72,42 @@
   
   <!-- Core -->
   <script src="{% static 'home/assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#submit-btni').click(function () {
+        let industry = $('#id_industry').val();
+        let token = $('input[name=csrfmiddlewaretoken]').val();
+        $("#submit-btni").val("Processing...");
+        $("#submit-btni").attr('disabled', true);
+        mydata = { "industry": industry, "csrfmiddlewaretoken": token }
+        $.ajax({
+          type: "POST",
+          url: "{% url 'home' %}",
+          data: mydata,
+          dataType: "json",
+          success: function (res) {
+            
+            $('#product-inventory').html(output2)
+            if (res.messages) {
+              for (i in res.messages)
+                alert(res.messages[i]);
+            }
+            $("#submit-btni").attr('disabled', false);
+            $("#submit-btni").val('Submit');
+            $("form")[0].reset()
+          }
+        });
+      });
+    });
+  
+
+
+
+
+
+
+
   <script src="{% static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'home/assets/vendor/js-cookie/js.cookie.js' %}"></script>
   <script src="{% static 'home/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>

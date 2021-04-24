@@ -89,41 +89,45 @@
         <!-- Navbar links -->
         <ul class="navbar-nav align-items-center  ml-md-auto ">
           <li class="nav-item d-xl-none">
-          <!-- Sidenav toggler -->
-          <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-            <div class="sidenav-toggler-inner">
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
+            <!-- Sidenav toggler -->
+            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+              data-target="#sidenav-main">
+              <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+              </div>
             </div>
-          </div>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="#">
-              Category
+            <a class="nav-link" href="{% url 'instruction' %}">
+              Instructions
             </a>
           </li>
           <li class="nav-item ">
-          <a class="nav-link" href="{% url 'buy' %}">
-            Buy
-          </a>
+            <a class="nav-link" href="{% url 'buy' %}">
+              Buy
+            </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'manufacture' %}">
-            Manufacture
-          </a>
+            <a class="nav-link" href="{% url 'manufacture' %}">
+              Manufacture
+            </a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'trade' %}" >
-            Trade
-          </a>
+            <a class="nav-link" href="{% url 'trade' %}">
+              Trade
+            </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="{% url 'sellus' %}">
               Sell Us
             </a>
-            </li>
-          
+          </li>
+          <li class="nav-item ">
+            <button class=" btn btn-primary" id="category">Check Progress</button>
+          </li>
+
         </ul>
         <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
           <li class="nav-item dropdown">
@@ -378,7 +382,7 @@
           console.log(res);
           
           if (res) {
-            output = " Category A: "+ res.sa + "\n" + "Category B: " + res.sb + "\n" +"Category C: " + res.sc;
+            output = "Category A: "+ res.sa + "\n" + "Category B: " + res.sb + "\n" +"Category C: " + res.sc;
             alert(output);
           }
 
