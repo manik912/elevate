@@ -1,195 +1,185 @@
-{% extends "home/base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block head %}{% endblock head %}
-{% block bodytag %}{% endblock bodytag %}
-
-
-{% block sidenav %}
+{% extends "home/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block head %}{% endblock head %} {% block bodytag %}{% endblock bodytag %} {% block sidenav %}
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-	<div class="scrollbar-inner">
-		<!-- Brand -->
-		<div class="sidenav-header  align-items-center">
-			<img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
-			
-		</div>
-		<div class="navbar-inner">
-			<!-- Collapse -->
-			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
-				<div class="col-xl-4" style="margin-top: 40px;">
-					<h2 class="mb-0" style="color: black !important;">Industry</h2>
-				</div>
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
 
-				<!-- Nav items -->
-				<ul class="navbar-nav" id="resource-inventory">
-					<li class="nav-item">
-						<div class="nav-link" style="padding: 0.675rem 1.5rem;">
-							<!--<i class="ni ni-tv-2 text-primary"></i>-->
-							<span class="nav-link-text" style="font-size: 20px; font-weight: bold; ">{{request.user.industry.spot.name}}</span>
-						</div>
-					</li>
-				</ul>
-				<hr class="my-3">
-				<div class="col-xl-4">
-					<h2 class="mb-0" style="color: black !important;">Raw Materials</h2>
-				</div>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <div class="col-xl-4" style="margin-top: 40px;">
+                    <h2 class="mb-0" style="color: black !important;">Industry</h2>
+                </div>
 
-				<!-- Nav items -->
-				<ul class="navbar-nav">
-					{% for i in rmc %}
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<!--<i class="ni ni-tv-2 text-primary"></i>-->
-							<span class="nav-link-text">{{i.raw_material}}</span><span class="lak"
-								id="{{i.id}}rmc">{{i.quantity}}</span>
-						</a>
-					</li>
-					{% endfor %}
-				</ul>
-				<!-- Divider -->
-				<hr class="my-3">
-				<!-- Heading-->
-				<div class="col-xl-4">
-					<h2 class="mb-0" style="color: black !important;">Products</h2>
-				</div>
-				<ul class="navbar-nav mb-md-3">
-					{% for i in pc%}
-					<li class="nav-item">
-						<a class="nav-link" href="#" target="_blank">
-							<!--<i class="ni ni-spaceship"></i>-->
-							<span class="nav-link-text">{{i.product}}</span><span class="lak"
-								id="{{i.id}}pc">{{i.quantity}}</span>
-						</a>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-	</div>
+                <!-- Nav items -->
+                <ul class="navbar-nav" id="resource-inventory">
+                    <li class="nav-item">
+                        <div class="nav-link" style="padding: 0.675rem 1.5rem;">
+                            <!--<i class="ni ni-tv-2 text-primary"></i>-->
+                            <span class="nav-link-text">{{request.user.industry.spot.name}}</span>
+                        </div>
+                    </li>
+                </ul>
+                <hr class="my-3">
+                <div class="col-xl-4">
+                    <h2 class="mb-0" style="color: black !important;">Raw Materials</h2>
+                </div>
+
+                <!-- Nav items -->
+                <ul class="navbar-nav">
+                    {% for i in rmc %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <!--<i class="ni ni-tv-2 text-primary"></i>-->
+                            <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- Divider -->
+                <hr class="my-3">
+                <!-- Heading-->
+                <div class="col-xl-4">
+                    <h2 class="mb-0" style="color: black !important;">Products</h2>
+                </div>
+                <ul class="navbar-nav mb-md-3">
+                    {% for i in pc%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" target="_blank">
+                            <!--<i class="ni ni-spaceship"></i>-->
+                            <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.id}}pc">{{i.quantity}}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </nav>
-{% endblock sidenav %}
-{% block body %}
+{% endblock sidenav %} {% block body %}
 <div class="container-fluid">
     <div class="row" style="justify-content: center;">
-    <div class="col-xl-4">
-      <div class="card">
-        <div class="table-responsive">
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="table-responsive">
 
-          <table class="table align-items-center table-flush" style="color: white;">
-            <thead class="thead-light" style="color: black !important">
-            <div class="card-header" style="background: #353535">
-                <h2 style="font-weight: bold;">Raw Material Price</h2>
-            </div>
-              <tr>
-                <th scope="col" style="color: black !important; font-weight: bold;">RAW MATERIALS</th>
-                
-                <th scope="col" style="color: black !important; font-weight: bold;">PRICE</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for r in rmcost %}
-              <tr>
-                <th scope="row">{{r.name}}</th>
-                <td>
-                   {{r.raw_material_cost}}
-				   
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4">
-      <div class="card">
-        <div class="table-responsive">
-          <!-- Projects table -->
+                    <table class="table align-items-center table-flush" style="color: white;">
+                        <thead class="thead-light" style="color: black !important">
+                            <div class="card-header" style="background: #353535">
+                                <h2 style="font-weight: bold;">Raw Material Price</h2>
+                            </div>
+                            <tr>
+                                <th scope="col" style="color: black !important; font-weight: bold;">RAW MATERIALS</th>
 
-          <table class="table align-items-center table-flush" style="color: white;">
-            <thead class="thead-light">
-            <div class="card-header" style="background: #353535">
-                <h2 style="font-weight: bold;">Product Price</h2>
-            </div>
-              <tr>
-                <th scope="col" style="color: black !important; font-weight: bold;">PRODUCTS</th>
-                
-                <th scope="col" style="color: black !important; font-weight: bold;">PRICE</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for p in pcost %}
-                <tr>
-                  <th scope="row">{{p.name}}</th>
-                  <td>
-                     {{p.product_cost}}
-                  </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4">
-        <div class="card">
-            <div class="card-header" style="background: #353535">
-                <h2 style="font-weight: bold;">Sell Us</h2>
-            </div>
-            <div class="card-body">
-                <form method="POST">
-					{% csrf_token %}
-                {{form|crispy}}
-                <div class="text-center">
-                    <input type="button" id="submit-btns" value="Sell"
-                        class="btn btn-primary my-4">           
+                                <th scope="col" style="color: black !important; font-weight: bold;">PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for r in rmcost %}
+                            <tr>
+                                <th scope="row">{{r.name}}</th>
+                                <td>
+                                    {{r.raw_material_cost}}
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-			</form>
             </div>
         </div>
-      </div>
-  </div>
-  </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="table-responsive">
+                    <!-- Projects table -->
+
+                    <table class="table align-items-center table-flush" style="color: white;">
+                        <thead class="thead-light">
+                            <div class="card-header" style="background: #353535">
+                                <h2 style="font-weight: bold;">Product Price</h2>
+                            </div>
+                            <tr>
+                                <th scope="col" style="color: black !important; font-weight: bold;">PRODUCTS</th>
+
+                                <th scope="col" style="color: black !important; font-weight: bold;">PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in pcost %}
+                            <tr>
+                                <th scope="row">{{p.name}}</th>
+                                <td>
+                                    {{p.product_cost}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-header" style="background: #353535">
+                    <h2 style="font-weight: bold;">Sell Us</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %} {{form|crispy}}
+                        <div class="text-center">
+                            <input type="button" id="submit-btns" value="Sell" class="btn btn-primary my-4">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-{% endblock body %}
-
-{% block js%}
+{% endblock body %} {% block js%}
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
-	$(document).ready(function () {
-		$('#submit-btns').click(function () {
-			let item = $('#id_item').val();
-			let quantity = $('#id_quantity').val();
-			let token = $('input[name=csrfmiddlewaretoken]').val();
-			$("#submit-btns").val("Processing...");
-			$("#submit-btns").attr('disabled', true);
-			mydata = { "item": item, "quantity": quantity, "csrfmiddlewaretoken": token }
-			console.log(mydata)
-			$.ajax({
-				type: "POST",
-				url: "/sellus/",
-				data: mydata,
-				dataType: "json",
-				success: function (res) {
-					$('#ecoins').html(res.ecoin)
-					for (i = 0; i < res.rmc.length; i++) {
-						$('#' + res.rmc[i].id + 'rmc').html(res.rmc[i].quantity);
-					}
-					for (i = 0; i < res.pc.length; i++) {
-						$('#' + res.pc[i].id + 'pc').html(res.pc[i].quantity);
-					}
-					if (res.messages) {
-						for (i in res.messages)
-							alert(res.messages[i]);
-					}
-					$("#submit-btns").val("Sell");
-					$("#submit-btns").attr('disabled', true);
-					$("form")[0].reset()
-				}
-			});
-		});
-	});
+    $(document).ready(function() {
+        $('#submit-btns').click(function() {
+            let item = $('#id_item').val();
+            let quantity = $('#id_quantity').val();
+            let token = $('input[name=csrfmiddlewaretoken]').val();
+            $("#submit-btns").val("Processing...");
+            $("#submit-btns").attr('disabled', true);
+            mydata = {
+                "item": item,
+                "quantity": quantity,
+                "csrfmiddlewaretoken": token
+            }
+            console.log(mydata)
+            $.ajax({
+                type: "POST",
+                url: "/sellus/",
+                data: mydata,
+                dataType: "json",
+                success: function(res) {
+                    $('#ecoins').html(res.ecoin)
+                    for (i = 0; i < res.rmc.length; i++) {
+                        $('#' + res.rmc[i].id + 'rmc').html(res.rmc[i].quantity);
+                    }
+                    for (i = 0; i < res.pc.length; i++) {
+                        $('#' + res.pc[i].id + 'pc').html(res.pc[i].quantity);
+                    }
+                    if (res.messages) {
+                        for (i in res.messages)
+                            alert(res.messages[i]);
+                    }
+                    $("#submit-btns").val("Sell");
+                    $("#submit-btns").attr('disabled', true);
+                    $("form")[0].reset()
+                }
+            });
+        });
+    });
 </script>
 
 {% endblock js%}

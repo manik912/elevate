@@ -1,573 +1,564 @@
-{% extends "home/base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block head %}
+{% extends "home/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block head %}
 <style>
-	.form-group {
-		margin-bottom: 0.8rem;
-	}
-
-	.form-control {
-		font-size: 0.875rem;
-		font-weight: 400;
-		line-height: 1.2;
-		display: block;
-		width: 100%;
-		padding: 0.2rem 0.75rem;
-	}
-
-	.card-header {
-		padding: 1rem 1.5rem;
-	}
-
-	.card-body {
-		padding: 1rem 1.5rem;
-	}
-	svg {
-		background: #353535
-	}
-	
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+    
+    .form-control {
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.2;
+        display: block;
+        width: 100%;
+        padding: 0.2rem 0.75rem;
+    }
+    
+    .card-header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .card-body {
+        padding: 1rem 1.5rem;
+    }
+    
+    svg {
+        background: #353535
+    }
 </style>
-{% endblock head %}
-{% block bodytag %}{% endblock bodytag %}
-{% block sidenav %}
+{% endblock head %} {% block bodytag %}{% endblock bodytag %} {% block sidenav %}
 <!-- Sidenav -->
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-	<div class="scrollbar-inner">
-		<!-- Brand -->
-		<div class="sidenav-header  align-items-center">
-			<img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
-			
-		</div>
-		<div class="navbar-inner">
-			<!-- Collapse -->
-			<div class="collapse navbar-collapse" id="sidenav-collapse-main">
-				<div class="col-xl-4" style="margin-top: 40px;">
-					<h2 class="mb-0" style="color: black !important;">Industry</h2>
-				</div>
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
 
-				<!-- Nav items -->
-				<ul class="navbar-nav" >
-					<li class="nav-item">
-						<div class="nav-link" style="padding: 0.675rem 1.5rem;">
-							<!--<i class="ni ni-tv-2 text-primary"></i>-->
-							<span class="nav-link-text" style="font-size: 20px; font-weight: bold; ">{{request.user.industry.spot.name}}</span>
-						</div>
-					</li>
-				</ul>
-				<hr class="my-3">
-				<div class="col-xl-4">
-					<h2 class="mb-0"style="color: black !important;">Raw Materials</h2>
-				</div>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <div class="col-xl-4" style="margin-top: 40px;">
+                    <h2 class="mb-0" style="color: black !important;">Industry</h2>
+                </div>
 
-				<!-- Nav items -->
-				<ul class="navbar-nav" id="resource-inventory">
-					{% for i in rmc %}
-					<li class="nav-item">
-						<div class="nav-link">
-							<!--<i class="ni ni-tv-2 text-primary"></i>-->
-							<span class="nav-link-text">{{i.raw_material}}</span><span class="lak"
-								id="{{i.id}}rmc">{{i.quantity}}</span>
-						</div>
-					</li>
-					{% endfor %}
-				</ul>
-				<!-- Divider -->
-				<hr class="my-3">
-				<!-- Heading-->
-				<div class="col-xl-4">
-					<h2 class="mb-0"style="color: black !important;">Products</h2>
-				</div>
-				<ul class="navbar-nav mb-md-3" id="product-inventory">
-					{% for i in pc%}
-					<li class="nav-item">
-						<div class="nav-link">
-							<!--<i class="ni ni-spaceship"></i>-->
-							<span class="nav-link-text">{{i.product}}</span><span class="lak"
-								id="{{i.pc}}pc">{{i.quantity}}</span>
-						</div>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-	</div>
+                <!-- Nav items -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <div class="nav-link" style="padding: 0.675rem 1.5rem;">
+                            <!--<i class="ni ni-tv-2 text-primary"></i>-->
+                            <span class="nav-link-text">{{request.user.industry.spot.name}}</span>
+                        </div>
+                    </li>
+                </ul>
+                <hr class="my-3">
+                <div class="col-xl-4">
+                    <h2 class="mb-0" style="color: black !important;">Raw Materials</h2>
+                </div>
+
+                <!-- Nav items -->
+                <ul class="navbar-nav" id="resource-inventory">
+                    {% for i in rmc %}
+                    <li class="nav-item">
+                        <div class="nav-link">
+                            <!--<i class="ni ni-tv-2 text-primary"></i>-->
+                            <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- Divider -->
+                <hr class="my-3">
+                <!-- Heading-->
+                <div class="col-xl-4">
+                    <h2 class="mb-0" style="color: black !important;">Products</h2>
+                </div>
+                <ul class="navbar-nav mb-md-3" id="product-inventory">
+                    {% for i in pc%}
+                    <li class="nav-item">
+                        <div class="nav-link">
+                            <!--<i class="ni ni-spaceship"></i>-->
+                            <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.pc}}pc">{{i.quantity}}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </nav>
-{% endblock sidenav %}
-
-{% block body %}
+{% endblock sidenav %} {% block body %}
 
 <script id="test1234" type="text/javascript">
-	var spot_mater = [];
-	var raw_materials = [];
+    var spot_mater = [];
+    var raw_materials = [];
 
-	// console.log(raw_materials)
-	var mumbai_description = "<i>Raw Material Source</i><br>State Tax: 4.75%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 11) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			mumbai_description += obj[0].name;
-			mumbai_description += " - ";
-			mumbai_description += spot_mater[mater].quantity;
-			mumbai_description += "<br>";
-		}
-	}
-	
-	var jaisalmer_description = "<i>Raw Material Source</i><br>State Tax: 6.25%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 13) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			jaisalmer_description += obj[0].name;
-			jaisalmer_description += " - ";
-			jaisalmer_description += spot_mater[mater].quantity;
-			jaisalmer_description += "<br>";
-		}
-	}
+    // console.log(raw_materials)
+    var mumbai_description = "<i>Raw Material Source</i><br>State Tax: 4.75%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 11) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            mumbai_description += obj[0].name;
+            mumbai_description += " - ";
+            mumbai_description += spot_mater[mater].quantity;
+            mumbai_description += "<br>";
+        }
+    }
 
-	var hisar_description = "<i>Raw Material Source</i><br>State Tax: 6.5%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 6) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			hisar_description += obj[0].name;
-			hisar_description += " - ";
-			hisar_description += spot_mater[mater].quantity;
-			hisar_description += "<br>";
-		}
-	}
-	
-	var hyderabad_description = "<i>Raw Material Source</i><br>State Tax: 5.75%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 15) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			hyderabad_description += obj[0].name;
-			hyderabad_description += " - ";
-			hyderabad_description += spot_mater[mater].quantity;
-			hyderabad_description += "<br>";
-		}
-	}
+    var jaisalmer_description = "<i>Raw Material Source</i><br>State Tax: 6.25%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 13) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            jaisalmer_description += obj[0].name;
+            jaisalmer_description += " - ";
+            jaisalmer_description += spot_mater[mater].quantity;
+            jaisalmer_description += "<br>";
+        }
+    }
 
-	var gorakhpur_description = "<i>Raw Material Source</i><br>State Tax: 7.75%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 14) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			gorakhpur_description += obj[0].name;
-			gorakhpur_description += " - ";
-			gorakhpur_description += spot_mater[mater].quantity;
-			gorakhpur_description += "<br>";
-		}
-	}
+    var hisar_description = "<i>Raw Material Source</i><br>State Tax: 6.5%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 6) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            hisar_description += obj[0].name;
+            hisar_description += " - ";
+            hisar_description += spot_mater[mater].quantity;
+            hisar_description += "<br>";
+        }
+    }
 
-	var kolkata_description = "<i>Raw Material Source</i><br>State Tax: 7.5%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 12) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			kolkata_description += obj[0].name;
-			kolkata_description += " - ";
-			kolkata_description += spot_mater[mater].quantity;
-			kolkata_description += "<br>";
-		}
-	}
-	
-	var chennai_description = "<i>Raw Material Source</i><br>State Tax: 6.75%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 10) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			chennai_description += obj[0].name;
-			chennai_description += " - ";
-			chennai_description += spot_mater[mater].quantity;
-			chennai_description += "<br>";
-		}
-	}
-	
-	var jhansi_description = "<i>Raw Material Source</i><br>State Tax: 7.75%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 9) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			jhansi_description += obj[0].name;
-			jhansi_description += " - ";
-			jhansi_description += spot_mater[mater].quantity;
-			jhansi_description += "<br>";
-		}
-	}
-	
-	var gangtok_description = "<i>Raw Material Source</i><br>State Tax: 5.25%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 8) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			gangtok_description += obj[0].name;
-			gangtok_description += " - ";
-			gangtok_description += spot_mater[mater].quantity;
-			gangtok_description += "<br>";
-		}
-	}
+    var hyderabad_description = "<i>Raw Material Source</i><br>State Tax: 5.75%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 15) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            hyderabad_description += obj[0].name;
+            hyderabad_description += " - ";
+            hyderabad_description += spot_mater[mater].quantity;
+            hyderabad_description += "<br>";
+        }
+    }
 
-	var srinagar_description = "<i>Raw Material Source</i><br>State Tax: 4.25%<br><br>Available Raw Materials:<br>";
-	for (mater in spot_mater) {
-		if (spot_mater[mater].spot_id == 7) {
-			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
-			// console.log(obj)
-			srinagar_description += obj[0].name;
-			srinagar_description += " - ";
-			srinagar_description += spot_mater[mater].quantity;
-			srinagar_description += "<br>";
-		}
-	}
+    var gorakhpur_description = "<i>Raw Material Source</i><br>State Tax: 7.75%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 14) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            gorakhpur_description += obj[0].name;
+            gorakhpur_description += " - ";
+            gorakhpur_description += spot_mater[mater].quantity;
+            gorakhpur_description += "<br>";
+        }
+    }
 
-	var simplemaps_countrymap_mapdata = {
-		main_settings: {
-			//General settings
-			width: "responsive", //'700' or 'responsive'
-			background_color: "#FFFFFF",
-			background_transparent: "yes",
-			border_color: "#ffffff",
+    var kolkata_description = "<i>Raw Material Source</i><br>State Tax: 7.5%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 12) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            kolkata_description += obj[0].name;
+            kolkata_description += " - ";
+            kolkata_description += spot_mater[mater].quantity;
+            kolkata_description += "<br>";
+        }
+    }
 
-			//State defaults
-			state_description: "State description",
-			state_color: "#88A4BC",
-			state_hover_color: "#738595",
-			state_url: "",
-			border_size: 1.5,
-			all_states_inactive: "yes",
-			all_states_zoomable: "yes",
-			location_description: "",
-			location_color: "",
-			location_opacity: "0.8",
-			location_hover_opacity: 1,
-			location_url: "",
-			location_size: "",
-			location_type: "square",
-			location_image_source: "frog.png",
-			location_border_color: "#FFFFFF",
-			location_border: 2,
-			location_hover_border: 2.5,
-			all_locations_inactive: "no",
-			all_locations_hidden: "no",
+    var chennai_description = "<i>Raw Material Source</i><br>State Tax: 6.75%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 10) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            chennai_description += obj[0].name;
+            chennai_description += " - ";
+            chennai_description += spot_mater[mater].quantity;
+            chennai_description += "<br>";
+        }
+    }
 
-			//Label defaults
-			label_color: "#d5ddec",
-			label_hover_color: "#d5ddec",
-			label_size: 22,
-			label_font: "Arial",
-			hide_labels: "no",
-			hide_eastern_labels: "no",
+    var jhansi_description = "<i>Raw Material Source</i><br>State Tax: 7.75%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 9) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            jhansi_description += obj[0].name;
+            jhansi_description += " - ";
+            jhansi_description += spot_mater[mater].quantity;
+            jhansi_description += "<br>";
+        }
+    }
 
-			//Zoom settings
-			zoom: "yes",
-			back_image: "no",
-			initial_back: "no",
-			initial_zoom: "-1",
-			initial_zoom_solo: "no",
-			region_opacity: 1,
-			region_hover_opacity: 0.6,
-			zoom_out_incrementally: "yes",
-			zoom_percentage: 0.99,
-			zoom_time: 0.5,
+    var gangtok_description = "<i>Raw Material Source</i><br>State Tax: 5.25%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 8) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            gangtok_description += obj[0].name;
+            gangtok_description += " - ";
+            gangtok_description += spot_mater[mater].quantity;
+            gangtok_description += "<br>";
+        }
+    }
 
-			//Popup settings
-			popup_color: "white",
-			popup_opacity: 0.9,
-			popup_shadow: 1,
-			popup_corners: 5,
-			popup_font: "12px/1.5 Verdana, Arial, Helvetica, sans-serif",
-			popup_nocss: "no",
+    var srinagar_description = "<i>Raw Material Source</i><br>State Tax: 4.25%<br><br>Available Raw Materials:<br>";
+    for (mater in spot_mater) {
+        if (spot_mater[mater].spot_id == 7) {
+            let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
+            // console.log(obj)
+            srinagar_description += obj[0].name;
+            srinagar_description += " - ";
+            srinagar_description += spot_mater[mater].quantity;
+            srinagar_description += "<br>";
+        }
+    }
 
-			//Advanced settings
-			div: "map",
-			auto_load: "yes",
-			url_new_tab: "no",
-			images_directory: "default",
-			fade_time: 0.1,
-			link_text: "View Website",
-			popups: "detect",
-			state_image_url: "",
-			state_image_position: "",
-			location_image_url: ""
-		},
-		state_specific: {
-			"1": {
-				description: " "
-			},
-			"2": {
-				description: " "
-			},
-			"3": {
-				description: " "
-			},
-			"4": {
-				description: " "
-			},
-			"5": {
-				description: " "
-			},
-			"6": {
-				description: " "
-			},
-			"7": {
-				description: " "
-			},
-			"8": {
-				description: " "
-			},
-			"9": {
-				description: " "
-			},
-			"10": {
-				description: " "
-			},
-			"11": {
-				description: " "
-			},
-			"12": {
-				description: " "
-			},
-			"13": {
-				description: " "
-			},
-			"14": {
-				description: " "
-			},
-			"16": {
-				description: " "
-			},
-			"17": {
-				description: " "
-			},
-			"18": {
-				description: " "
-			},
-			"19": {
-				description: " "
-			},
-			"20": {
-				description: " "
-			},
-			"21": {
-				description: " "
-			},
-			"22": {
-				description: " "
-			},
-			"23": {
-				description: " "
-			},
-			"24": {
-				description: " "
-			},
-			"25": {
-				description: " "
-			},
-			"26": {
-				description: " "
-			},
-			"27": {
-				description: " "
-			},
-			"28": {
-				description: " "
-			},
-			"29": {
-				description: " "
-			},
-			"30": {
-				description: " "
-			},
-			"31": {
-				description: " "
-			},
-			"32": {
-				description: " "
-			},
-			"33": {
-				description: " "
-			},
-			"34": {
-				description: " "
-			},
-			"35": {
-				description: " "
-			},
-			"36": {
-				description: " "
-			},
-			"37": {
-				description: " "
-			},
-			"38": {
-				description: " "
-			},
-			standard: {
-				inactive: "yes",
-				description: " "
-			}
-		},
-		locations: {
-			"0": {
-				lat: 18.987807,
-				lng: 72.836447,
-				name: "Mumbai",
-				color: "#FF0067",
-				size: "15",
-				description: mumbai_description
-			},
-			"1": {
-				lat: "26.9157",
-				lng: "70.9083",
-				name: "Jaisalmer",
-				color: "#FF0067",
-				size: "15",
-				description: mumbai_description
-			},
-			"2": {
-				lat: "34.0837",
-				lng: "74.7973",
-				name: "Srinagar",
-				color: "#FF0067",
-				size: "15",
-				description: srinagar_description
-			},
-			"3": {
-				lat: "29.1492",
-				lng: "75.7217",
-				name: "Hisar",
-				color: "#FF0067",
-				size: "15",
-				description: hisar_description 			
-			},
-			"4": {
-				lat: "26.7606",
-				lng: "83.3732",
-				name: "Gorakhpur",
-				color: "#FF0067",
-				size: "15",
-				description: gorakhpur_description
-			},
-			"5": {
-				lat: "25.4484",
-				lng: "78.5685",
-				name: "Jhansi",
-				color: "#FF0067",
-				size: "15",
-				description: jhansi_description
-			},
-			"6": {
-				lat: "22.5726",
-				lng: "88.3639",
-				name: "Kolkata",
-				color: "#FF0067",
-				size: "15",
-				description: kolkata_description
-			},
-			"7": {
-				lat: "27.3314",
-				lng: "88.6138",
-				name: "Gangtok",
-				color: "#FF0067",
-				size: "15",
-				description: gangtok_description
-			},
-			"8": {
-				lat: "17.3850",
-				lng: "78.4867",
-				name: "Hyderabad",
-				color: "#FF0067",
-				size: "15",
-				description: hyderabad_description
-			},
-			"9": {
-				lat: "13.0827",
-				lng: "80.2707",
-				name: "Chennai",
-				color: "#FF0067",
-				size: "15",
-				description: chennai_description
-			},
-			"10": {
-				lat: "30.9084",
-				lng: "77.0999",
-				name: "Solan",
-				color: "#000000",
-				size: "20",
-				description: "<i>Industrial Cluster</i>"
-			},
-			"11": {
-				lat: "22.3039",
-				lng: "70.8022",
-				name: "Rajkot",
-				color: "#000000",
-				size: "20",
-				description: "<i>Industrial Cluster</i>"
-			},
-			"12": {
-				lat: "11.0168",
-				lng: "76.9558",
-				name: "Coimbatore",
-				color: "#000000",
-				size: "20",
-				description: "<i>Industrial Cluster</i>"
-			},
-			"13": {
-				lat: "26.1445",
-				lng: "91.7362",
-				name: "Guwahati",
-				color: "#000000",
-				size: "20",
-				description: "<i>Industrial Cluster</i>"
-			},
-			"14": {
-				lat: "21.2514",
-				lng: "81.6296",
-				name: "Raipur",
-				color: "#000000",
-				size: "20",
-				description: "<i>Industrial Cluster</i>"
-			}
-		},
-		labels: {},
-		regions: {},
-		legend: {
-			entries: []
-		}
-	};
+    var simplemaps_countrymap_mapdata = {
+        main_settings: {
+            //General settings
+            width: "responsive", //'700' or 'responsive'
+            background_color: "#FFFFFF",
+            background_transparent: "yes",
+            border_color: "#ffffff",
+
+            //State defaults
+            state_description: "State description",
+            state_color: "#88A4BC",
+            state_hover_color: "#738595",
+            state_url: "",
+            border_size: 1.5,
+            all_states_inactive: "yes",
+            all_states_zoomable: "yes",
+            location_description: "",
+            location_color: "",
+            location_opacity: "0.8",
+            location_hover_opacity: 1,
+            location_url: "",
+            location_size: "",
+            location_type: "square",
+            location_image_source: "frog.png",
+            location_border_color: "#FFFFFF",
+            location_border: 2,
+            location_hover_border: 2.5,
+            all_locations_inactive: "no",
+            all_locations_hidden: "no",
+
+            //Label defaults
+            label_color: "#d5ddec",
+            label_hover_color: "#d5ddec",
+            label_size: 22,
+            label_font: "Arial",
+            hide_labels: "no",
+            hide_eastern_labels: "no",
+
+            //Zoom settings
+            zoom: "yes",
+            back_image: "no",
+            initial_back: "no",
+            initial_zoom: "-1",
+            initial_zoom_solo: "no",
+            region_opacity: 1,
+            region_hover_opacity: 0.6,
+            zoom_out_incrementally: "yes",
+            zoom_percentage: 0.99,
+            zoom_time: 0.5,
+
+            //Popup settings
+            popup_color: "white",
+            popup_opacity: 0.9,
+            popup_shadow: 1,
+            popup_corners: 5,
+            popup_font: "12px/1.5 Verdana, Arial, Helvetica, sans-serif",
+            popup_nocss: "no",
+
+            //Advanced settings
+            div: "map",
+            auto_load: "yes",
+            url_new_tab: "no",
+            images_directory: "default",
+            fade_time: 0.1,
+            link_text: "View Website",
+            popups: "detect",
+            state_image_url: "",
+            state_image_position: "",
+            location_image_url: ""
+        },
+        state_specific: {
+            "1": {
+                description: " "
+            },
+            "2": {
+                description: " "
+            },
+            "3": {
+                description: " "
+            },
+            "4": {
+                description: " "
+            },
+            "5": {
+                description: " "
+            },
+            "6": {
+                description: " "
+            },
+            "7": {
+                description: " "
+            },
+            "8": {
+                description: " "
+            },
+            "9": {
+                description: " "
+            },
+            "10": {
+                description: " "
+            },
+            "11": {
+                description: " "
+            },
+            "12": {
+                description: " "
+            },
+            "13": {
+                description: " "
+            },
+            "14": {
+                description: " "
+            },
+            "16": {
+                description: " "
+            },
+            "17": {
+                description: " "
+            },
+            "18": {
+                description: " "
+            },
+            "19": {
+                description: " "
+            },
+            "20": {
+                description: " "
+            },
+            "21": {
+                description: " "
+            },
+            "22": {
+                description: " "
+            },
+            "23": {
+                description: " "
+            },
+            "24": {
+                description: " "
+            },
+            "25": {
+                description: " "
+            },
+            "26": {
+                description: " "
+            },
+            "27": {
+                description: " "
+            },
+            "28": {
+                description: " "
+            },
+            "29": {
+                description: " "
+            },
+            "30": {
+                description: " "
+            },
+            "31": {
+                description: " "
+            },
+            "32": {
+                description: " "
+            },
+            "33": {
+                description: " "
+            },
+            "34": {
+                description: " "
+            },
+            "35": {
+                description: " "
+            },
+            "36": {
+                description: " "
+            },
+            "37": {
+                description: " "
+            },
+            "38": {
+                description: " "
+            },
+            standard: {
+                inactive: "yes",
+                description: " "
+            }
+        },
+        locations: {
+            "0": {
+                lat: 18.987807,
+                lng: 72.836447,
+                name: "Mumbai",
+                color: "#FF0067",
+                size: "15",
+                description: mumbai_description
+            },
+            "1": {
+                lat: "26.9157",
+                lng: "70.9083",
+                name: "Jaisalmer",
+                color: "#FF0067",
+                size: "15",
+                description: mumbai_description
+            },
+            "2": {
+                lat: "34.0837",
+                lng: "74.7973",
+                name: "Srinagar",
+                color: "#FF0067",
+                size: "15",
+                description: srinagar_description
+            },
+            "3": {
+                lat: "29.1492",
+                lng: "75.7217",
+                name: "Hisar",
+                color: "#FF0067",
+                size: "15",
+                description: hisar_description
+            },
+            "4": {
+                lat: "26.7606",
+                lng: "83.3732",
+                name: "Gorakhpur",
+                color: "#FF0067",
+                size: "15",
+                description: gorakhpur_description
+            },
+            "5": {
+                lat: "25.4484",
+                lng: "78.5685",
+                name: "Jhansi",
+                color: "#FF0067",
+                size: "15",
+                description: jhansi_description
+            },
+            "6": {
+                lat: "22.5726",
+                lng: "88.3639",
+                name: "Kolkata",
+                color: "#FF0067",
+                size: "15",
+                description: kolkata_description
+            },
+            "7": {
+                lat: "27.3314",
+                lng: "88.6138",
+                name: "Gangtok",
+                color: "#FF0067",
+                size: "15",
+                description: gangtok_description
+            },
+            "8": {
+                lat: "17.3850",
+                lng: "78.4867",
+                name: "Hyderabad",
+                color: "#FF0067",
+                size: "15",
+                description: hyderabad_description
+            },
+            "9": {
+                lat: "13.0827",
+                lng: "80.2707",
+                name: "Chennai",
+                color: "#FF0067",
+                size: "15",
+                description: chennai_description
+            },
+            "10": {
+                lat: "30.9084",
+                lng: "77.0999",
+                name: "Solan",
+                color: "#000000",
+                size: "20",
+                description: "<i>Industrial Cluster</i>"
+            },
+            "11": {
+                lat: "22.3039",
+                lng: "70.8022",
+                name: "Rajkot",
+                color: "#000000",
+                size: "20",
+                description: "<i>Industrial Cluster</i>"
+            },
+            "12": {
+                lat: "11.0168",
+                lng: "76.9558",
+                name: "Coimbatore",
+                color: "#000000",
+                size: "20",
+                description: "<i>Industrial Cluster</i>"
+            },
+            "13": {
+                lat: "26.1445",
+                lng: "91.7362",
+                name: "Guwahati",
+                color: "#000000",
+                size: "20",
+                description: "<i>Industrial Cluster</i>"
+            },
+            "14": {
+                lat: "21.2514",
+                lng: "81.6296",
+                name: "Raipur",
+                color: "#000000",
+                size: "20",
+                description: "<i>Industrial Cluster</i>"
+            }
+        },
+        labels: {},
+        regions: {},
+        legend: {
+            entries: []
+        }
+    };
 </script>
 <script src="{%static 'home/assets/img/map/countrymap.js' %}" id="shayad"></script>
 
 
 <div class="container-fluid ">
-	<div class="row">
-		<div class="col-xl-8">
-			<div class="card bg-default">
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card bg-default">
 
-				<div id="map">
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4">
-			<div class="card">
-				<div class="card-header bg-transparent">
-					<div class="row align-items-center">
-						<div class="col">
-							<h1 class="mb-0">Buying Form</h1>
-						</div>
-					</div>
-				</div>
-				<div class="card-body">
-					<div class="chart">
-						<form method="POST" id="buying-form">
-							{% csrf_token %}
+                <div id="map">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h1 class="mb-0">Buying Form</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <form method="POST" id="buying-form">
+                            {% csrf_token %}
 
-							<div id="div_id_spot" class="form-group"> <label for="id_spot" class="">
+                            <div id="div_id_spot" class="form-group"> <label for="id_spot" class="">
 									Location *
 								</label>
-								<div class=""> <select name="spot" class="select form-control" id="id_spot" required>
+                                <div class=""> <select name="spot" class="select form-control" id="id_spot" required>
 										<option value="" disabled="disabled" selected="selected">Choose Location</option>
 										<option value="7">Srinagar</option>
 										<option value="6">Hisar</option>
@@ -581,274 +572,275 @@
 										<option value="8">Gangtok</option>
 
 									</select> </div>
-							</div>
-							<div id="div_id_raw_material_1" class="form-group"> <label for="id_raw_material_1"
-									class=" requiredField">
+                            </div>
+                            <div id="div_id_raw_material_1" class="form-group"> <label for="id_raw_material_1" class=" requiredField">
 									Raw material 1<span class="asteriskField">*</span> </label>
-								<div class=""> <select name="raw_material_1" class="select form-control" required=""
-										id="id_raw_material_1">
+                                <div class=""> <select name="raw_material_1" class="select form-control" required="" id="id_raw_material_1">
 										
 
 									</select> </div>
-							</div>
-							<div id="div_id_quantity_1" class="form-group"> <label for="id_quantity_1"
-									class=" requiredField">
+                            </div>
+                            <div id="div_id_quantity_1" class="form-group"> <label for="id_quantity_1" class=" requiredField">
 									Quantity 1<span class="asteriskField">*</span> </label>
-								<div class=""> <input type="number" name="quantity_1" value="0"
-										class="numberinput form-control" required="" id="id_quantity_1"> </div>
-							</div>
-							<div id="div_id_raw_material_2" class="form-group"> <label for="id_raw_material_2"
-									class=" requiredField">
+                                <div class=""> <input type="number" name="quantity_1" value="0" class="numberinput form-control" required="" id="id_quantity_1"> </div>
+                            </div>
+                            <div id="div_id_raw_material_2" class="form-group"> <label for="id_raw_material_2" class=" requiredField">
 									Raw material 2<span class="asteriskField">*</span> </label>
-								<div class=""> <select name="raw_material_2" class="select form-control" required=""
-										id="id_raw_material_2">
+                                <div class=""> <select name="raw_material_2" class="select form-control" required="" id="id_raw_material_2">
 										
 
 									</select> </div>
-							</div>
-							<div id="div_id_quantity_2" class="form-group"> <label for="id_quantity_2"
-									class=" requiredField">
+                            </div>
+                            <div id="div_id_quantity_2" class="form-group"> <label for="id_quantity_2" class=" requiredField">
 									Quantity 2<span class="asteriskField">*</span> </label>
-								<div class=""> <input type="number" name="quantity_2" value="0"
-										class="numberinput form-control" required="" id="id_quantity_2"> </div>
-							</div>
+                                <div class=""> <input type="number" name="quantity_2" value="0" class="numberinput form-control" required="" id="id_quantity_2"> </div>
+                            </div>
 
-							<div class="input_fields_wrap">
-								
-							</div>
-							
-							<button class="add_field_button btn btn-primary my-2">Add More Fields</button>
-							
-							<input type="button" class="btn btn-primary my-2" id="submit-btn" value="Buy">
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <div class="input_fields_wrap">
+
+                            </div>
+
+                            <button class="add_field_button btn btn-primary my-2">Add More Fields</button>
+
+                            <input type="button" class="btn btn-primary my-2" id="submit-btn" value="Buy">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-{% endblock body %}
-
-{% block js %}
+{% endblock body %} {% block js %}
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <script>
-	$(document).ready(function () {
-		$('#submit-btn').click(function () {
-			
-			let spot = $('#id_spot').val();
-			if(spot == null) {
-				alert("You need to choose a location first.");
-				return;
-			}
-			let raw_material_1 = $('#id_raw_material_1').val();
-			let raw_material_2 = $('#id_raw_material_2').val();
-			let raw_material_3 = $('#id_raw_material_3').val();
-			let raw_material_4 = $('#id_raw_material_4').val();
-			if(raw_material_1 == "" || raw_material_2 == "") {
-				alert("Raw material 1 and 2 can not be null");
-				return;
-			}
-			if(raw_material_3!=null || raw_material_4!=null){
-				if(raw_material_1==raw_material_2 || raw_material_1==raw_material_3 || raw_material_1==raw_material_4 || raw_material_2==raw_material_3 || raw_material_2==raw_material_4 || raw_material_3==raw_material_4 ){
-					alert("2 raw materials can not be same.");
-					return;
-				}
-			}
-			else{
-				if(raw_material_2==raw_material_1 ){
-					alert("2 raw materials can not be same.");
-					return;
-				}
-			}
+    $(document).ready(function() {
+        $('#submit-btn').click(function() {
 
-			let quantity_1 = $('#id_quantity_1').val();
-			let quantity_2 = $('#id_quantity_2').val();
-			let quantity_3 = $('#id_quantity_3').val();
-			let quantity_4 = $('#id_quantity_4').val();
-			let token = $('input[name=csrfmiddlewaretoken]').val();
-			$("#submit-btn").val("Processing...");
-			$("#submit-btn").attr('disabled', true);
-			mydata = { "spot": spot, "raw_material_1": raw_material_1, "raw_material_2": raw_material_2, "raw_material_3": raw_material_3, "raw_material_4": raw_material_4, "quantity_1": quantity_1, "quantity_2": quantity_2, "quantity_3": quantity_3, "quantity_4": quantity_4, "csrfmiddlewaretoken": token }
-			// console.log(mydata)
-			$.ajax({
-				type: "POST",
-				url: "/buy/",
-				data: mydata,
-				dataType: "json",
-				success: function (res) {
-					$('#ecoins').html((res.ecoin))
-					if(!res.rmc || !res.pc){
-						if (res.messages) {
-							for (i in res.messages)
-								alert(res.messages[i]);
-						}
-						$("#submit-btn").attr('disabled', false);
-						$("#submit-btn").val('Buy');
-						$("form")[0].reset()
-						return;
-					}
-					output1 = "";
-					output2 = "";
-					for (i = 0; i < res.rmc.length; i++) {
-						let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
-						output1 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
-							"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
-							+ res.rmc[i].quantity + "</span></a></li>"
-					}
-					$('#resource-inventory').html(output1)
-					for (i = 0; i < res.pc.length; i++) {
-						let obj = res.items.filter(item => item.id === res.pc[i].product_id);
+            let spot = $('#id_spot').val();
+            if (spot == null) {
+                alert("You need to choose a location first.");
+                return;
+            }
+            let raw_material_1 = $('#id_raw_material_1').val();
+            let raw_material_2 = $('#id_raw_material_2').val();
+            let raw_material_3 = $('#id_raw_material_3').val();
+            let raw_material_4 = $('#id_raw_material_4').val();
+            if (raw_material_1 == "" || raw_material_2 == "") {
+                alert("Raw material 1 and 2 can not be null");
+                return;
+            }
+            if (raw_material_3 != null || raw_material_4 != null) {
+                if (raw_material_1 == raw_material_2 || raw_material_1 == raw_material_3 || raw_material_1 == raw_material_4 || raw_material_2 == raw_material_3 || raw_material_2 == raw_material_4 || raw_material_3 == raw_material_4) {
+                    alert("2 raw materials can not be same.");
+                    return;
+                }
+            } else {
+                if (raw_material_2 == raw_material_1) {
+                    alert("2 raw materials can not be same.");
+                    return;
+                }
+            }
 
-						output2 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
-							"</span><span class='lak' id='" + res.pc[i].id + "pc'>"
-							+ res.pc[i].quantity + "</span></a></li>"
-					}
+            let quantity_1 = $('#id_quantity_1').val();
+            let quantity_2 = $('#id_quantity_2').val();
+            let quantity_3 = $('#id_quantity_3').val();
+            let quantity_4 = $('#id_quantity_4').val();
+            let token = $('input[name=csrfmiddlewaretoken]').val();
+            $("#submit-btn").val("Processing...");
+            $("#submit-btn").attr('disabled', true);
+            mydata = {
+                    "spot": spot,
+                    "raw_material_1": raw_material_1,
+                    "raw_material_2": raw_material_2,
+                    "raw_material_3": raw_material_3,
+                    "raw_material_4": raw_material_4,
+                    "quantity_1": quantity_1,
+                    "quantity_2": quantity_2,
+                    "quantity_3": quantity_3,
+                    "quantity_4": quantity_4,
+                    "csrfmiddlewaretoken": token
+                }
+                // console.log(mydata)
+            $.ajax({
+                type: "POST",
+                url: "/buy/",
+                data: mydata,
+                dataType: "json",
+                success: function(res) {
+                    $('#ecoins').html((res.ecoin))
+                    if (!res.rmc || !res.pc) {
+                        if (res.messages) {
+                            for (i in res.messages)
+                                alert(res.messages[i]);
+                        }
+                        $("#submit-btn").attr('disabled', false);
+                        $("#submit-btn").val('Buy');
+                        $("form")[0].reset()
+                        return;
+                    }
+                    output1 = "";
+                    output2 = "";
+                    for (i = 0; i < res.rmc.length; i++) {
+                        let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
+                        output1 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
+                            "</span><span class='lak' id='" + res.rmc[i].id + "rmc'>" +
+                            res.rmc[i].quantity + "</span></a></li>"
+                    }
+                    $('#resource-inventory').html(output1)
+                    for (i = 0; i < res.pc.length; i++) {
+                        let obj = res.items.filter(item => item.id === res.pc[i].product_id);
 
-					$('#product-inventory').html(output2)
-					if (res.messages) {
-						for (i in res.messages)
-							alert(res.messages[i]);
-					}
+                        output2 += "<li class='nav-item'><a class='nav-link'><span class='nav-link-text'> " + obj[0].name +
+                            "</span><span class='lak' id='" + res.pc[i].id + "pc'>" +
+                            res.pc[i].quantity + "</span></a></li>"
+                    }
 
-					$("#submit-btn").attr('disabled', false);
-					$("#submit-btn").val('Buy');
-					$("form")[0].reset()
-				}
-			});
-		});
-	});
+                    $('#product-inventory').html(output2)
+                    if (res.messages) {
+                        for (i in res.messages)
+                            alert(res.messages[i]);
+                    }
 
-	setInterval(() => {
-		$.ajax({
-			type: "GET",
-			url: "/get-quan/ajax/",
-			dataType: "json",
-			success: function (res) {
-				// console.log($("#test1234").html())
+                    $("#submit-btn").attr('disabled', false);
+                    $("#submit-btn").val('Buy');
+                    $("form")[0].reset()
+                }
+            });
+        });
+    });
 
-				var oldScript = $("#test1234").html();
-				var l = oldScript.indexOf("]");
-				oldScript = oldScript.substring(l+1)
-				l = oldScript.indexOf("]");
-				oldScript = oldScript.substring(l+1)
-				$("#test1234").remove();
-				var newScript;
-				newScript = document.createElement('script');
-				$(newScript).attr("id", "test1234")
-				var temp = "var spot_mater = "
-				temp += JSON.stringify(res.spot_mater)
-				var temp2 = `;
+    setInterval(() => {
+        $.ajax({
+            type: "GET",
+            url: "/get-quan/ajax/",
+            dataType: "json",
+            success: function(res) {
+                // console.log($("#test1234").html())
+
+                var oldScript = $("#test1234").html();
+                var l = oldScript.indexOf("]");
+                oldScript = oldScript.substring(l + 1)
+                l = oldScript.indexOf("]");
+                oldScript = oldScript.substring(l + 1)
+                $("#test1234").remove();
+                var newScript;
+                newScript = document.createElement('script');
+                $(newScript).attr("id", "test1234")
+                var temp = "var spot_mater = "
+                temp += JSON.stringify(res.spot_mater)
+                var temp2 = `;
 							var raw_materials = `
-				temp2 += JSON.stringify(res.raw_materials)
-				oldScript = temp + temp2 + oldScript
-				$(newScript).html(oldScript)
-				$('head').append(newScript)
+                temp2 += JSON.stringify(res.raw_materials)
+                oldScript = temp + temp2 + oldScript
+                $(newScript).html(oldScript)
+                $('head').append(newScript)
 
-				oldScript = $("#shayad").attr("src");
-				// console.log(oldScript)
-				$("#shayad").remove();
-				newScript = document.createElement('script');
-				newScript.type = 'text/javascript';
-				newScript.src = oldScript;
-				$(newScript).attr("id", "shayad")
-				$('head').append(newScript)
+                oldScript = $("#shayad").attr("src");
+                // console.log(oldScript)
+                $("#shayad").remove();
+                newScript = document.createElement('script');
+                newScript.type = 'text/javascript';
+                newScript.src = oldScript;
+                $(newScript).attr("id", "shayad")
+                $('head').append(newScript)
 
-				$("#hey1234").load(location.href + " #map")
-			}
-		});
+                $("#hey1234").load(location.href + " #map")
+            }
+        });
 
-	}, 5000);
-		
-	// setInterval(function () {
-	// 	$.ajax({
-	// 		type: "GET",
-	// 		url: "/get-quan/ajax/",
-	// 		dataType: "json",
-	// 		success: function (res) {
-	// 			console.log(res)
-	// 			// for (i = 0; i < res.req.length; i++) {
-	// 			// 	$('#' + res.req[i].id).html(res.req[i].quantity);
-	// 			// }
-	// 		}
-	// 	});
-	// }, 30000);
+    }, 5000);
 
-	$("#id_spot").change(function () {
-		var spot = $(this).val();
-		let token = $('input[name=csrfmiddlewaretoken]').val();
-		$.ajax({
-			type: 'POST',
-			url: '/buy/ajax/',
-			data: {
-				'spot': spot,
-				"csrfmiddlewaretoken": token,
-			},
-			
-			success: function (req) {
-				// console.log(req)
-				output="";
-				for(i=0; i<req.rmc.length; i++){
-					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
-					output+= "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name +"</option>"
-				}
-				$("#id_raw_material_1").html(output)
-				$("#id_raw_material_2").html(output)
-				$("#id_raw_material_3").html(output)
-				$("#id_raw_material_4").html(output)
-			}
-		});
-	});
+    // setInterval(function () {
+    // 	$.ajax({
+    // 		type: "GET",
+    // 		url: "/get-quan/ajax/",
+    // 		dataType: "json",
+    // 		success: function (res) {
+    // 			console.log(res)
+    // 			// for (i = 0; i < res.req.length; i++) {
+    // 			// 	$('#' + res.req[i].id).html(res.req[i].quantity);
+    // 			// }
+    // 		}
+    // 	});
+    // }, 30000);
 
+    $("#id_spot").change(function() {
+        var spot = $(this).val();
+        let token = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+            type: 'POST',
+            url: '/buy/ajax/',
+            data: {
+                'spot': spot,
+                "csrfmiddlewaretoken": token,
+            },
+
+            success: function(req) {
+                // console.log(req)
+                output = "";
+                for (i = 0; i < req.rmc.length; i++) {
+                    let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
+                    output += "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name + "</option>"
+                }
+                $("#id_raw_material_1").html(output)
+                $("#id_raw_material_2").html(output)
+                $("#id_raw_material_3").html(output)
+                $("#id_raw_material_4").html(output)
+            }
+        });
+    });
 </script>
 
 
 
 <script>
-	$(document).ready(function() {
-    var max_fields      = 4; 
-    var wrapper         = $(".input_fields_wrap");
-    var add_button      = $(".add_field_button"); 
-    
-    var x = 2; 
-    $(add_button).click(function(e){ 
-        e.preventDefault();
-        if(x < max_fields){ 
-            x++; 
-			o= "<div id='div_id_raw_material_" +x+"' class='form-group'> <label for='id_raw_material_" + x + "' class=' requiredField'> Raw material " + x + "</label><div> <select name='raw_material_" + x + "' class='select form-control' required='' id='id_raw_material_" + x + "'><option value='' selected=''>---------</option></select> </div></div><div id='div_id_quantity_" + x + "' class='form-group'> <label for='id_quantity_" + x +
-									"' class='requiredField'>Quantity " + x + "</label><div> <input type='number' name='quantity_" + x + "' value='0' class='numberinput form-control' id='id_quantity_" + x +"'> </div></div>"
-            $(wrapper).append(o);
-			$("form")[0].reset();
-        }
-		var spot = $("#id_spot").val();
-		let token = $('input[name=csrfmiddlewaretoken]').val();
-		$.ajax({
-			type: 'POST',
-			url: '/buy/ajax/',
-			data: {
-				'spot': spot,
-				"csrfmiddlewaretoken": token,
-			},
-			
-			success: function (req) {
-				// console.log(req)
-				output="";
-				for(i=0; i<req.rmc.length; i++){
-					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
-					output+= "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name +"</option>"
-				}
-				$("#id_raw_material_3").html(output)
-				$("#id_raw_material_4").html(output)
-			}
-		});
+    $(document).ready(function() {
+        var max_fields = 4;
+        var wrapper = $(".input_fields_wrap");
+        var add_button = $(".add_field_button");
+
+        var x = 2;
+        $(add_button).click(function(e) {
+            e.preventDefault();
+            if (x < max_fields) {
+                x++;
+                o = "<div id='div_id_raw_material_" + x + "' class='form-group'> <label for='id_raw_material_" + x + "' class=' requiredField'> Raw material " + x + "</label><div> <select name='raw_material_" + x + "' class='select form-control' required='' id='id_raw_material_" + x + "'><option value='' selected=''>---------</option></select> </div></div><div id='div_id_quantity_" + x + "' class='form-group'> <label for='id_quantity_" + x +
+                    "' class='requiredField'>Quantity " + x + "</label><div> <input type='number' name='quantity_" + x + "' value='0' class='numberinput form-control' id='id_quantity_" + x + "'> </div></div>"
+                $(wrapper).append(o);
+                $("form")[0].reset();
+            }
+            var spot = $("#id_spot").val();
+            let token = $('input[name=csrfmiddlewaretoken]').val();
+            $.ajax({
+                type: 'POST',
+                url: '/buy/ajax/',
+                data: {
+                    'spot': spot,
+                    "csrfmiddlewaretoken": token,
+                },
+
+                success: function(req) {
+                    // console.log(req)
+                    output = "";
+                    for (i = 0; i < req.rmc.length; i++) {
+                        let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
+                        output += "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name + "</option>"
+                    }
+                    $("#id_raw_material_3").html(output)
+                    $("#id_raw_material_4").html(output)
+                }
+            });
+        });
+
+        $(wrapper).on("click", ".remove_field", function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
     });
-    
-    $(wrapper).on("click",".remove_field", function(e){ 
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
-});
 </script>
 
 {% endblock js %}

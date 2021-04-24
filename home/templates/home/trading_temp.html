@@ -1,372 +1,366 @@
-{% extends "home/base.html" %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% block head %}{% endblock head %}
-{% block bodytag %}{% endblock bodytag %}
-
-{% block sidenav %}
+{% extends "home/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block head %}{% endblock head %} {% block bodytag %}{% endblock bodytag %} {% block sidenav %}
 <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
-      <!-- Brand -->
-      <div class="sidenav-header  align-items-center">
-		<img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
-		
-	</div>
-      <div class="navbar-inner">
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-			<div class="col-xl-4" style="margin-top: 40px;">
-				<h2 class="mb-0" style="color: black !important;">Industry</h2>
-			</div>
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <img src="{% static 'home/assets/img/elevate-black.png' %}" style="height: 100px; width: 100px; margin-top: 5px;">
 
-			<!-- Nav items -->
-			<ul class="navbar-nav" id="resource-inventory">
-				<li class="nav-item">
-					<div class="nav-link" style="padding: 0.675rem 1.5rem;">
-						<!--<i class="ni ni-tv-2 text-primary"></i>-->
-						<span class="nav-link-text" style="font-size: 20px; font-weight: bold; ">{{request.user.industry.spot.name}}</span>
-					</div>
-				</li>
-			</ul>
-			<hr class="my-3">
-          <div class="col-xl-4">
-            <h2 class="mb-0" style="color: black !important;">Raw Materials</h2>
-          </div>
-          
-          <!-- Nav items -->
-          <ul class="navbar-nav" id="resource-inventory">
-            {% for i in rmc %}
-            <li class="nav-item">
-              <a class="nav-link">
-                <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-          <!-- Divider -->
-          <hr class="my-3">
-          <!-- Heading-->
-          <div class="col-xl-4">
-            <h2 class="mb-0" style="color: black !important;">Products</h2>
-          </div>
-          <ul class="navbar-nav mb-md-3" id="product-inventory">
-            {% for i in pc%}
-            <li class="nav-item">
-              <a class="nav-link">
-                <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.id}}pc">{{i.quantity}}</span>
-              </a>
-            </li>
-            {% endfor %}
-          </ul> 
         </div>
-      </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <div class="col-xl-4" style="margin-top: 40px;">
+                    <h2 class="mb-0" style="color: black !important;">Industry</h2>
+                </div>
+
+                <!-- Nav items -->
+                <ul class="navbar-nav" id="resource-inventory">
+                    <li class="nav-item">
+                        <div class="nav-link" style="padding: 0.675rem 1.5rem;">
+                            <!--<i class="ni ni-tv-2 text-primary"></i>-->
+                            <span class="nav-link-text">{{request.user.industry.spot.name}}</span>
+                        </div>
+                    </li>
+                </ul>
+                <hr class="my-3">
+                <div class="col-xl-4">
+                    <h2 class="mb-0" style="color: black !important;">Raw Materials</h2>
+                </div>
+
+                <!-- Nav items -->
+                <ul class="navbar-nav" id="resource-inventory">
+                    {% for i in rmc %}
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <span class="nav-link-text">{{i.raw_material}}</span><span class="lak" id="{{i.id}}rmc">{{i.quantity}}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <!-- Divider -->
+                <hr class="my-3">
+                <!-- Heading-->
+                <div class="col-xl-4">
+                    <h2 class="mb-0" style="color: black !important;">Products</h2>
+                </div>
+                <ul class="navbar-nav mb-md-3" id="product-inventory">
+                    {% for i in pc%}
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <span class="nav-link-text">{{i.product}}</span><span class="lak" id="{{i.id}}pc">{{i.quantity}}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-  </nav>
-  <div class="main-content" id="panel">
-{% endblock sidenav%}
-{% block body %}
-	<!-- Page content -->
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xl-4">
-				<div class="card bg-default">
-					<div class="card-header bg-transparent">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="text-light text-uppercase ls-1 mb-1">Buying request form</h6>
-								<h5 class="h3 text-white mb-0">Send Request</h5>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<!-- Chart -->
-						<form action="" id="trading-form" method="POST">
-							{% csrf_token %}
-							{{form|crispy}}
-							<input type="button" value="Send" id="submit-btnt" class="btn btn-success mt-3"
-								style="width: 100%;">
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-8">
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-header bg-transparent">
-							<div class="row align-items-center">
-								<div class="col">
-									<h6 class="text-uppercase text-light ls-1 mb-1">Pending Requests</h6>
-									<h5 class="h3 mb-0">Received Requests</h5>
-								</div>
-							</div>
-						</div>
-						<div class="card-body p-2">
-							<!-- Chart -->
-							<div class="req-list">
-								<div class="list-group" id="pen-req">
+</nav>
+<div class="main-content" id="panel">
+    {% endblock sidenav%} {% block body %}
+    <!-- Page content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card bg-default">
+                    <div class="card-header bg-transparent">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="text-light text-uppercase ls-1 mb-1">Buying request form</h6>
+                                <h5 class="h3 text-white mb-0">Send Request</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Chart -->
+                        <form action="" id="trading-form" method="POST">
+                            {% csrf_token %} {{form|crispy}}
+                            <input type="button" value="Send" id="submit-btnt" class="btn btn-success mt-3" style="width: 100%;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="text-uppercase text-light ls-1 mb-1">Pending Requests</h6>
+                                    <h5 class="h3 mb-0">Received Requests</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <!-- Chart -->
+                            <div class="req-list">
+                                <div class="list-group" id="pen-req">
 
-									{% for re in req %}
+                                    {% for re in req %}
 
-									<a 
-										class="list-group-item list-group-item-action flex-column align-items-start ">
-										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-1">{{ re.from_team }}</h5>
-										</div>
-										<p class="mb-1">Product : {{ re.item }}</p>
-										<p class="mb-1">Quantity : {{ re.quantity }}</p>
-										<p class="mb-1">Price : {{ re.cost }}</p>
-										<input type="button" id="{{re.id}}rej" value="Reject" class="btn btn-danger float-right "
-											onclick="rejectfun({{re.id}})" style="margin-top:-2.5rem ;">
-										<input type="button" id="{{re.id}}acc" value="Accept" onclick="acceptfun({{re.id}})"
-											class="btn btn-success float-right mr-1" style="margin-top:-2.5rem ;">
+                                    <a class="list-group-item list-group-item-action flex-column align-items-start ">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{ re.from_team }}</h5>
+                                        </div>
+                                        <p class="mb-1">Product : {{ re.item }}</p>
+                                        <p class="mb-1">Quantity : {{ re.quantity }}</p>
+                                        <p class="mb-1">Price : {{ re.cost }}</p>
+                                        <input type="button" id="{{re.id}}rej" value="Reject" class="btn btn-danger float-right " onclick="rejectfun({{re.id}})" style="margin-top:-2.5rem ;">
+                                        <input type="button" id="{{re.id}}acc" value="Accept" onclick="acceptfun({{re.id}})" class="btn btn-success float-right mr-1" style="margin-top:-2.5rem ;">
 
-									</a>
+                                    </a>
 
-									{% endfor %}
-								</div>
-							</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
 
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-header bg-transparent">
-							<div class="row align-items-center">
-								<div class="col">
-									<h6 class="text-uppercase text-light ls-1 mb-1">Requested</h6>
-									<h5 class="h3 mb-0">Sent Requests</h5>
-								</div>
-							</div>
-						</div>
-						<div class="card-body p-2">
-							<!-- Chart -->
-							<div class="req-list">
-								<div class="list-group" id="sent-req">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-transparent">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="text-uppercase text-light ls-1 mb-1">Requested</h6>
+                                    <h5 class="h3 mb-0">Sent Requests</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <!-- Chart -->
+                            <div class="req-list">
+                                <div class="list-group" id="sent-req">
 
-									{% for sre in sreq %}
+                                    {% for sre in sreq %}
 
-									<a
-										class="list-group-item list-group-item-action flex-column align-items-start ">
-										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-1">To Team: {{ sre.to_team }}</h5>
-										</div>
-										<p class="mb-1">Product : {{ sre.item }}</p>
-										<p class="mb-1">Quantity : {{ sre.quantity }}</p>
-										<p class="mb-1">Price : {{ sre.cost }}</p>
-										<input type="button" id="{{sre.id}}del" value="Delete" class="btn btn-danger float-right "
-											onclick="deletefun({{sre.id}}sen)"  style="margin-top:-2.5rem ;">
-										
-									</a>
+                                    <a class="list-group-item list-group-item-action flex-column align-items-start ">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">To Team: {{ sre.to_team }}</h5>
+                                        </div>
+                                        <p class="mb-1">Product : {{ sre.item }}</p>
+                                        <p class="mb-1">Quantity : {{ sre.quantity }}</p>
+                                        <p class="mb-1">Price : {{ sre.cost }}</p>
+                                        <input type="button" id="{{sre.id}}del" value="Delete" class="btn btn-danger float-right " onclick="deletefun({{sre.id}}sen)" style="margin-top:-2.5rem ;">
 
-									{% endfor %}
-								</div>
-							</div>
+                                    </a>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	{% endblock body %}
+                                    {% endfor %}
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock body %} {% block js%}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-{% block js%}
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submit-btnt').click(function() {
+                let to_team = $('#id_to_team').val();
+                let item = $('#id_item').val();
+                let cost = $('#id_cost').val();
+                let quantity = $('#id_quantity').val();
+                let token = $('input[name=csrfmiddlewaretoken]').val();
+                $("#submit-btnt").val("Processing...");
+                $("#submit-btnt").attr('disabled', true);
+                mydata = {
+                    "to_team": to_team,
+                    "item": item,
+                    "cost": cost,
+                    "quantity": quantity,
+                    "csrfmiddlewaretoken": token
+                }
+                console.log(mydata)
+                $.ajax({
+                    type: "POST",
+                    url: "/trade/",
+                    data: mydata,
+                    dataType: "json",
+                    success: function(res) {
+                        $('#ecoins').html(res.ecoin)
+                        for (i = 0; i < res.rmc.length; i++) {
+                            $('#' + res.rmc[i].id + 'rmc').html(res.rmc[i].quantity);
+                        }
+                        for (i = 0; i < res.pc.length; i++) {
+                            $('#' + res.pc[i].id + 'pc').html(res.pc[i].quantity);
+                        }
 
-<script>
-	$(document).ready(function () {
-		$('#submit-btnt').click(function () {
-			let to_team = $('#id_to_team').val();
-			let item = $('#id_item').val();
-			let cost = $('#id_cost').val();
-			let quantity = $('#id_quantity').val();
-			let token = $('input[name=csrfmiddlewaretoken]').val();
-			$("#submit-btnt").val("Processing...");
-			$("#submit-btnt").attr('disabled', true);
-			mydata = { "to_team": to_team, "item": item, "cost": cost, "quantity": quantity, "csrfmiddlewaretoken": token }
-			console.log(mydata)
-			$.ajax({
-				type: "POST",
-				url: "/trade/",
-				data: mydata,
-				dataType: "json",
-				success: function (res) {
-					$('#ecoins').html(res.ecoin)
-					for (i = 0; i < res.rmc.length; i++) {
-                        $('#' + res.rmc[i].id +'rmc').html( res.rmc[i].quantity);
+                        if (res.messages) {
+                            for (i in res.messages)
+                                alert(res.messages[i]);
+                        }
+
+                        $("#submit-btnt").val("Send");
+                        $("#submit-btnt").prop('disabled', false);
+                        $("form")[0].reset()
                     }
+                });
+            });
+        });
+
+
+
+        setInterval(function() {
+            $.ajax({
+                type: "GET",
+                url: "/get-req/ajax/",
+                dataType: "json",
+                success: function(res) {
+                    $('#ecoins').html(res.ecoin)
+                    console.log(res);
+                    output1 = "";
+                    output2 = "";
+                    for (i = 0; i < res.req.length; i++) {
+                        let obj = res.pc.filter(item => item.id === res.req[i].item_id);
+                        let obj2 = res.teams.filter(item => item.id === res.req[i].from_team_id);
+
+                        output1 += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" + obj2[0].team_name +
+                            "</h5></div><p class='mb-1'>Product : " + obj[0].name +
+                            "</p><p class='mb-1'>Quantity : " + res.req[i].quantity +
+                            "</p><p class='mb-1'>Price : " + res.req[i].cost +
+                            "</p><input type='button' id='" + res.req[i].id + "rej' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.req[i].id + ")' style='margin-top:-2.5rem ;'><input type='button' id='" + res.req[i].id + "acc' value='Accept' onclick='acceptfun(" + res.req[i].id +
+                            ")' class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
+                    }
+                    $('#pen-req').html(output1);
+
+                    for (i = 0; i < res.sreq.length; i++) {
+                        let obj = res.pc.filter(item => item.id === res.sreq[i].item_id);
+                        let obj2 = res.teams.filter(item => item.id === res.sreq[i].to_team_id);
+
+                        output2 += "<a class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>To Team: " + obj2[0].team_name +
+                            "</h5></div><p class='mb-1'>Product :" + obj[0].name +
+                            "</p><p class='mb-1'>Quantity :" + res.sreq[i].quantity +
+                            "</p><p class='mb-1'>Price :" + res.sreq[i].cost +
+                            "</p><input type='button' id='" + res.sreq[i].id + "del' value='Delete' class='btn btn-danger float-right' onclick='deletefun(" + res.sreq[i].id + ")' style='margin-top:-2.5rem ;'></a>"
+                    }
+                    $('#sent-req').html(output2);
+                }
+            });
+        }, 3000);
+
+        // setInterval(function() {
+        // 	output = "";
+        // 	$.ajax({
+        // 		type: "GET",
+        // 		url: "/get-req/ajax/",
+        // 		dataType: "json",
+        // 		success: function (res) {
+        // 			if(res.status){
+        // 				output += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  res.from_team + 
+        // 					"</h5></div><p class='mb-1'>Product :" + res.item + 
+        // 						"</p><p class='mb-1'>Quantity :" + res.quantity +
+        // 							"</p><p class='mb-1'>Price :" + res.cost +
+        // 								"</p><input type='button' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.id + ") style='margin-top:-2.5rem ;'><input type='button' value='Accept' onclick='acceptfun(" + res.id + 
+        // 								") class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
+
+        // 				$('#pen-req').append(output);
+        // 			}
+        // 		}
+        // 	});
+        // }, 3000);
+
+
+
+        function acceptfun(n) {
+            console.log("Hello World");
+            var patch = '{% url "accept" 0 %}'.replace('0', n);
+            let token = $('input[name=csrfmiddlewaretoken]').val();
+            mydata = {
+                "csrfmiddlewaretoken": token
+            }
+
+            $("#" + n + "acc").val("Processing...");
+            $("#" + n + "acc").attr('disabled', true);
+
+            $.ajax({
+                type: "POST",
+                url: patch,
+                data: mydata,
+                dataType: "json",
+                success: function(res) {
+                    $('#ecoins').html(res.ecoin)
+                    output1 = "";
+                    output2 = "";
+                    console.log(res);
+
+                    for (i = 0; i < res.rmc.length; i++) {
+                        let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
+                        console.log(obj);
+                        output1 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name +
+                            "</span><span class='lak' id='" + res.rmc[i].id + "rmc'>" +
+                            res.rmc[i].quantity + "</span></a></li>"
+                    }
+                    $('#resource-inventory').html(output1)
                     for (i = 0; i < res.pc.length; i++) {
-                        $('#' + res.pc[i].id +'pc').html( res.pc[i].quantity);
+                        let obj = res.items.filter(item => item.id === res.pc[i].product_id);
+                        console.log(obj);
+                        output2 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name +
+                            "</span><span class='lak' id='" + res.pc[i].id + "rmc'>" +
+                            res.pc[i].quantity + "</span></a></li>"
                     }
-					
-					if (res.messages) {
-						for (i in res.messages)
-							alert(res.messages[i]);
-					}
-					
-					$("#submit-btnt").val("Send");
-					$("#submit-btnt").prop('disabled', false);
-					$("form")[0].reset()
-				}
-			});
-		});
-	});
+                    $('#product-inventory').html(output2)
+                    if (res.messages) {
+                        for (i in res.messages)
+                            alert(res.messages[i]);
+                    }
+                    $("#" + n + "acc").val("Accept");
+                    $("#" + n + "acc").attr('disabled', false);
+                }
+            });
+        }
 
-	
+        function rejectfun(n) {
+            console.log("Hello World");
+            var patch = '{% url "reject" 0 %}'.replace('0', n);
+            let token = $('input[name=csrfmiddlewaretoken]').val();
+            mydata = {
+                "csrfmiddlewaretoken": token
+            }
+            $("#" + n + 'rej').val("Processing...");
+            $("#" + n + 'rej').attr('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: patch,
+                data: mydata,
+                dataType: "json",
+                success: function(res) {
+                    if (res.messages) {
+                        for (i in res.messages)
+                            alert(res.messages[i]);
+                    }
+                    $("#" + n + 'rej').val("Reject");
+                    $("#" + n + 'rej').attr('disabled', false);
+                }
+            });
+        }
 
-	setInterval(function() {
-		$.ajax({
-			type: "GET",
-			url: "/get-req/ajax/",
-			dataType: "json",
-			success: function (res) {
-				$('#ecoins').html(res.ecoin)
-				console.log(res);
-				output1="";
-				output2="";
-				for (i = 0; i < res.req.length; i++) {
-					let obj = res.pc.filter(item => item.id === res.req[i].item_id);
-					let obj2 = res.teams.filter(item => item.id === res.req[i].from_team_id);
-  					
-					output1 += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  obj2[0].team_name + 
-						"</h5></div><p class='mb-1'>Product : " + obj[0].name + 
-							"</p><p class='mb-1'>Quantity : " + res.req[i].quantity +
-								"</p><p class='mb-1'>Price : " + res.req[i].cost +
-									"</p><input type='button' id='"+res.req[i].id+"rej' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.req[i].id + ")' style='margin-top:-2.5rem ;'><input type='button' id='"+res.req[i].id+"acc' value='Accept' onclick='acceptfun(" + res.req[i].id + 
-									")' class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
-				}
-				$('#pen-req').html(output1);
-
-				for (i = 0; i < res.sreq.length; i++) {
-					let obj = res.pc.filter(item => item.id === res.sreq[i].item_id);
-					let obj2 = res.teams.filter(item => item.id === res.sreq[i].to_team_id);
-  					
-					output2 += "<a class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>To Team: " +  obj2[0].team_name + 
-						"</h5></div><p class='mb-1'>Product :" + obj[0].name + 
-							"</p><p class='mb-1'>Quantity :" + res.sreq[i].quantity +
-								"</p><p class='mb-1'>Price :" + res.sreq[i].cost +
-									"</p><input type='button' id='" + res.sreq[i].id+ "del' value='Delete' class='btn btn-danger float-right' onclick='deletefun(" + res.sreq[i].id + ")' style='margin-top:-2.5rem ;'></a>"
-				}
-				$('#sent-req').html(output2);
-			}
-		});
-	}, 3000);
-
-	// setInterval(function() {
-	// 	output = "";
-	// 	$.ajax({
-	// 		type: "GET",
-	// 		url: "/get-req/ajax/",
-	// 		dataType: "json",
-	// 		success: function (res) {
-	// 			if(res.status){
-	// 				output += "<a href='#' class='list-group-item list-group-item-action flex-column align-items-start '><div class='d-flex w-100 justify-content-between'><h5 class='mb-1'>" +  res.from_team + 
-	// 					"</h5></div><p class='mb-1'>Product :" + res.item + 
-	// 						"</p><p class='mb-1'>Quantity :" + res.quantity +
-	// 							"</p><p class='mb-1'>Price :" + res.cost +
-	// 								"</p><input type='button' value='Reject' class='btn btn-danger float-right' onclick='rejectfun(" + res.id + ") style='margin-top:-2.5rem ;'><input type='button' value='Accept' onclick='acceptfun(" + res.id + 
-	// 								") class='btn btn-success float-right mr-1' style='margin-top:-2.5rem ;'></a>"
-				
-	// 				$('#pen-req').append(output);
-	// 			}
-	// 		}
-	// 	});
-	// }, 3000);
-
-	
-
-	function acceptfun(n) {
-		console.log("Hello World");
-		var patch = '{% url "accept" 0 %}'.replace('0', n);
-		let token = $('input[name=csrfmiddlewaretoken]').val();
-		mydata = { "csrfmiddlewaretoken": token }
-		
-		$("#" +n + "acc").val("Processing...");
-		$("#" +n + "acc").attr('disabled', true);
-
-		$.ajax({
-			type: "POST",
-			url: patch,
-			data: mydata,
-			dataType: "json",
-			success: function (res) {
-				$('#ecoins').html(res.ecoin)
-				output1 = "";
-				output2 = "";
-				console.log(res);
-
-				for (i = 0; i < res.rmc.length; i++) {
-					let obj = res.items.filter(item => item.id === res.rmc[i].raw_material_id);
-					console.log(obj);
-					output1 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name + 
-						"</span><span class='lak' id='" + res.rmc[i].id + "rmc'>"
-							+ res.rmc[i].quantity+ "</span></a></li>"
-				}
-				$('#resource-inventory').html(output1)
-				for (i = 0; i < res.pc.length; i++) {
-					let obj = res.items.filter(item => item.id === res.pc[i].product_id);
-					console.log(obj);
-					output2 += "<li class='nav-item'><a class='nav-link' href='#'><span class='nav-link-text'> " + obj[0].name + 
-						"</span><span class='lak' id='" + res.pc[i].id + "rmc'>"
-							+ res.pc[i].quantity+ "</span></a></li>"
-				}
-				$('#product-inventory').html(output2)
-				if (res.messages) {
-					for (i in res.messages)
-						alert(res.messages[i]);
-				}
-				$("#" +n + "acc").val("Accept");
-				$("#" +n + "acc").attr('disabled', false);
-			}
-		});
-	}
-
-	function rejectfun(n) {
-		console.log("Hello World");
-		var patch = '{% url "reject" 0 %}'.replace('0', n);
-		let token = $('input[name=csrfmiddlewaretoken]').val();
-		mydata = { "csrfmiddlewaretoken": token }
-		$("#" +n + 'rej').val("Processing...");
-		$("#" +n + 'rej').attr('disabled', true);
-		$.ajax({
-			type: "POST",
-			url: patch,
-			data: mydata,
-			dataType: "json",
-			success: function (res) {
-				if (res.messages) {
-					for (i in res.messages)
-						alert(res.messages[i]);
-				}
-				$("#" +n + 'rej').val("Reject");
-				$("#" +n + 'rej').attr('disabled', false);
-			}
-		});
-	}
-
-	function deletefun(n) {
-		var patch = '{% url "delete" 0 %}'.replace('0', n);
-		let token = $('input[name=csrfmiddlewaretoken]').val();
-		mydata = { "csrfmiddlewaretoken": token }
-		$('#' + n + 'del').val("Processing...");
-		$('#' + n + 'del').attr('disabled', true);
-		$.ajax({
-			type: "POST",
-			url: patch,
-			data: mydata,
-			dataType: "json",
-			success: function (res) {
-				if (res.messages) {
-					for (i in res.messages)
-						alert(res.messages[i]);
-				}
-				$('#' +n + 'del').val("Delete");
-				$('#' +n + 'del').attr('disabled', false);
-			}
-		});
-	}
-
-</script>
-{% endblock js%}
+        function deletefun(n) {
+            var patch = '{% url "delete" 0 %}'.replace('0', n);
+            let token = $('input[name=csrfmiddlewaretoken]').val();
+            mydata = {
+                "csrfmiddlewaretoken": token
+            }
+            $('#' + n + 'del').val("Processing...");
+            $('#' + n + 'del').attr('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: patch,
+                data: mydata,
+                dataType: "json",
+                success: function(res) {
+                    if (res.messages) {
+                        for (i in res.messages)
+                            alert(res.messages[i]);
+                    }
+                    $('#' + n + 'del').val("Delete");
+                    $('#' + n + 'del').attr('disabled', false);
+                }
+            });
+        }
+    </script>
+    {% endblock js%}
