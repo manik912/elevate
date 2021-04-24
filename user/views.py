@@ -131,7 +131,7 @@ def register(request):
     
         columns = ['Email', 'Name', 'Contact No', 'Thapar Student', 'unwind', 'elevate', 'bootcamp', 'internship fair']
     
-        for col_num in range(len(columns)):
+       for col_num in range(len(columns)):
             ws.write(row_num, col_num, columns[col_num], font_style) # at 0 row 0 column 
     
         # Sheet body, remaining rows
