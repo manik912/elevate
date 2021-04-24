@@ -27,7 +27,6 @@ def register(request):
 
 
 
-
 # def update_user(request):
 #     if request.method == 'POST':
 #         form = TeamUpdate(request.POST, instance=request.user)

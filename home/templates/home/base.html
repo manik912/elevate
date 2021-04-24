@@ -6,146 +6,156 @@
 
 
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 <head>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LDLR9T57ZG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDLR9T57ZG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-LDLR9T57ZG');
-</script>
-<script src="https://kit.fontawesome.com/6bc83f78a9.js" crossorigin="anonymous"></script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Elevate 2021</title>
- 
-  <!-- Favicon -->
-  <link rel="icon" href="{%static 'home/assets/img/favicon.ico' %}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-
-  <link rel="stylesheet" href="{%static 'home/assets/vendor/nucleo/css/nucleo.css'%}" type="text/css">
-  <link rel="stylesheet" href="{%static 'home/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
-
-  <link rel="stylesheet" href="{%static 'home/assets/css/argon.min5438.css'%}" type="text/css">
+        gtag('config', 'G-LDLR9T57ZG');
+    </script>
+    <script src="https://kit.fontawesome.com/6bc83f78a9.js" crossorigin="anonymous"></script>
 
 
-  <style>
-    body{ 
-      background-color: #000000;
-    }
-    .card{
-      background-color: #353535 !important;
-    }
-    body{
-      color: white;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      color: white !important;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    .topbox{
-      background-color: #acacac;
-    }
-    .bg-primary{
-      background-color: #353535 !important;
-    }
-  </style>
+    <title>Elevate 2021</title>
 
-  {% block head %}{% endblock head %}
+    <!-- Favicon -->
+    <link rel="icon" href="{%static 'home/assets/img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+    <link rel="stylesheet" href="{%static 'home/assets/vendor/nucleo/css/nucleo.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'home/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css'%}" type="text/css">
+
+    <link rel="stylesheet" href="{%static 'home/assets/css/argon.min5438.css'%}" type="text/css">
+
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+        
+        .card {
+            background-color: #353535 !important;
+        }
+        
+        body {
+            color: white;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: white !important;
+        }
+        
+        .topbox {
+            background-color: #acacac;
+        }
+        
+        .bg-primary {
+            background-color: #353535 !important;
+        }
+    </style>
+
+    {% block head %}{% endblock head %}
 
 </head>
 <style>
-    /* @media(max-width: 1024px){
+    @media(max-width: 1024px) {
         #display {
             display: none;
+            z-index: 10;
         }
         #error {
-            display: block;
+            display: block !important;
+            z-index: 100;
         }
-    } */
+    }
 </style>
 
 <body {% block bodytag %}{% endblock bodytag %}>
-<div id="display">
+    <div id="display">
 
-   {% block sidenav %}
+        {% block sidenav %} {% endblock sidenav %}
+        <!-- Main content -->
+        <div class="main-content" id="panel">
+            <!-- Topnav -->
+            <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" style="padding: 0 !important;">
+                <div class="container-fluid" style="margin: 1rem 1rem !important;">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-   
-
-   {% endblock sidenav %}
-    <!-- Main content -->
-  <div class="main-content" id="panel">
-    <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" style="padding: 0 !important;">
-      <div class="container-fluid" style="margin: 1rem 1rem !important;">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
-        <!-- Navbar links -->
-        <ul class="navbar-nav align-items-center  ml-md-auto ">
-          <li class="nav-item d-xl-none">
-            <!-- Sidenav toggler -->
-            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
-              data-target="#sidenav-main">
-              <div class="sidenav-toggler-inner">
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'instruction' %}">
+                        <!-- Navbar links -->
+                        <ul class="navbar-nav align-items-center  ml-md-auto ">
+                            <li class="nav-item d-xl-none">
+                                <!-- Sidenav toggler -->
+                                <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+                                    <div class="sidenav-toggler-inner">
+                                        <i class="sidenav-toggler-line"></i>
+                                        <i class="sidenav-toggler-line"></i>
+                                        <i class="sidenav-toggler-line"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{% url 'instruction' %}">
               Instructions
             </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'buy' %}">
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{% url 'buy' %}">
               Buy
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'manufacture' %}">
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'manufacture' %}">
               Manufacture
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'trade' %}">
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'trade' %}">
               Trade
             </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{% url 'sellus' %}">
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{% url 'sellus' %}">
               Sell Us
             </a>
-          </li>
-          <li class="nav-item ">
-            <button class=" btn btn-primary" id="category">Check Progress</button>
-          </li>
+                            </li>
+                            <li class="nav-item ">
+                                <button class=" btn btn-primary" id="category">Check Progress</button>
+                            </li>
 
-        </ul>
-        <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-          <li class="nav-item dropdown">
-          <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="media align-items-center">
-            <!-- <span class="avatar avatar-sm rounded-circle">
+                        </ul>
+                        <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="media align-items-center">
+                                        <!-- <span class="avatar avatar-sm rounded-circle">
               <img alt="Image placeholder" src="{%static 'home/assets/img/theme/team-4.jpg' %}">
             </span> -->
-            <div class="media-body  ml-2  d-none d-lg-block">
-              <span class="mb-0 font-weight-bold">Hi {{user.team_name}}</span>
-            </div>
-            </div>
-          </a>
-          <div class="dropdown-menu  dropdown-menu-right ">
-            <div class="dropdown-header noti-title">
-            <h6 class="text-overflow m-0">Welcome!</h6>
-            </div>
-            <!-- <a href="#!" class="dropdown-item">
+                                        <div class="media-body  ml-2  d-none d-lg-block">
+                                            <span class="mb-0 font-weight-bold">Hi {{user.team_name}}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu  dropdown-menu-right ">
+                                    <div class="dropdown-header noti-title">
+                                        <h6 class="text-overflow m-0">Welcome!</h6>
+                                    </div>
+                                    <!-- <a href="#!" class="dropdown-item">
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
             </a>
@@ -161,104 +171,106 @@
             <i class="ni ni-support-16"></i>
             <span>Support</span>
             </a> -->
-            <div class="dropdown-divider"></div>
-            <a href="{% url 'logout' %}" class="dropdown-item">
-            <i class="ni ni-user-run"></i>
-            <span>Logout</span>
-            </a>
-          </div>
-          </li>
-        </ul>
-        </div>
-      </div>
-      </nav>
-
-      <div class="header bg-primary">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center py-4">
-                    <div class="col-lg-6 col-7">
-    
-                    </div>
-                    <div class="col-lg-6 col-5 text-right">
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{% url 'logout' %}" class="dropdown-item">
+                                        <i class="ni ni-user-run"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="row my-2">
-                    <div class="col-xl-6 col-md-12">
-                        <div class="card card-stats" style="height: 100px;">
-                            <!-- Card body -->
-                            <div class="card-body topbox">
-                                <div class="row">
-                                    <div class="col">
-                                      <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Breaking News</h5>
-                                        
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                                            <i class="ni ni-chart-pie-35"></i>
+            </nav>
+
+            <div class="header bg-primary">
+                <div class="container-fluid">
+                    <div class="header-body">
+                        <div class="row align-items-center py-4">
+                            <div class="col-lg-6 col-7">
+
+                            </div>
+                            <div class="col-lg-6 col-5 text-right">
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card card-stats" style="height: 100px;">
+                                    <!-- Card body -->
+                                    <div class="card-body topbox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Breaking News</h5>
+
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                                                    <i class="ni ni-chart-pie-35"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats" style="height: 100px;">
-                            <!-- Card body -->
-                            <div class="card-body topbox">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Season</h5>
-                                        {% if season.season_1 %}
-                                        <h4 style="color: #32325d !important; ">May-July</h4>
-                                        <span class="h4 font-weight-bold mb-0">(Summer Season)</span>
-                                        <!-- <div class="col-auto">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats" style="height: 100px;">
+                                    <!-- Card body -->
+                                    <div class="card-body topbox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">Season</h5>
+                                                {% if season.season_1 %}
+                                                <h4 style="color: #32325d !important; ">May-July</h4>
+                                                <span class="h4 font-weight-bold mb-0">(Summer Season)</span>
+                                                <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                               <i class="fas fa-sun"></i>
                                             </div>
                                         </div> -->
-                                        {% elif season.season_2 %}
-                                        <h4 style="color: #32325d !important; ">Aug-Oct</h4>
-                                        <span class="h4 font-weight-bold mb-0">(Autumn Season)</span>
-                                        <!-- <div class="col-auto">
+                                                {% elif season.season_2 %}
+                                                <h4 style="color: #32325d !important; ">Aug-Oct</h4>
+                                                <span class="h4 font-weight-bold mb-0">(Autumn Season)</span>
+                                                <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                               <i class="fas fa-sun"></i>
                                             </div>
                                         </div> -->
-                                        {% elif season.season_3 %}
-                                        <h4 style="color: #32325d !important; ">Nov-Jan</h4>
-                                        <span class="h4 font-weight-bold mb-0">(Winter Season)</span>
-                                        <!-- <div class="col-auto">
+                                                {% elif season.season_3 %}
+                                                <h4 style="color: #32325d !important; ">Nov-Jan</h4>
+                                                <span class="h4 font-weight-bold mb-0">(Winter Season)</span>
+                                                <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                               <i class="fas fa-sun"></i>
                                             </div>
                                         </div> -->
-                                        {% elif season.season_4 %}
-                                        <h4 style="color: #32325d !important; ">Feb-April</h4>
-                                        <span class="h4 font-weight-bold mb-0">(Spring Season)</span>
-                                        <!-- <div class="col-auto">
+                                                {% elif season.season_4 %}
+                                                <h4 style="color: #32325d !important; ">Feb-April</h4>
+                                                <span class="h4 font-weight-bold mb-0">(Spring Season)</span>
+                                                <!-- <div class="col-auto">
                                             <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                               <i class="fas fa-sun"></i>
                                             </div>
                                         </div> -->
-                                        {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats" style="height: 100px;">
-                            <!-- Card body -->
-                            <div class="card-body topbox">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">E-Coins</h5>
-                                        <span class="h2 font-weight-bold mb-0" id="ecoins">{{user.ecoins}}</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                            <i class="ni ni-money-coins"></i>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats" style="height: 100px;">
+                                    <!-- Card body -->
+                                    <div class="card-body topbox">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title text-uppercase text-muted mb-0" style="color: black !important;">E-Coins</h5>
+                                                <span class="h2 font-weight-bold mb-0" id="ecoins">{{user.ecoins}}</span>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                                    <i class="ni ni-money-coins"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -267,11 +279,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    {% block body %}{% endblock body %}
-    <!-- <div class="row">
+            {% block body %}{% endblock body %}
+            <!-- <div class="row">
       <div class="table-responsive">
           <div class="col-xl-12">
               <div class="card bg-default">
@@ -368,51 +378,51 @@
           </div>
       </div>
   </div> -->
-</div>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('#category').click(function () {
-      
-      $.ajax({
-        type: "GET",
-        url: "/category/",
-        dataType: "json",
-        success: function (res) {
-          console.log(res);
-          
-          if (res) {
-            output = "Category A: "+ res.sa + "\n" + "Category B: " + res.sb + "\n" +"Category C: " + res.sc;
-            alert(output);
-          }
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#category').click(function() {
 
-        }
-      });
-    });
+                    $.ajax({
+                        type: "GET",
+                        url: "/category/",
+                        dataType: "json",
+                        success: function(res) {
+                            console.log(res);
 
-  });
+                            if (res) {
+                                output = "Category A: " + res.sa + "\n" + "Category B: " + res.sb + "\n" + "Category C: " + res.sc;
+                                alert(output);
+                            }
 
-</script>
-    {% block js%}{% endblock js %}
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="{%static 'home/assets/vendor/jquery/dist/jquery.min.js'%}"></script>
-  <script src="{%static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
-  <script src="{%static 'home/assets/vendor/js-cookie/js.cookie.js'%}"></script>
-  <script src="{%static 'home/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js'%}"></script>
-  <script src="{%static 'home/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js'%}"></script>
-  <!-- Optional JS -->
-  <script src="{%static 'home/assets/vendor/chart.js/dist/Chart.min.js'%}"></script>
-  <script src="{%static 'home/assets/vendor/chart.js/dist/Chart.extension.js'%}"></script>
-  <!-- Argon JS -->
-  <script src="{%static 'home/assets/js/argon.min5438.js'%}"></script>
-</div>
-<div id="error" style="display: none;">
-    <h6>This screen size is not supportive.Please switch to desktop.</h6>
-</div>
+                        }
+                    });
+                });
+
+            });
+        </script>
+        {% block js%}{% endblock js %}
+        <!-- Argon Scripts -->
+        <!-- Core -->
+        <script src="{%static 'home/assets/vendor/jquery/dist/jquery.min.js'%}"></script>
+        <script src="{%static 'home/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
+        <script src="{%static 'home/assets/vendor/js-cookie/js.cookie.js'%}"></script>
+        <script src="{%static 'home/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js'%}"></script>
+        <script src="{%static 'home/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js'%}"></script>
+        <!-- Optional JS -->
+        <script src="{%static 'home/assets/vendor/chart.js/dist/Chart.min.js'%}"></script>
+        <script src="{%static 'home/assets/vendor/chart.js/dist/Chart.extension.js'%}"></script>
+        <!-- Argon JS -->
+        <script src="{%static 'home/assets/js/argon.min5438.js'%}"></script>
+    </div>
+    <div id="error" style="display: none;">
+        <h6 style="text-align: center; font-size: 25px; margin-top: 40vh;">This screen size is not supportive.Please switch to desktop.</h6>
+    </div>
 
 </body>
 
 
 <!-- Mirrored from demos.creative-tim.com/argon-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Apr 2021 18:26:38 GMT -->
+
 </html>
