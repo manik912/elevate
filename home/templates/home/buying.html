@@ -491,7 +491,7 @@
 										class="numberinput form-control" required="" id="id_quantity_2"> </div>
 							</div>
 
-							<!-- <div class="input_fields_wrap">
+							<div class="input_fields_wrap">
 								
 							</div>
 							
@@ -525,6 +525,23 @@
 			let raw_material_2 = $('#id_raw_material_2').val();
 			let raw_material_3 = $('#id_raw_material_3').val();
 			let raw_material_4 = $('#id_raw_material_4').val();
+			if(raw_material_1 == null || raw_material_2 == null) {
+				alert("Raw material 1 and 2 can not be null");
+				return;
+			}
+			if(raw_material_3!=null || raw_material_4!=null){
+				if(raw_material_1==raw_material_2 || raw_material_1==raw_material_3 || raw_material_1==raw_material_4 || raw_material_2==raw_material_3 || raw_material_2==raw_material_4 || raw_material_3==raw_material_4 ){
+					alert("2 raw materials can not be same.");
+					return;
+				}
+			}
+			else{
+				if(raw_material_2==raw_material_1 ){
+					alert("2 raw materials can not be same.");
+					return;
+				}
+			}
+
 			let quantity_1 = $('#id_quantity_1').val();
 			let quantity_2 = $('#id_quantity_2').val();
 			let quantity_3 = $('#id_quantity_3').val();
@@ -540,7 +557,17 @@
 				data: mydata,
 				dataType: "json",
 				success: function (res) {
-					$('#ecoins').html(res.ecoin)
+					$('#ecoins').html((res.ecoin))
+					if(!res.rmc || !res.pc){
+						if (res.messages) {
+							for (i in res.messages)
+								alert(res.messages[i]);
+						}
+						$("#submit-btn").attr('disabled', false);
+						$("#submit-btn").val('Buy');
+						$("form")[0].reset()
+						return;
+					}
 					output1 = "";
 					output2 = "";
 					for (i = 0; i < res.rmc.length; i++) {
@@ -598,15 +625,15 @@
 			
 			success: function (req) {
 				console.log(req)
-				output="";
+				output="<option value='' selected>------------</option>";
 				for(i=0; i<req.rmc.length; i++){
 					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
 					output+= "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name +"</option>"
 				}
 				$("#id_raw_material_1").html(output)
 				$("#id_raw_material_2").html(output)
-				// $("#id_raw_material_3").html(output)
-				// $("#id_raw_material_4").html(output)
+				$("#id_raw_material_3").html(output)
+				$("#id_raw_material_4").html(output)
 			}
 		});
 	});
@@ -643,7 +670,7 @@
 			
 			success: function (req) {
 				console.log(req)
-				output="";
+				output="<option value='' selected>------------</option>";
 				for(i=0; i<req.rmc.length; i++){
 					let obj = req.items.filter(item => item.id === req.rmc[i].raw_material_id);
 					output+= "<option value='" + req.rmc[i].raw_material_id + "'>" + obj[0].name +"</option>"

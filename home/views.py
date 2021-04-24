@@ -74,8 +74,8 @@ def home(request):
                 form.save()
                 return redirect('buy')
             else:
-                message = 'This spot is already taken by a lot of teams. So, choose a different one.'
-                return JsonResponse({'messages':[message]})
+                messages.add_message(request, messages.INFO, 'This spot is already taken by a lot of teams. So, choose a different one.')
+                return redirect('home')
     else:
         form = IndustryForm()
     season = Season.objects.all().first()
@@ -96,101 +96,155 @@ def cal_transportation_cost(s1, s2):
     else:
         return 0
 
+class buyc:
+    def __init__(self, tc, bo):
+        self.tc = tc
+        self.bo = bo
+
+def help(r, q, s, u):
+    spr = SpotRawMaterial.objects.filter(spot = s).filter(raw_material=r).first()
+    no   = spr.quantity
+    c   = spr.cost
+    d = cal_transportation_cost(s, u.industry.spot)
+    tc = (q*c)
+    tax = tc*(s.tax)
+    ftax = float(tax)
+    ftax/=400
+    tcf = tc+ftax+d
+    if no<q:
+        op = buyc(0, 0)
+    else:
+        op = buyc(tcf, 1)
+
+    return op
+    
+    
+
+
 @login_required
 def buyMaterial(request):
-    print("main aa gya")
-
+    message = ''
     spr = SpotRawMaterial.objects.all()
     spots = Spot.objects.all()
     if(request.method == 'POST'):
         print(request.POST)
 
         form = BuyRawMaterialForm(request.POST)
-        print(form.is_valid())
-        print(form.errors)
-        print(form.non_field_errors)
         if form.is_valid():
-            print("i am still here")
 
             form.instance.team_name = request.user
             form.save()
             s = form.cleaned_data.get('spot')
             q1 = form.cleaned_data.get('quantity_1')
             q2 = form.cleaned_data.get('quantity_2')
+            q3 = form.cleaned_data.get('quantity_3')
+            q4 = form.cleaned_data.get('quantity_4')
             r2 = form.cleaned_data.get('raw_material_2')
             r1 = form.cleaned_data.get('raw_material_1')
-            print("i am still here")
+            r3 = form.cleaned_data.get('raw_material_3')
+            r4 = form.cleaned_data.get('raw_material_4')
+            u = request.user
+            if q3==None:
+                q3=0
+            if q4==None:
+                q4=0
 
-            if q1%5==0 and q2%5==0 and q1>0 and q2>0 and (q2+q1)<=60:
-                spr1 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r1).first()
-                spr2 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r2).first()
-                if r1.name != r2.name:
-                    if spr1 and spr2:
-                        no1   = spr1.quantity
-                        no2   = spr2.quantity
-                        c1   = spr1.cost
-                        c2   = spr2.cost
-                        u = request.user
-                        d = cal_transportation_cost(s, u.industry.spot)
-                        tc = ((q1*c1)+(q2*c2))
-                        tax = tc*(s.tax)
-                        ftax = float(tax)
-                        ftax/=400
-                        print("i am still here")
+            if q1%5!=0 or q2%5!=0 or q3%5!=0 or q4%5!=0:
+                return JsonResponse({'messages' : ['Quantity should be a multiple of 5']})
 
-                        if u.ecoins >= (tc +d +ftax):
-                            if no1>=q1 and no2>=q2:
-                                x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
-                                if x1:
-                                    x1.quantity += q1
-                                    x1.save()
-                                else:
-                                    y = RawMaterialCart(team_name=u, raw_material=r1, quantity=q1, spot=s)
-                                    y.save()
-                                spr1.quantity -= q1
-                                spr1.save()
-                                x2 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r2).first()
-                                if x2:
-                                    x2.quantity += q2
-                                    x2.save()
-                                else:
-                                    y = RawMaterialCart(team_name=u, raw_material=r2, quantity=q2, spot=s)
-                                    y.save()
-                                spr2.quantity -= q2
-                                spr2.save()
-                                u.ecoins -= (tc +d +ftax)
-                                u.save()
-                                message=  'We have successfully added this item to your cart'
-                            else:
-                                message=  'This much raw material is not available at this spot'
-                        else:
-                            message = 'Not enough money'
-                        print("i am still here")
-
-                    else:
-                        message = 'This raw material is not available at this spot'
-                else:
-                    message= 'Raw Material 1 and Raw Material 2 should be different'
-        
+            if (q1<=0 or q2<=0 or q3<0 or q4<0) or (q2+q1+q3+q4)>60:
+                return JsonResponse({'messages' : ['Quantity should be greater than 0 and their total should be less than 60']})
+            
+            obj1 = help(r1, q1, s, u)
+            obj2 = help(r2, q2, s, u)
+            if r3:
+                obj3 = help(r3, q3, s, u)
+                spr3 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r3).first()
             else:
-                message= 'You need to enter the quantity in multiples of 5 and their sum should be less than 60.'
+                obj3 = buyc(0, -1)
+                spr3 = False
+            if r4:
+                obj4 = help(r4, q4, s, u)
+                spr4 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r4).first()
+            else:
+                obj4 = buyc(0, -1)
+                spr4 = False
+
+            if(obj1.bo==0 or obj2.bo==0 or obj3.bo==0 or obj4.bo==0):
+                return JsonResponse({'messages' : ['This much quantity is not available at this spot']})
+
+            
+
+            final_cost = (obj1.tc + obj2.tc + obj3.tc + obj4.tc)
+            if u.ecoins < (final_cost):
+                return JsonResponse({'messages' : ['You don\'t have enough money to complete this transaction.']})
+
+            u.ecoins -= final_cost
+            u.save()
+
+            spr1 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r1).first()
+            spr2 = SpotRawMaterial.objects.filter(spot=s).filter(raw_material=r2).first()
+            x1 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r1).first()
+            if x1:
+                x1.quantity += q1
+                x1.save()
+            else:
+                y = RawMaterialCart(team_name=u, raw_material=r1, quantity=q1, spot=s)
+                y.save()
+            spr1.quantity -= q1
+            spr1.save()
+
+            x2 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r2).first()
+            if x2:
+                x2.quantity += q2
+                x2.save()
+            else:
+                y = RawMaterialCart(team_name=u, raw_material=r2, quantity=q2, spot=s)
+                y.save()
+            spr2.quantity -= q2
+            spr2.save()
+
+
+
+            if spr3:
+                x3 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r3).first()
+                if x3:
+                    x3.quantity += q3
+                    x3.save()
+                else:
+                    y = RawMaterialCart(team_name=u, raw_material=r3, quantity=q3, spot=s)
+                    y.save()
+                spr3.quantity -= q3
+                spr3.save()
+
+            if spr4:
+                x4 = RawMaterialCart.objects.filter(team_name=u).filter(raw_material=r4).first()
+                if x4:
+                    x4.quantity += q4
+                    x4.save()
+                else:
+                    y = RawMaterialCart(team_name=u, raw_material=r4, quantity=q4, spot=s)
+                    y.save()
+                spr4.quantity -= q4
+                spr4.save()
+                
+                    
             spr = SpotRawMaterial.objects.filter(spot=s).values()
             rmc = RawMaterialCart.objects.filter(team_name=request.user).values()
             pc = ProductCart.objects.filter(team_name=request.user).values()
             items = Item.objects.all().values()
-            # season = Season.objects.all().values()
-            print("i am still here")
 
-        responseData = {
-            'spr' : list(spr),
-            'messages': [message],
-            'rmc' : list(rmc),
-            'pc'  : list(pc),
-            'items': list(items),
-            'ecoin':request.user.ecoins,
-            # 'season':season,
-        }
-        return JsonResponse(responseData)
+            responseData = {
+                'spr' : list(spr),
+                'messages': ['We have successfully added this item to your cart.'],
+                'rmc' : list(rmc),
+                'pc'  : list(pc),
+                'items': list(items),
+                'ecoin':request.user.ecoins,
+                # 'season':season,
+            }
+            return JsonResponse(responseData)
+
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
