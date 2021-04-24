@@ -119,8 +119,6 @@ def help(r, q, s, u):
     return op
     
     
-
-
 @login_required
 def buyMaterial(request):
     message = ''
@@ -248,7 +246,7 @@ def buyMaterial(request):
     form = BuyRawMaterialForm()
     rmc = RawMaterialCart.objects.filter(team_name=request.user)
     pc = ProductCart.objects.filter(team_name=request.user)
-    spot_mater = SpotRawMaterial.objects.all()
+    print(spot_mater)
     season = Season.objects.all().first()
 
     context = {
@@ -257,7 +255,6 @@ def buyMaterial(request):
         'spots' : spots,
         'rmc' : rmc,
         'pc'  : pc,
-        'spot_mater' : spot_mater,
         'season':season,
     }
     return render(request, 'home/buying.html', context)
@@ -592,8 +589,11 @@ def pending_req(request):
 
 
 def get_quantity(request):
-    req = SpotRawMaterial.objects.filter().values()
-    return JsonResponse({'req' : list(req)})
+    context = {
+        'spot_mater' : list(SpotRawMaterial.objects.all().values()),
+        'raw_materials' : list(Item.objects.all().values())
+    }
+    return JsonResponse(context)
 
 def get_rmc(request):
     if request.method == 'POST':
