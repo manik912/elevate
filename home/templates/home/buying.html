@@ -102,7 +102,7 @@
 	var raw_materials = [];
 
 	// console.log(raw_materials)
-	var mumbai_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var mumbai_description = "<i>Raw Material Source</i><br>State Tax: 4.75%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 11) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -114,7 +114,7 @@
 		}
 	}
 	
-	var jaisalmer_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var jaisalmer_description = "<i>Raw Material Source</i><br>State Tax: 6.25%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 13) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -126,7 +126,7 @@
 		}
 	}
 
-	var hisar_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var hisar_description = "<i>Raw Material Source</i><br>State Tax: 6.5%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 6) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -138,7 +138,7 @@
 		}
 	}
 	
-	var hyderabad_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var hyderabad_description = "<i>Raw Material Source</i><br>State Tax: 5.75%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 15) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -150,7 +150,7 @@
 		}
 	}
 
-	var gorakhpur_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var gorakhpur_description = "<i>Raw Material Source</i><br>State Tax: 7.75%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 14) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -162,7 +162,7 @@
 		}
 	}
 
-	var kolkata_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var kolkata_description = "<i>Raw Material Source</i><br>State Tax: 7.5%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 12) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -174,7 +174,7 @@
 		}
 	}
 	
-	var chennai_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var chennai_description = "<i>Raw Material Source</i><br>State Tax: 6.75%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 10) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -186,7 +186,7 @@
 		}
 	}
 	
-	var jhansi_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var jhansi_description = "<i>Raw Material Source</i><br>State Tax: 7.75%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 9) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -198,7 +198,7 @@
 		}
 	}
 	
-	var gangtok_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var gangtok_description = "<i>Raw Material Source</i><br>State Tax: 5.25%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 8) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -210,7 +210,7 @@
 		}
 	}
 
-	var srinagar_description = "<i>Raw Material Source</i><br><br>Available Raw Materials:<br>";
+	var srinagar_description = "<i>Raw Material Source</i><br>State Tax: 4.25%<br><br>Available Raw Materials:<br>";
 	for (mater in spot_mater) {
 		if (spot_mater[mater].spot_id == 7) {
 			let obj = raw_materials.filter(item => item.id === spot_mater[mater].raw_material_id);
@@ -548,7 +548,6 @@
 
 				<div id="map">
 				</div>
-				<a href="{% url 'buy' %}" class="add_field_button btn btn-primary my-2" style="margin: 200px; ">Refresh Map</a>
 			</div>
 		</div>
 		<div class="col-xl-4">
@@ -761,7 +760,7 @@
 			}
 		});
 
-	}, 30000);
+	}, 5000);
 		
 	// setInterval(function () {
 	// 	$.ajax({
